@@ -1,17 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Api } from "./api"
-import { User } from "./models/user"
+import { useDispatch, useSelector } from "react-redux";
+import { initializeUsers } from "./redux/actions/users";
+
 
 function App() {
-  const [users, setUsers] = useState<Array<User> | null>(null)
   const api = new Api()
+
+  const users = useSelector((state: any) => state.usersReducer.users);
+  const dispatch = useDispatch();
 
   const fetchData = async () => {
     try {
       const result = await api.getUserData()
       if(result.error === true) throw new Error("Error fetching user data")
 
-      setUsers(result)
+      dispatch(initializeUsers({users: result}))
     } catch (error) {
       console.log(error)
     }
