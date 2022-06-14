@@ -1,36 +1,15 @@
-const BASE = "/"
-
-// export const api = {
-//   queryData: async () => {
-//     try {
-//       let response = await fetch(`${BASE}data.json`),
-//       userData = response.json();
-
-//       // return {
-//       //   error: false,
-//       //   status: response.status,
-//       //   data: userData
-//       // }
-
-//       throw new Error({response})
-
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-// }
+const BASE = "/";
 
 export class Api {
-  public async getUserData(): Promise<any>{
+  public async getUserData(): Promise<any> {
     try {
-      let response = await fetch(`${BASE}data.json`)
+      let response = await fetch(`${BASE}data.json`);
       return await response.json();
-    } catch(error: any){
+    } catch (error: any) {
       return {
         error: true,
-        message: error.message
-      }
+        message: error.message,
+      };
     }
-
   }
 }
