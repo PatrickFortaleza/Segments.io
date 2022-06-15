@@ -5,3 +5,8 @@ export interface GroupedAttributes {
   numeric: Array<string>;
   boolean: Array<string>;
 }
+
+export interface Attribute {
+  type: string;
+  name: string;
+}

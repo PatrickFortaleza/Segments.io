@@ -26,9 +26,13 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      {Array.isArray(users) && users.length > 0 && users.length}
-      <Sidebar />
+    <div className="app">
+      {/* {Array.isArray(users) && users.length > 0 && users.length} */}
+      <header />
+      <div className="body">
+        <Sidebar />
+        <main></main>
+      </div>
     </div>
   );
 }

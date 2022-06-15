@@ -15,7 +15,7 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.52.2",
-    "styled-icons": "^10.45.0"
+    "semantic-ui-react": "^2.1.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

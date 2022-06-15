@@ -1,0 +1,61 @@
+/* 
+  -----------------------------------
+  VARIABLES
+  -----------------------------------
+*/
+:root {
+  // SHADOWS
+  --shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.115);
+  --text-shadow: 0px 0px 7px rgba(0, 0, 0, 0.55);
+  // BACKGROUNDS
+  --elevation-1: #ffffff;
+  --elevation-2: #f7f7f7;
+  --elevation-3: #efefef;
+  --elevation-4: #eeeeee;
+  --elevation-5: #dddddd;
+  --elevation-6: #cccccc;
+  // TEXT
+  --text-1: #232323;
+  --text-2: #333333;
+  --text-3: #545454;
+  --text-4: #aaaaaa;
+  // HIGHLIGHTS
+  --highlight-primary-1: #044a95;
+  --highlight-primary-2: #043c77;
+  --highlight-primary-3: #fc1923;
+  --highlight-secondary-1: #01286d;
+  // SUCCESS
+  --success-1: #19b51e;
+  --success-2: #1ecc24;
+  // DANGER
+  --danger-1: #db0f0f;
+  --danger-2: #e83333;
+  --danger-3: #ffcece;
+  // INFO
+  --info-1: #1180db;
+  --info-2: #3aa1f4;
+}
+
+@mixin wrap {
+  max-width: 1500px;
+  margin: auto;
+  padding: 0 10px;
+
+  @media screen and (min-width: 600px) {
+    padding: 0 25px;
+  }
+}
+
+@mixin wrap-mobile {
+  max-width: 1500px;
+  margin: auto;
+  padding: 0;
+
+  @media screen and (min-width: 500px) {
+    padding: 0 20px;
+  }
+
+  @media screen and (min-width: 600px) {
+    padding: 0 40px;
+  }
+}

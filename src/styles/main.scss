@@ -1,1 +1,45 @@
-@import "./components/sidebar"
+/*------------------------------------------------
+NORMALIZE
+------------------------------------------------*/
+@import "./normalize/normalize";
+@import "./normalize/resets";
+
+/*------------------------------------------------
+VARIABLES
+------------------------------------------------*/
+@import "./variables/variables";
+@import "./variables/typography";
+
+/*------------------------------------------------
+COMPONENTS
+------------------------------------------------*/
+@import "./components/sidebar";
+@import "./components/header";
+@import "./components/draglist";
+
+
+
+/*------------------------------------------------
+MAIN STYLES
+------------------------------------------------*/
+
+.app {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root, .app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+}
