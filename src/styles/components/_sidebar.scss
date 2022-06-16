@@ -10,6 +10,8 @@ aside {
 
 header.sidebar {
   border-bottom: 1px solid var(--elevation-3);
+  z-index: 502;
+  background: var(--elevation-1);
 
   .sidebar__wrap {
     display: grid;
