@@ -1,4 +1,59 @@
 aside {
-  border-right: 1px solid var(--elevation-2);
-  padding: 20px;
+  border-right: 1px solid var(--elevation-3);
+  position: relative;
+  width: 300px;
+  max-height: 100vh;
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
 }
+
+header.sidebar {
+  border-bottom: 1px solid var(--elevation-3);
+
+  .sidebar__wrap {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 15px 20px;
+
+    & > :first-child {
+      grid-column: 1 / span 1;
+
+      .sidebar__header__icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        background: var(--highlight-primary-2);
+        border-radius: 4px;
+        text-align: center;
+
+        i {
+          margin: 0;
+          line-height: 40px;
+          color: var(--elevation-1);
+          font-size: 17px;
+        }
+      }
+    }
+
+    & > :last-child {
+      grid-column: 2 / span 4;
+
+      h3, span {
+        font-family: sans-serif;
+      }
+
+      h3 {
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      span {
+        font-size: 12px;
+        color: var(--text-3);
+      }
+    }
+  }
+}
+

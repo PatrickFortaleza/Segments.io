@@ -9,7 +9,11 @@ export default function ListItem({ item }: { item: Attribute }) {
       <div className="drag__list__item__icon">
         <Icon name={returnTypeIcon(item.type)} />
       </div>
-      <p>{snakeCaseToTitleCase(item.name)}</p>
+      <p>
+        <span className="type">{item.type}</span>
+        {snakeCaseToTitleCase(item.name)}
+      </p>
+
       <div className="drag__list__item__icon__secondary">
         <Icon name="indent" />
       </div>

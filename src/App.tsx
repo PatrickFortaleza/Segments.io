@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="app">
       {/* {Array.isArray(users) && users.length > 0 && users.length} */}
-      <header />
+      <header className="main" />
       <div className="body">
         <Sidebar />
         <main></main>

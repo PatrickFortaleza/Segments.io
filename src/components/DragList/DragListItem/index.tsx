@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Attribute } from "../../../models/attributes";
 import { Coordinates } from "../../../models/positioning";
+import { evaluateDragging } from "../../../redux/actions/sidebar";
+import { useDispatch } from "react-redux";
 import DragListItemView from "./view";
 
 export default function DragListItemController({ item }: { item: Attribute }) {
@@ -10,7 +12,8 @@ export default function DragListItemController({ item }: { item: Attribute }) {
   const [offset, setOffset] = useState<Coordinates>({ x: 0, y: 0 });
 
   const listItemRef = useRef<HTMLDivElement | null>(null);
-  const bRect = document.body.getBoundingClientRect(); // define type here
+  const bRect: DOMRect = document.body.getBoundingClientRect();
+  const dispatch = useDispatch();
 
   const onMouseMove = (e: MouseEvent) => {
     if (!isDragging || !listItemRef.current) return;
@@ -22,6 +25,7 @@ export default function DragListItemController({ item }: { item: Attribute }) {
 
   const onMouseUp = async () => {
     // handleDropped({ itemId: item.id });
+    // setIsTransitioning(true);
     setIsDragging(false);
     setPos({ x: 0, y: 0 });
   };
@@ -31,7 +35,8 @@ export default function DragListItemController({ item }: { item: Attribute }) {
     setIsDragging(true);
     setIsTransitioning(false);
 
-    let rect = listItemRef?.current?.getBoundingClientRect(); // find type
+    let rect: DOMRect | undefined =
+      listItemRef?.current?.getBoundingClientRect(); // find type
 
     if (!rect) return;
 
@@ -58,6 +63,7 @@ export default function DragListItemController({ item }: { item: Attribute }) {
   }, [listItemRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    dispatch(evaluateDragging({ bool: isDragging }));
     if (isDragging) {
       document.addEventListener("mouseup", onMouseUp);
       document.addEventListener("mousemove", onMouseMove);
@@ -65,6 +71,7 @@ export default function DragListItemController({ item }: { item: Attribute }) {
       document.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("mousemove", onMouseMove);
     }
+
     return () => {
       document.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("mousemove", onMouseMove);

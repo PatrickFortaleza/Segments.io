@@ -1,5 +1,72 @@
+.drag__list__bar__wrap {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: var(--elevation-2);
+
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--elevation-4);
+
+  }
+
+  &.dragging {
+    overflow-y: visible;
+    overflow-x: visible;
+    padding-right: 25px;
+  }
+}
+
+.drag__list__container {
+  margin-top: 10px;
+  h2 {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+
+  &__header {
+
+    &__title {
+      display: flex;
+
+      h2 {
+        margin-right: 5px;
+      }
+
+      span {
+        font-family: sans-serif;
+        font-size: 9px;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background: var(--elevation-2);
+        border: 1px solid var(--elevation-4);
+        text-align: center;
+        line-height: 16px;
+        color: var(--text-1);
+        font-weight: bold;
+      }
+    }
+  }
+}
 
 .drag__list {
+  padding-left: 10px;
+  margin-left: 3px;
+  border-left: 1px solid var(--highlight-primary-2);
   li {
     transform-origin: center;
     position: relative;
@@ -14,7 +81,6 @@
         top: 0;
         left: 0;
         z-index: 0 !important;
-        //   display: none;
     }
   }
 }
@@ -25,7 +91,7 @@
   align-items: center;
   border: 1px solid #ddd;
   margin-bottom: -1px;
-  padding: 6px 12px;
+  padding: 6px 6px;
   padding-right: 45px;
   background: white;
   position: relative;
@@ -33,8 +99,16 @@
   cursor: pointer;
 
   p {
-    padding-left: 5px;
-    font-size: 14px;
+    padding-left: 6px;
+    font-size: 12px;
+
+    .type {
+      display: block;
+      color: var(--highlight-primary-1);
+      text-transform: capitalize;
+      font-size: 10px;
+      line-height: 1em;
+    }
   }
 
   &.list {
@@ -47,12 +121,20 @@
   }
 
   .drag__list__item__icon {
-    i { color: var(--highlight-primary-1) }
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    background: var(--highlight-primary-1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i { color: var(--elevation-1); transform: translateX(2px); font-size: 12px; }
   }
 
   .drag__list__item__icon__secondary {
     position: absolute;
-    right: 10px;
+    right: 6px;
     top: 50%;
     transform: translateY(-50%);
 
