@@ -1,15 +1,73 @@
 .drag__bucket {
-  background: white;
+  width: 350px;
+  background: var(--elevation-1);
   padding: 10px;
-  border: 1px solid #ddd;
-  margin-left: 10px;
-  width: 400px;
+  border: 1px solid var(--elevation-5);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    .bucket__label {
+      input[type="text"] {
+          font-family: sans-serif;
+          font-weight: bold;
+          background: none;
+          border: none;
+          font-size: 14px;
+      }
+
+
+    }
+
+    .bucket__actions {
+      display: flex;
+      align-items: center;
+
+      button {
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+
+        i {
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 14px;
+      margin-right: 3px;
+
+      i {
+        margin: 0;
+        padding: 0;
+        color: var(--elevation-6);
+        transition: .2s ease-in-out;
+      }
+
+      &:hover,
+      &:focus {
+        i {
+          color: var(--highlight-primary-1);
+        }
+      }
+    }
+  }
 
   &__target {
     background: #f7f7f7;
-    border: dashed 2px #cccccc;
+    border: dashed 1px #cccccc;
 
-    height: 69px;
+    height: 50px;
     border-radius: 3px;
     display: flex;
     align-items: center;
@@ -17,15 +75,104 @@
     transition: 0.2s ease-in;
 
     p {
-      font-size: 14px;
+      font-size: 12px;
       text-align: center;
       font-weight: bold;
       color: #7e7e7e;
     }
 
     &.active {
-      border: 2px dashed var(--highlight-primary-1);
+      border: 1px dashed var(--highlight-primary-1);
       background: #b7dbff;
     }
+  }
+
+  .empty {
+    font-size: 12px;
+    text-align: center;
+    padding: 6px;
+    color: var(--elevation-6);
+  }
+}
+
+.buckets__container {
+  display: flex;
+
+  &__outer {
+    margin-left: 10px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+
+    h3 {
+      font-family: sans-serif;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 17px;
+      
+      i {
+        font-size: 12px;
+        line-height: 17px;
+        color: var(--elevation-6);
+      }
+    }
+  }
+
+  &__inner {
+    max-height: 500px;
+    background: var(--elevation-2);
+    padding: 10px;
+    border: 1px solid var(--elevation-5);
+    overflow-y: scroll;
+
+    /* width */
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+    
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: var(--elevation-2);
+    
+      }
+    
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: var(--elevation-4);
+    
+      }
+  }
+}
+
+
+.bucket__actions__radio {
+  margin-right: 5px;
+  .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+  }
+
+  & > :first-child {
+    margin-right: -1px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+
+  & > :last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .container {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid var(--elevation-6);
+    color: var(--elevation-6);
+    padding: 5px;
+    width: 37px;
+    display: inline-block;
+    text-align: center;
   }
 }

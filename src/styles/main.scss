@@ -49,5 +49,7 @@ body {
 }
 
 main {
-  padding-top: 25px;
+  padding-top: 25px + 10px;
+  background: var(--elevation-2);
+  width: calc(100% - 300px);
 }

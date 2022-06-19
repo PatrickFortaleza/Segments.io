@@ -6,7 +6,6 @@ const bucketState: Bucket = {
   label: "",
   id: "",
   rules: [],
-  ref: null,
   itemInZone: false,
 };
 
