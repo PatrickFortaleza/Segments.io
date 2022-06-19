@@ -1,4 +1,4 @@
-import React from "react";
+import React, { LegacyRef } from "react";
 import { Attribute } from "../../../models/attributes";
 import ListItem from "../ListItem";
 import { Coordinates, DragTransition } from "../../../models/positioning";
@@ -10,7 +10,7 @@ export default function DragListItemView({
   is,
 }: {
   item: Attribute;
-  itemRef: any;
+  itemRef: LegacyRef<HTMLDivElement> | undefined;
   pos: Coordinates;
   is: DragTransition;
 }) {

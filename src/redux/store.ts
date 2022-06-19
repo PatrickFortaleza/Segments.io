@@ -2,8 +2,8 @@ import rootReducer from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
 
 const actionSanitizer = (action: any) =>
-  action.type === "FILE_DOWNLOAD_SUCCESS" && action.data
-    ? { ...action, data: "<<LONG_BLOB>>" }
+  action.type === "item_dragging" && action.payload
+    ? { ...action, payload: "<<LONG_BLOB>>" }
     : action;
 
 const store = configureStore({

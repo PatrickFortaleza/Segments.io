@@ -1,5 +1,3 @@
-// import { MouseEvent } from "react";
-
 export interface Coordinates {
   x: number;
   y: number;

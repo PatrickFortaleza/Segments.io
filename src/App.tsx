@@ -3,6 +3,7 @@ import { Api } from "./api";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeUsers } from "./redux/actions/users";
 import Sidebar from "./components/Sidebar";
+import DropBuckets from "./components/DropBuckets";
 
 function App() {
   const api = new Api();
@@ -31,7 +32,9 @@ function App() {
       <header className="main" />
       <div className="body">
         <Sidebar />
-        <main></main>
+        <main>
+          <DropBuckets />
+        </main>
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ COMPONENTS
 @import "./components/sidebar";
 @import "./components/header";
 @import "./components/draglist";
+@import "./components/dragbuckets";
 
 
 
@@ -45,4 +46,8 @@ body {
 .body {
   display: flex;
   flex: 1;
+}
+
+main {
+  padding-top: 25px;
 }
