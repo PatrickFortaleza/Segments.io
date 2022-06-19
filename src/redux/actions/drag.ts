@@ -6,7 +6,10 @@ export const itemDragging = ({
   itemRectCoords,
 }: {
   bool: boolean;
-  itemId: string;
+  itemId: {
+    id: string | number;
+    type: string;
+  };
   itemRectCoords: RectCoordinates;
 }) => {
   return {

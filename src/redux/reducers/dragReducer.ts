@@ -3,7 +3,10 @@ import { RectCoordinates } from "../../models/positioning";
 
 const initialState = {
   isDragging: <boolean>false,
-  itemId: <string | number>"",
+  itemId: {
+    id: <string | number>"",
+    type: <string>"",
+  },
   itemRectCoords: <RectCoordinates>{
     top: 0,
     right: 0,

@@ -85,7 +85,7 @@ export default function DragListItemController({ item }: { item: Attribute }) {
       dispatch(
         itemDragging({
           bool: isDragging,
-          itemId: item.name,
+          itemId: { id: item.name, type: item.type },
           itemRectCoords: calculateCoordinates({
             el: listItemRef.current,
           }),
