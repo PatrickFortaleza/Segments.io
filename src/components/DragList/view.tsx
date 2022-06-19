@@ -1,6 +1,7 @@
 import React, { LegacyRef } from "react";
-import { GroupedAttributes } from "../../../models/attributes";
-import DragListItem from "../DragListItem";
+import { GroupedAttributes } from "../../models/attributes";
+import { SetterGetter } from "../../models";
+import List from "./List";
 
 export default function DragList({
   groupedAttributes,
@@ -12,6 +13,7 @@ export default function DragList({
   isDragging: boolean;
   scrollBoxRef: LegacyRef<HTMLDivElement>;
   scrollPos: number;
+  expanded: SetterGetter;
 }) {
   return (
     <div
@@ -26,25 +28,7 @@ export default function DragList({
           Object.entries(groupedAttributes).map(([type, attributes], index) => (
             <React.Fragment key={index}>
               {Array.isArray(attributes) && attributes.length > 0 && (
-                <div className="drag__list__container">
-                  <div className="drag__list__container__header">
-                    <span className="drag__list__container__header__title">
-                      <h2>{type.toUpperCase()}</h2>
-                      <span>{attributes.length}</span>
-                    </span>
-                  </div>
-                  <ul className="drag__list">
-                    {attributes.map((attribute, index) => (
-                      <DragListItem
-                        key={index}
-                        item={{
-                          type: type,
-                          name: attribute,
-                        }}
-                      />
-                    ))}
-                  </ul>
-                </div>
+                <List attributes={attributes} type={type} />
               )}
             </React.Fragment>
           ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import { GroupedAttributes } from "../../models/attributes";
-import DragList from "../DragList/DragList";
+import DragList from "../DragList";
 import SidebarHeader from "./Header";
 
 export default function SidebarView({

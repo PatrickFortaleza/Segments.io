@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { GroupedAttributes } from "../../../models/attributes";
+import { GroupedAttributes } from "../../models/attributes";
 import { useSelector } from "react-redux";
 import DragListView from "./view";
 
@@ -8,10 +8,9 @@ export default function DragList({
 }: {
   groupedAttributes: GroupedAttributes | null;
 }) {
+  const [expanded, setExpanded] = useState<boolean>(false);
   const [scrollPos, setScrollPos] = useState<number>(0);
-  const isDragging = useSelector(
-    (state: any) => state.sidebarReducer.isDragging
-  );
+  const isDragging = useSelector((state: any) => state.dragReducer.isDragging);
 
   const scrollBoxRef = useRef<HTMLDivElement | null>(null);
 
@@ -37,6 +36,10 @@ export default function DragList({
       isDragging={isDragging}
       scrollBoxRef={scrollBoxRef}
       scrollPos={scrollPos}
+      expanded={{
+        value: expanded,
+        setter: setExpanded,
+      }}
     />
   );
 }

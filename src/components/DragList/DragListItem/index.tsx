@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Attribute } from "../../../models/attributes";
-import { Coordinates } from "../../../models/positioning";
-import { evaluateDragging } from "../../../redux/actions/sidebar";
+import { Coordinates, RectCoordinates } from "../../../models/positioning";
+import { itemDragging, unsetItemDragging } from "../../../redux/actions/drag";
 import { useDispatch } from "react-redux";
+import { calculateCoordinates } from "../../../utility";
 import DragListItemView from "./view";
 
 export default function DragListItemController({ item }: { item: Attribute }) {
@@ -63,11 +64,12 @@ export default function DragListItemController({ item }: { item: Attribute }) {
   }, [listItemRef.current]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    dispatch(evaluateDragging({ bool: isDragging }));
     if (isDragging) {
       document.addEventListener("mouseup", onMouseUp);
       document.addEventListener("mousemove", onMouseMove);
     } else {
+      dispatch(unsetItemDragging());
+
       document.removeEventListener("mouseup", onMouseUp);
       document.removeEventListener("mousemove", onMouseMove);
     }
@@ -77,6 +79,23 @@ export default function DragListItemController({ item }: { item: Attribute }) {
       document.removeEventListener("mousemove", onMouseMove);
     };
   }, [isDragging]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (listItemRef?.current) {
+      dispatch(
+        itemDragging({
+          bool: isDragging,
+          itemId: item.name,
+          itemRectCoords: calculateCoordinates({
+            el: listItemRef.current,
+          }),
+        })
+      );
+    }
+
+    if ((pos.x === 0 && pos.y === 0) || !isDragging)
+      dispatch(unsetItemDragging());
+  }, [pos, isDragging]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <DragListItemView

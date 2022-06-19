@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import usersReducer from "./usersReducer";
-import sidebarReducer from "./sidebarReducer";
+import dragReducer from "./dragReducer";
 
 const rootReducer = combineReducers({
   usersReducer: usersReducer,
-  sidebarReducer: sidebarReducer,
+  dragReducer: dragReducer,
 });
 
 export default rootReducer;

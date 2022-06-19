@@ -5,7 +5,8 @@
 */
 :root {
   // SHADOWS
-  --shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.115);
+  --shadow-down: 0px 0px 3px 1px rgba(0, 0, 0, 0.115);
+  --shadow-up: 0px 0px -3px 1px rgba(0, 0, 0, 0.115);
   --text-shadow: 0px 0px 7px rgba(0, 0, 0, 0.55);
   // BACKGROUNDS
   --elevation-1: #ffffff;

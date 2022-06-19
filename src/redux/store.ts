@@ -1,10 +1,22 @@
-import rootReducer from "./reducers"
+import rootReducer from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
 
-const store = configureStore(
-  {reducer:rootReducer},
-);
+const actionSanitizer = (action: any) =>
+  action.type === "FILE_DOWNLOAD_SUCCESS" && action.data
+    ? { ...action, data: "<<LONG_BLOB>>" }
+    : action;
 
-store.getState()
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }),
+  devTools: {
+    actionSanitizer,
+  },
+});
 
+store.getState();
 export default store;
