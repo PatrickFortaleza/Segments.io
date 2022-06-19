@@ -2,7 +2,7 @@ import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
 import { Bucket, BucketContainer } from "../../models/bucket";
 
-const bucketState: Bucket = {
+const initialBucketState: Bucket = {
   label: "",
   id: "",
   rules: [],
@@ -12,12 +12,12 @@ const bucketState: Bucket = {
 
 const initialState = {
   buckets: <BucketContainer>{
-    includes: [{ ...bucketState, label: "condition 1", id: uuid() }],
-    excludes: [{ ...bucketState, label: "condition 1", id: uuid() }],
+    includes: [{ ...initialBucketState, label: "condition 1", id: uuid() }],
+    excludes: [{ ...initialBucketState, label: "condition 1", id: uuid() }],
   },
 };
 
-const dragReducer = (state = initialState, action: Action) => {
+const bucketReducer = (state = initialState, action: Action) => {
   let bucketState = { ...state };
   switch (action.type) {
     case "evaluate_in_zone": {
@@ -47,7 +47,32 @@ const dragReducer = (state = initialState, action: Action) => {
 
       return { ...bucketState };
     }
+    case "add_condition": {
+      let { bucketType } = action.payload;
+
+      let newBucket: Bucket = {
+        ...initialBucketState,
+        label: `condition ${
+          bucketState.buckets[bucketType as keyof BucketContainer].length + 1
+        }`,
+        id: uuid(),
+      };
+
+      bucketState = {
+        ...bucketState,
+        buckets: {
+          ...bucketState.buckets,
+        },
+      };
+
+      bucketState.buckets[bucketType as keyof BucketContainer] = [
+        ...bucketState.buckets[bucketType as keyof BucketContainer],
+        newBucket,
+      ];
+
+      return { ...bucketState };
+    }
   }
   return state;
 };
-export default dragReducer;
+export default bucketReducer;

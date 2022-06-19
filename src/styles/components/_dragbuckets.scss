@@ -3,6 +3,7 @@
   background: var(--elevation-1);
   padding: 10px;
   border: 1px solid var(--elevation-5);
+  margin-bottom: 10px;
 
   &__header {
     display: flex;
@@ -125,6 +126,8 @@
         color: var(--elevation-6);
       }
     }
+
+
   }
 
   &__inner {
@@ -135,21 +138,37 @@
     overflow-y: scroll;
 
     /* width */
-      &::-webkit-scrollbar {
-        width: 5px;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: var(--elevation-2);
+  
+    }
+  
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: var(--elevation-4);
+  
+    }
+
+    button.add {
+      background: none;
+      border: none;
+      font-family: sans-serif;
+      font-size: 12px;
+      color: var(--highlight-primary-1);
+      cursor: pointer;
+      margin-top: 5px;
+
+      i {
+        margin: 0;
+        font-size: 9px;
+        line-height: 12px;
       }
-    
-      /* Track */
-      &::-webkit-scrollbar-track {
-        background: var(--elevation-2);
-    
-      }
-    
-      /* Handle */
-      &::-webkit-scrollbar-thumb {
-        background: var(--elevation-4);
-    
-      }
+    }
   }
 }
 

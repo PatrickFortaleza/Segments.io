@@ -5,11 +5,16 @@ import { Icon } from "semantic-ui-react";
 
 export default function DropBucketsView({
   buckets,
+  addToBucket,
 }: {
   buckets: BucketContainer;
+  addToBucket: ({ bucketType }: { bucketType: keyof BucketContainer }) => any;
 }) {
   return (
-    <div className="buckets__container">
+    <div
+      className="buckets__container"
+      key={`includes-${buckets.includes.length} excludes-${buckets.excludes.length}`}
+    >
       <div className="buckets__container__outer">
         <h3>
           Includes <Icon name="info circle" />
@@ -24,6 +29,12 @@ export default function DropBucketsView({
                 bucketIndex={index}
               />
             ))}
+          <button
+            className="add"
+            onClick={() => addToBucket({ bucketType: "includes" })}
+          >
+            + Add new condition
+          </button>
         </div>
       </div>
       <div className="buckets__container__outer">
@@ -40,6 +51,12 @@ export default function DropBucketsView({
                 bucketIndex={index}
               />
             ))}
+          <button
+            className="add"
+            onClick={() => addToBucket({ bucketType: "excludes" })}
+          >
+            + Add new condition
+          </button>
         </div>
       </div>
     </div>

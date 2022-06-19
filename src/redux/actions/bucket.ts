@@ -56,3 +56,16 @@ export const updateConditionLogic = ({
     },
   };
 };
+
+export const addCondition = ({
+  bucketType,
+}: {
+  bucketType: keyof BucketContainer;
+}) => {
+  return {
+    type: "add_condition",
+    payload: {
+      bucketType,
+    },
+  };
+};
