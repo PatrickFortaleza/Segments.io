@@ -7,6 +7,7 @@ const bucketState: Bucket = {
   id: "",
   rules: [],
   itemInZone: false,
+  conditionLogic: "and",
 };
 
 const initialState = {
@@ -34,6 +35,15 @@ const dragReducer = (state = initialState, action: Action) => {
       bucketState.buckets[bucketType as keyof BucketContainer][
         bucketIndex
       ].label = label;
+
+      return { ...bucketState };
+    }
+    case "update_condition_logic": {
+      let { bucketType, bucketIndex, conditionLogic } = action.payload;
+
+      bucketState.buckets[bucketType as keyof BucketContainer][
+        bucketIndex
+      ].conditionLogic = conditionLogic;
 
       return { ...bucketState };
     }

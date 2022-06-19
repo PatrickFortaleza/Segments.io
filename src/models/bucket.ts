@@ -3,6 +3,7 @@ export interface Bucket {
   id: string;
   rules: Array<any>; // define any after rule data has been defined
   itemInZone: boolean;
+  conditionLogic: string;
 }
 
 export interface BucketContainer {

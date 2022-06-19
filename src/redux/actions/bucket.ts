@@ -37,3 +37,22 @@ export const updateLabel = ({
     },
   };
 };
+
+export const updateConditionLogic = ({
+  bucketType,
+  bucketIndex,
+  conditionLogic,
+}: {
+  bucketType: keyof BucketContainer;
+  bucketIndex: number;
+  conditionLogic: string;
+}) => {
+  return {
+    type: "update_condition_logic",
+    payload: {
+      bucketType,
+      bucketIndex,
+      conditionLogic,
+    },
+  };
+};

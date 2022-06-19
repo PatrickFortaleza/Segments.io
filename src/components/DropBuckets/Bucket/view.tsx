@@ -10,6 +10,7 @@ export default function BucketView({
   inZone,
   editingLabel,
   conditionLabel,
+  conditionLogic,
 }: {
   bucket: Bucket;
   bucketRef: LegacyRef<HTMLDivElement> | undefined;
@@ -17,7 +18,9 @@ export default function BucketView({
   inZone: boolean;
   editingLabel: SetterGetter;
   conditionLabel: SetterGetter;
+  conditionLogic: SetterGetter;
 }) {
+  const conditionLogicOptions = ["and", "or"];
   return (
     <div className="drag__bucket">
       <div className="drag__bucket__header">
@@ -48,16 +51,23 @@ export default function BucketView({
         </div>
         <div className="bucket__actions">
           <div className="bucket__actions__radio">
-            <label className="container">
-              and
-              <input type="radio" checked={true} name="radio" />
-              <span className="checkmark"></span>
-            </label>
-            <label className="container">
-              or
-              <input type="radio" name="radio" />
-              <span className="checkmark"></span>
-            </label>
+            {conditionLogicOptions.map((opt, index) => (
+              <label
+                className={`container ${
+                  conditionLogic.value === opt ? "checked" : ""
+                }`}
+                key={index}
+              >
+                {opt}
+                <input
+                  type="radio"
+                  checked={conditionLogic.value === opt ? true : false}
+                  onChange={(e) => conditionLogic.setter(e.target.value)}
+                  name="logicOptions"
+                  value={opt}
+                />
+              </label>
+            ))}
           </div>
           <button>
             <Icon name="trash alternate" />{" "}

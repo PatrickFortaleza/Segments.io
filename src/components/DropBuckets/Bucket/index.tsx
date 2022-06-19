@@ -4,7 +4,11 @@ import { Bucket, BucketContainer } from "../../../models/bucket";
 import { useSelector, useDispatch } from "react-redux";
 import { RectCoordinates } from "../../../models/positioning";
 import { calculateCoordinates } from "../../../utility";
-import { evaluateInZone, updateLabel } from "../../../redux/actions/bucket";
+import {
+  evaluateInZone,
+  updateLabel,
+  updateConditionLogic,
+} from "../../../redux/actions/bucket";
 
 export default function BucketController({
   bucket,
@@ -18,6 +22,7 @@ export default function BucketController({
   const [itemInZone, setItemInZone] = useState<boolean>(false);
   const [conditionLabel, setConditionLabel] = useState<string>(bucket.label);
   const [editingLabel, setEditingLabel] = useState<boolean>(false);
+  const [conditionLogic, setConditionLogic] = useState<string>("and");
 
   const dispatch = useDispatch();
   const bucketRef = useRef<HTMLDivElement | null>(null);
@@ -86,6 +91,16 @@ export default function BucketController({
     );
   }, [conditionLabel]);
 
+  useEffect(() => {
+    dispatch(
+      updateConditionLogic({
+        bucketType: bucketKey,
+        bucketIndex: bucketIndex,
+        conditionLogic: conditionLogic,
+      })
+    );
+  }, [conditionLogic]);
+
   return (
     <BucketView
       bucket={bucket}
@@ -99,6 +114,10 @@ export default function BucketController({
       conditionLabel={{
         value: conditionLabel,
         setter: setConditionLabel,
+      }}
+      conditionLogic={{
+        value: conditionLogic,
+        setter: setConditionLogic,
       }}
     />
   );
