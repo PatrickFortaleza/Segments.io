@@ -17,14 +17,23 @@ const initialState = {
 };
 
 const dragReducer = (state = initialState, action: Action) => {
+  let bucketState = { ...state };
   switch (action.type) {
     case "evaluate_in_zone": {
       let { bucketType, bucketIndex, inZone } = action.payload;
-      let bucketState = { ...state };
 
       bucketState.buckets[bucketType as keyof BucketContainer][
         bucketIndex
       ].itemInZone = inZone;
+
+      return { ...bucketState };
+    }
+    case "update_label": {
+      let { bucketType, bucketIndex, label } = action.payload;
+
+      bucketState.buckets[bucketType as keyof BucketContainer][
+        bucketIndex
+      ].label = label;
 
       return { ...bucketState };
     }

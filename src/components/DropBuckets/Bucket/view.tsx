@@ -1,24 +1,50 @@
 import React, { LegacyRef } from "react";
 import { Bucket } from "../../../models/bucket";
 import { Icon } from "semantic-ui-react";
+import { SetterGetter } from "../../../models";
 
 export default function BucketView({
   bucket,
   bucketRef,
+  labelRef,
   inZone,
+  editingLabel,
+  conditionLabel,
 }: {
   bucket: Bucket;
   bucketRef: LegacyRef<HTMLDivElement> | undefined;
+  labelRef: LegacyRef<HTMLInputElement> | undefined;
   inZone: boolean;
+  editingLabel: SetterGetter;
+  conditionLabel: SetterGetter;
 }) {
   return (
     <div className="drag__bucket">
       <div className="drag__bucket__header">
         <div className="bucket__label">
-          <button>
-            <Icon name="edit" />
+          <button onClick={() => editingLabel.setter(!editingLabel.value)}>
+            {editingLabel.value ? (
+              <Icon name="checkmark" style={{ color: "var(--success-1)" }} />
+            ) : (
+              <Icon name="edit" />
+            )}
           </button>
-          <input type="text" value={bucket.label} />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              editingLabel.setter(false);
+            }}
+          >
+            <input
+              ref={labelRef}
+              type="text"
+              value={conditionLabel.value}
+              onChange={(e) => conditionLabel.setter(e.target.value)}
+              className={`${editingLabel.value ? "editing" : ""}`}
+              readOnly={editingLabel.value ? false : true}
+              disabled={editingLabel.value ? false : true}
+            />
+          </form>
         </div>
         <div className="bucket__actions">
           <div className="bucket__actions__radio">

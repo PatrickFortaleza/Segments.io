@@ -4,7 +4,7 @@ import { Bucket, BucketContainer } from "../../../models/bucket";
 import { useSelector, useDispatch } from "react-redux";
 import { RectCoordinates } from "../../../models/positioning";
 import { calculateCoordinates } from "../../../utility";
-import { evaluateInZone } from "../../../redux/actions/bucket";
+import { evaluateInZone, updateLabel } from "../../../redux/actions/bucket";
 
 export default function BucketController({
   bucket,
@@ -15,10 +15,13 @@ export default function BucketController({
   bucketKey: keyof BucketContainer;
   bucketIndex: number;
 }) {
-  const [itemInZone, setItemInZone] = useState(false);
+  const [itemInZone, setItemInZone] = useState<boolean>(false);
+  const [conditionLabel, setConditionLabel] = useState<string>(bucket.label);
+  const [editingLabel, setEditingLabel] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const bucketRef = useRef<HTMLDivElement | null>(null);
+  const labelRef = useRef<HTMLInputElement | null>(null);
   const itemState = useSelector((state: any) => state.dragReducer);
   let { itemRectCoords } = itemState;
 
@@ -62,7 +65,6 @@ export default function BucketController({
   useEffect(() => {
     dispatch(
       evaluateInZone({
-        bucketId: bucket.id,
         bucketType: bucketKey,
         bucketIndex: bucketIndex,
         inZone: itemInZone,
@@ -70,7 +72,34 @@ export default function BucketController({
     );
   }, [itemInZone]);
 
+  useEffect(() => {
+    if (editingLabel && labelRef?.current) labelRef.current.focus();
+  }, [editingLabel]);
+
+  useEffect(() => {
+    dispatch(
+      updateLabel({
+        bucketType: bucketKey,
+        bucketIndex: bucketIndex,
+        label: conditionLabel,
+      })
+    );
+  }, [conditionLabel]);
+
   return (
-    <BucketView bucket={bucket} bucketRef={bucketRef} inZone={itemInZone} />
+    <BucketView
+      bucket={bucket}
+      bucketRef={bucketRef}
+      labelRef={labelRef}
+      inZone={itemInZone}
+      editingLabel={{
+        value: editingLabel,
+        setter: setEditingLabel,
+      }}
+      conditionLabel={{
+        value: conditionLabel,
+        setter: setConditionLabel,
+      }}
+    />
   );
 }

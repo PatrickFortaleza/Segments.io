@@ -18,3 +18,22 @@ export const evaluateInZone = ({
     },
   };
 };
+
+export const updateLabel = ({
+  bucketType,
+  bucketIndex,
+  label,
+}: {
+  bucketType: keyof BucketContainer;
+  bucketIndex: number;
+  label: string;
+}) => {
+  return {
+    type: "update_label",
+    payload: {
+      bucketType,
+      bucketIndex,
+      label,
+    },
+  };
+};
