@@ -11,11 +11,21 @@ export default function DropBucketsView({
     <div>
       {Array.isArray(buckets?.includes) &&
         buckets.includes.map((bucket, index) => (
-          <Bucket key={index} bucket={{ ...bucket }} bucketKey={"includes"} />
+          <Bucket
+            key={index}
+            bucket={{ ...bucket }}
+            bucketKey={"includes"}
+            bucketIndex={index}
+          />
         ))}
       {Array.isArray(buckets?.excludes) &&
         buckets.excludes.map((bucket, index) => (
-          <Bucket key={index} bucket={{ ...bucket }} bucketKey={"excludes"} />
+          <Bucket
+            key={index}
+            bucket={{ ...bucket }}
+            bucketKey={"excludes"}
+            bucketIndex={index}
+          />
         ))}
     </div>
   );

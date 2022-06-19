@@ -1,19 +1,23 @@
 import React, { useRef, useEffect, useState } from "react";
 import BucketView from "./view";
-import { Bucket } from "../../../models/bucket";
-import { useSelector } from "react-redux";
+import { Bucket, BucketContainer } from "../../../models/bucket";
+import { useSelector, useDispatch } from "react-redux";
 import { RectCoordinates } from "../../../models/positioning";
 import { calculateCoordinates } from "../../../utility";
+import { evaluateInZone } from "../../../redux/actions/bucket";
 
 export default function BucketController({
   bucket,
   bucketKey,
+  bucketIndex,
 }: {
   bucket: Bucket;
-  bucketKey: string;
+  bucketKey: keyof BucketContainer;
+  bucketIndex: number;
 }) {
   const [itemInZone, setItemInZone] = useState(false);
 
+  const dispatch = useDispatch();
   const bucketRef = useRef<HTMLDivElement | null>(null);
   const itemState = useSelector((state: any) => state.dragReducer);
   let { itemRectCoords } = itemState;
@@ -54,6 +58,17 @@ export default function BucketController({
   useEffect(() => {
     checkInDropzone();
   }, [itemRectCoords]);
+
+  useEffect(() => {
+    dispatch(
+      evaluateInZone({
+        bucketId: bucket.id,
+        bucketType: bucketKey,
+        bucketIndex: bucketIndex,
+        inZone: itemInZone,
+      })
+    );
+  }, [itemInZone]);
 
   return (
     <BucketView bucket={bucket} bucketRef={bucketRef} inZone={itemInZone} />

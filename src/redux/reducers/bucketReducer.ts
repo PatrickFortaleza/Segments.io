@@ -1,6 +1,6 @@
 import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
-import { Bucket } from "../../models/bucket";
+import { Bucket, BucketContainer } from "../../models/bucket";
 
 const bucketState: Bucket = {
   label: "",
@@ -11,7 +11,7 @@ const bucketState: Bucket = {
 };
 
 const initialState = {
-  buckets: {
+  buckets: <BucketContainer>{
     includes: [{ ...bucketState, label: "condition 1", id: uuid() }],
     excludes: [{ ...bucketState, label: "condition 1", id: uuid() }],
   },
@@ -19,8 +19,15 @@ const initialState = {
 
 const dragReducer = (state = initialState, action: Action) => {
   switch (action.type) {
-    case "dropzone_listen": {
-      return { ...state };
+    case "evaluate_in_zone": {
+      let { bucketType, bucketIndex, inZone } = action.payload;
+      let bucketState = { ...state };
+
+      bucketState.buckets[bucketType as keyof BucketContainer][
+        bucketIndex
+      ].itemInZone = inZone;
+
+      return { ...bucketState };
     }
   }
   return state;
