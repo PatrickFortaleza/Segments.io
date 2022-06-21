@@ -6,6 +6,11 @@ export interface Bucket {
   conditionLogic: string;
 }
 
+export interface BucketWithType extends Bucket {
+  type: string;
+  index: number;
+}
+
 export interface BucketContainer {
   includes: Array<Bucket>;
   excludes: Array<Bucket>;

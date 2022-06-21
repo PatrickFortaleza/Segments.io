@@ -85,3 +85,19 @@ export const removeCondition = ({
     },
   };
 };
+
+export const handleDropped = ({
+  itemId,
+  itemType,
+}: {
+  itemId: string;
+  itemType: string;
+}) => {
+  return {
+    type: "handle_dropped",
+    payload: {
+      itemId,
+      itemType,
+    },
+  };
+};

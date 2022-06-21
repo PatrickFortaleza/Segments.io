@@ -1,6 +1,7 @@
 import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
-import { Bucket, BucketContainer } from "../../models/bucket";
+import { Bucket, BucketWithType, BucketContainer } from "../../models/bucket";
+import { Attribute } from "../../models/attributes";
 
 const initialBucketState: Bucket = {
   label: "",
@@ -52,6 +53,7 @@ const bucketReducer = (state = initialState, action: Action) => {
 
       let newBucket: Bucket = {
         ...initialBucketState,
+        rules: [],
         label: `condition ${
           bucketState.buckets[bucketType as keyof BucketContainer].length + 1
         }`,
@@ -91,6 +93,51 @@ const bucketReducer = (state = initialState, action: Action) => {
           ...newBucket,
         ];
       }
+
+      return { ...bucketState };
+    }
+    case "handle_dropped": {
+      let { itemId, itemType } = action.payload;
+
+      let attribute: Attribute = {
+        name: itemId,
+        type: itemType,
+      };
+
+      let itemInBuckets: Array<BucketWithType> = [];
+
+      let { buckets } = bucketState;
+
+      // Find the bucket with itemInZone === true
+      Object.entries(buckets).forEach(
+        ([bucketType, bucket]: [string, Array<Bucket>]) => {
+          bucket.forEach((b: Bucket, index: number) => {
+            if (b.itemInZone) {
+              let bucketWithType = {
+                ...b,
+                type: bucketType,
+                index: index,
+              };
+              itemInBuckets.push(bucketWithType);
+            }
+          });
+        }
+      );
+
+      // should only allow one bucket with itemInZone === true
+      if (itemInBuckets.length !== 1) return;
+      let foundBucket = itemInBuckets[0];
+
+      bucketState = {
+        ...bucketState,
+        buckets: {
+          ...bucketState.buckets,
+        },
+      };
+
+      bucketState.buckets[foundBucket.type as keyof BucketContainer][
+        foundBucket.index
+      ].rules.push(attribute);
 
       return { ...bucketState };
     }

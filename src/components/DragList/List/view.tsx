@@ -1,6 +1,7 @@
 import { Icon } from "semantic-ui-react";
 import { SetterGetter } from "../../../models";
 import DragListItem from "../DragListItem";
+import { Attribute } from "../../../models/attributes";
 
 export default function ListView({
   attributes,
@@ -8,7 +9,7 @@ export default function ListView({
   type,
   isDragging,
 }: {
-  attributes: Array<string>;
+  attributes: Array<Attribute>;
   expanded: SetterGetter;
   type: string;
   isDragging: boolean;

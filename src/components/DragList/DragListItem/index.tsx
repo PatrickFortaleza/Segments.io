@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Attribute } from "../../../models/attributes";
 import { Coordinates, RectCoordinates } from "../../../models/positioning";
 import { itemDragging, unsetItemDragging } from "../../../redux/actions/drag";
+import { handleDropped } from "../../../redux/actions/bucket";
 import { useDispatch } from "react-redux";
 import { calculateCoordinates } from "../../../utility";
 import DragListItemView from "./view";
@@ -25,6 +26,7 @@ export default function DragListItemController({ item }: { item: Attribute }) {
   };
 
   const onMouseUp = async () => {
+    dispatch(handleDropped({ itemId: item.name, itemType: item.type }));
     // handleDropped({ itemId: item.id });
     // setIsTransitioning(true);
     setIsDragging(false);
