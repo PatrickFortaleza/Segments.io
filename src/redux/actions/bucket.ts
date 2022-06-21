@@ -69,3 +69,19 @@ export const addCondition = ({
     },
   };
 };
+
+export const removeCondition = ({
+  bucketType,
+  bucketId,
+}: {
+  bucketType: keyof BucketContainer;
+  bucketId: string;
+}) => {
+  return {
+    type: "remove_condition",
+    payload: {
+      bucketType,
+      bucketId,
+    },
+  };
+};

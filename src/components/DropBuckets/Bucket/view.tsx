@@ -1,5 +1,5 @@
 import React, { LegacyRef } from "react";
-import { Bucket } from "../../../models/bucket";
+import { Bucket, BucketContainer } from "../../../models/bucket";
 import { Icon } from "semantic-ui-react";
 import { SetterGetter } from "../../../models";
 
@@ -8,6 +8,7 @@ export default function BucketView({
   bucketRef,
   labelRef,
   inZone,
+  remove,
   editingLabel,
   conditionLabel,
   conditionLogic,
@@ -16,6 +17,7 @@ export default function BucketView({
   bucketRef: LegacyRef<HTMLDivElement> | undefined;
   labelRef: LegacyRef<HTMLInputElement> | undefined;
   inZone: boolean;
+  remove: () => void;
   editingLabel: SetterGetter;
   conditionLabel: SetterGetter;
   conditionLogic: SetterGetter;
@@ -69,7 +71,7 @@ export default function BucketView({
               </label>
             ))}
           </div>
-          <button>
+          <button onClick={() => remove()}>
             <Icon name="trash alternate" />{" "}
           </button>
         </div>

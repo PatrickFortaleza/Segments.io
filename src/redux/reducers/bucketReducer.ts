@@ -72,6 +72,28 @@ const bucketReducer = (state = initialState, action: Action) => {
 
       return { ...bucketState };
     }
+    case "remove_condition": {
+      let { bucketType, bucketId } = action.payload;
+
+      if (bucketState.buckets[bucketType as keyof BucketContainer].length > 1) {
+        bucketState = {
+          ...bucketState,
+          buckets: {
+            ...bucketState.buckets,
+          },
+        };
+
+        let newBucket = bucketState.buckets[
+          bucketType as keyof BucketContainer
+        ].filter((bucket) => bucket.id !== bucketId);
+
+        bucketState.buckets[bucketType as keyof BucketContainer] = [
+          ...newBucket,
+        ];
+      }
+
+      return { ...bucketState };
+    }
   }
   return state;
 };

@@ -8,6 +8,7 @@ import {
   evaluateInZone,
   updateLabel,
   updateConditionLogic,
+  removeCondition,
 } from "../../../redux/actions/bucket";
 
 export default function BucketController({
@@ -63,6 +64,15 @@ export default function BucketController({
     setItemInZone(inZone);
   };
 
+  const removeFromBucket = () => {
+    dispatch(
+      removeCondition({
+        bucketType: bucketKey,
+        bucketId: bucket.id,
+      })
+    );
+  };
+
   useEffect(() => {
     checkInDropzone();
   }, [itemRectCoords]);
@@ -107,6 +117,7 @@ export default function BucketController({
       bucketRef={bucketRef}
       labelRef={labelRef}
       inZone={itemInZone}
+      remove={removeFromBucket}
       editingLabel={{
         value: editingLabel,
         setter: setEditingLabel,
