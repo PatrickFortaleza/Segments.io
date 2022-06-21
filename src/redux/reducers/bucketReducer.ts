@@ -126,7 +126,7 @@ const bucketReducer = (state = initialState, action: Action) => {
 
       // should only allow one bucket with itemInZone === true
       if (itemInBuckets.length !== 1) return;
-      let foundBucket = itemInBuckets[0];
+      let { type, index } = itemInBuckets[0];
 
       bucketState = {
         ...bucketState,
@@ -135,9 +135,13 @@ const bucketReducer = (state = initialState, action: Action) => {
         },
       };
 
-      bucketState.buckets[foundBucket.type as keyof BucketContainer][
-        foundBucket.index
-      ].rules.push(attribute);
+      let existingRules =
+        bucketState.buckets[type as keyof BucketContainer][index].rules;
+
+      bucketState.buckets[type as keyof BucketContainer][index].rules = [
+        ...existingRules,
+        attribute,
+      ];
 
       return { ...bucketState };
     }
