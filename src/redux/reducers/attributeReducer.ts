@@ -1,7 +1,9 @@
 import { Action } from "../../models/action";
-import { AttributeTypeMeta } from "../../models/attributes";
+import { AttributeTypeMeta, AttributeTypes } from "../../models/attributes";
+import { User } from "../../models/user";
+import moment, { Moment } from "moment";
 
-const inititalState = {
+const inititalState = <AttributeTypes>{
   alphabetical: <AttributeTypeMeta>{
     controlOptions: <Array<string>>[
       "starts_with",
@@ -62,10 +64,47 @@ const attributeReducer = (state = inititalState, action: Action) => {
   switch (action.type) {
     case "initialize_attribute_meta": {
       let { users } = action.payload;
+      let newAttributeMeta = { ...state };
 
-      console.log(users);
+      Object.entries(newAttributeMeta).forEach(([metaKey, metaData]) => {
+        let { variables } = metaData;
+        let allOptions = <Array<any> | Set<any>>[];
 
-      return { ...state };
+        if (!variables) return;
+
+        Object.keys(variables).forEach((v) => {
+          allOptions = users.map((user: User) => user[v as keyof User]);
+          allOptions = new Set(allOptions);
+          allOptions = Array.from(allOptions);
+
+          switch (metaKey) {
+            case "numeric":
+              allOptions = [Math.min(...allOptions), Math.max(...allOptions)];
+              break;
+            case "boolean":
+              allOptions = [true, false];
+              break;
+            case "datetime":
+              let datesMoment = allOptions.map((date) => moment(date)),
+                minDate: Moment | string = moment.min(datesMoment),
+                maxDate: Moment | string = moment.max(datesMoment);
+
+              minDate = minDate.format("YYYY-MM-DD");
+              maxDate = maxDate.format("YYYY-MM-DD");
+
+              allOptions = [minDate, maxDate];
+              break;
+            default:
+              break;
+          }
+          newAttributeMeta[metaKey as keyof AttributeTypes].variables[v] = [
+            ...newAttributeMeta[metaKey as keyof AttributeTypes].variables[v],
+            ...allOptions,
+          ];
+        });
+      });
+
+      return { ...newAttributeMeta };
     }
   }
   return state;

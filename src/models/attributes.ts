@@ -44,3 +44,27 @@ export interface AttributeTypeMeta {
     | DateTimeVariables
     | BooleanVariables;
 }
+
+export interface AttributeTypes {
+  alphabetical: {
+    controlOptions: Array<string>;
+    variables: undefined;
+  };
+  select: {
+    controlOptions: Array<string>;
+    variables: SelectVariables;
+  };
+  datetime: {
+    controlOptions: Array<string>;
+    variables: DateTimeVariables;
+  };
+  numeric: {
+    controlOptions: Array<string>;
+    variables: NumericVariables;
+  };
+  boolean: any; // I have no idea why this doesn't work...
+  // boolean: {
+  //   controlOptions: Array<string>;
+  //   variables: BooleanVariables;
+  // };
+}
