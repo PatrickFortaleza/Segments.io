@@ -1,7 +1,7 @@
 import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
 import { Bucket, BucketWithType, BucketContainer } from "../../models/bucket";
-import { Attribute } from "../../models/attributes";
+import { Attribute, AttributeWithId } from "../../models/attributes";
 
 const initialBucketState: Bucket = {
   label: "",
@@ -99,9 +99,12 @@ const bucketReducer = (state = initialState, action: Action) => {
     case "handle_dropped": {
       let { itemId, itemType } = action.payload;
 
-      let attribute: Attribute = {
+      let attribute: AttributeWithId = {
         name: itemId,
         type: itemType,
+        id: uuid(),
+        condition: "",
+        value: undefined,
       };
 
       let itemInBuckets: Array<BucketWithType> = [];

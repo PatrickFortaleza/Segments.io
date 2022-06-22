@@ -2,6 +2,7 @@ import React, { LegacyRef } from "react";
 import { Bucket, BucketContainer } from "../../../models/bucket";
 import { Icon } from "semantic-ui-react";
 import { SetterGetter } from "../../../models";
+import Rule from "../Rule";
 
 export default function BucketView({
   bucket,
@@ -77,10 +78,18 @@ export default function BucketView({
         </div>
       </div>
       <div className="drag__bucket__rules">
-        <p className="empty">
-          <Icon name="warning sign" /> No rules currently selected for this
-          condition
-        </p>
+        {Array.isArray(bucket.rules) && bucket.rules.length > 0 ? (
+          <>
+            {bucket.rules.map((rule) => (
+              <Rule key={rule.id} rule={rule} />
+            ))}
+          </>
+        ) : (
+          <p className="empty">
+            <Icon name="warning sign" /> No rules currently selected for this
+            condition
+          </p>
+        )}
       </div>
       <div
         className={`drag__bucket__target ${inZone ? "active" : ""}`}
