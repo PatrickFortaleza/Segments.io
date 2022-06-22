@@ -81,7 +81,11 @@ export default function BucketView({
         {Array.isArray(bucket.rules) && bucket.rules.length > 0 ? (
           <>
             {bucket.rules.map((rule) => (
-              <Rule key={rule.id} rule={rule} />
+              <Rule
+                key={rule.id}
+                rule={rule}
+                conditionLogic={conditionLogic.value}
+              />
             ))}
           </>
         ) : (

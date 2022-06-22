@@ -18,6 +18,7 @@ COMPONENTS
 @import "./components/header";
 @import "./components/draglist";
 @import "./components/dragbuckets";
+@import "./components/rules";
 
 
 
@@ -52,4 +53,42 @@ main {
   padding-top: 25px + 10px;
   background: var(--elevation-2);
   width: calc(100% - 300px);
+}
+
+.type__icon {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  background: var(--highlight-primary-1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    color: var(--elevation-1);
+    transform: translateX(2px);
+    font-size: 12px;
+  }
+}
+
+button.default {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+
+  &:focus, &:active, &:hover {
+    i {
+      color: var(--highlight-primary-1);
+    }
+  }
+
+  i {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    color: var(--elevation-6);
+    transition: .2s ease-in-out;
+  }
 }

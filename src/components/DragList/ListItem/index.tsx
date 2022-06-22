@@ -1,12 +1,13 @@
 import React from "react";
 import { Attribute } from "../../../models/attributes";
 import { snakeCaseToTitleCase } from "../../../utility";
-import { Icon, SemanticICONS } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
+import { returnTypeIcon } from "../../../data/attributes";
 
 export default function ListItem({ item }: { item: Attribute }) {
   return (
     <div className={`drag__list__item__rule`}>
-      <div className="drag__list__item__icon">
+      <div className="type__icon">
         <Icon name={returnTypeIcon(item.type)} />
       </div>
       <p>
@@ -19,21 +20,4 @@ export default function ListItem({ item }: { item: Attribute }) {
       </div>
     </div>
   );
-}
-
-function returnTypeIcon(type: string): SemanticICONS {
-  switch (type) {
-    case "alphabetical":
-      return "sort alphabet down";
-    case "select":
-      return "list ol";
-    case "datetime":
-      return "calendar outline";
-    case "numeric":
-      return "sort numeric down";
-    case "boolean":
-      return "question";
-    default:
-      return "question";
-  }
 }

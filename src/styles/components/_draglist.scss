@@ -139,18 +139,6 @@
     }
   }
 
-  .drag__list__item__icon {
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    background: var(--highlight-primary-1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    i { color: var(--elevation-1); transform: translateX(2px); font-size: 12px; }
-  }
-
   .drag__list__item__icon__secondary {
     position: absolute;
     right: 6px;

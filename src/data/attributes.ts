@@ -1,3 +1,4 @@
+import { Icon, SemanticICONS } from "semantic-ui-react";
 export const attributes = <Array<string>>[
   "first_name",
   "last_name",
@@ -46,3 +47,20 @@ export const returnAttributeType = ({
       return null;
   }
 };
+
+export function returnTypeIcon(type: string): SemanticICONS {
+  switch (type) {
+    case "alphabetical":
+      return "sort alphabet down";
+    case "select":
+      return "list ol";
+    case "datetime":
+      return "calendar outline";
+    case "numeric":
+      return "sort numeric down";
+    case "boolean":
+      return "question";
+    default:
+      return "question";
+  }
+}
