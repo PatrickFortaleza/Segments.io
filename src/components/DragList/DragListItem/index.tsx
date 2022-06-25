@@ -27,10 +27,11 @@ export default function DragListItemController({ item }: { item: Attribute }) {
 
   const onMouseUp = async () => {
     if (!isDragging) return;
+    setIsDragging(false);
     dispatch(handleDropped({ itemId: item.name, itemType: item.type }));
     // handleDropped({ itemId: item.id });
     // setIsTransitioning(true);
-    setIsDragging(false);
+
     setPos({ x: 0, y: 0 });
   };
 

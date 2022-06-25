@@ -10,3 +10,27 @@ button.base {
     opacity: 0.5;
   }
 }
+
+
+button.default {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+
+  &:focus,
+  &:active,
+  &:hover {
+    i {
+      color: var(--highlight-primary-1);
+    }
+  }
+
+  i {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    color: var(--elevation-6);
+    transition: .2s ease-in-out;
+  }
+}

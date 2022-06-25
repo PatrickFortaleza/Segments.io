@@ -1,6 +1,7 @@
 import React from "react";
 import { AttributeWithId } from "../../../models/attributes";
 import RuleView from "./view";
+import { useSelector } from "react-redux";
 
 export default function RuleController({
   rule,
@@ -9,5 +10,15 @@ export default function RuleController({
   rule: AttributeWithId;
   conditionLogic: string | undefined;
 }) {
-  return <RuleView rule={rule} conditionLogic={conditionLogic} />;
+  const ruleMetadata = useSelector(
+    (state: any) => state.attributeReducer[rule.type]
+  );
+
+  return (
+    <RuleView
+      rule={rule}
+      conditionLogic={conditionLogic}
+      ruleMetadata={ruleMetadata}
+    />
+  );
 }

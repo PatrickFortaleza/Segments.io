@@ -2,6 +2,7 @@ import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
 import { Bucket, BucketWithType, BucketContainer } from "../../models/bucket";
 import { Attribute, AttributeWithId } from "../../models/attributes";
+import BucketController from "../../components/DropBuckets/Bucket";
 
 const initialBucketState: Bucket = {
   label: "",
@@ -99,6 +100,8 @@ const bucketReducer = (state = initialState, action: Action) => {
     case "handle_dropped": {
       let { itemId, itemType } = action.payload;
 
+      if (!itemId || !itemType) return { ...bucketState };
+
       let attribute: AttributeWithId = {
         name: itemId,
         type: itemType,
@@ -128,7 +131,7 @@ const bucketReducer = (state = initialState, action: Action) => {
       );
 
       // should only allow one bucket with itemInZone === true
-      if (itemInBuckets.length !== 1) return;
+      if (itemInBuckets.length !== 1) return { ...bucketState };
       let { type, index } = itemInBuckets[0];
 
       bucketState = {
@@ -146,6 +149,9 @@ const bucketReducer = (state = initialState, action: Action) => {
         attribute,
       ];
 
+      return { ...bucketState };
+    }
+    default: {
       return { ...bucketState };
     }
   }

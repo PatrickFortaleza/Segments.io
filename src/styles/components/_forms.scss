@@ -1,0 +1,142 @@
+.custom-select {
+  border: var(--elevation-6) 1px solid;
+  border-radius: 2px;
+  display: inline-block;
+  position: relative;
+  pointer-events: all;
+
+  select {
+    appearance: none;
+    // Additional resets for further consistency
+    font-family: sans-serif;
+    font-size: 12px;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    cursor: inherit;
+    line-height: inherit;
+    padding: 7px 30px 7px 7px;
+    position: relative;
+    cursor: pointer;
+    background-color: none;
+    outline: none;
+
+    &:focus,
+    &:active {
+      &+.custom-select::after {
+        border-top: 5px solid red;
+      }
+    }
+  }
+
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    border-left: 1px solid var(--elevation-6);
+    z-index: 5000;
+    pointer-events: none;
+    background: var(--elevation-2);
+  }
+
+  &::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--elevation-6);
+    pointer-events: none;
+    z-index: 5001;
+  }
+
+  &:focus,
+  &:active,
+  &:hover {
+    border: var(--highlight-primary-1) 1px solid;
+  }
+}
+
+
+.custom__range {
+  display: flex;
+  border: 1px solid var(--elevation-6);
+  height: 100%;
+  align-items: center;
+  border-radius: 2px;
+
+
+  &__input {
+    display: inline-block;
+    border-right: 1px solid var(--elevation-6);
+    height: 100%;
+
+    input {
+      font-family: sans-serif;
+      font-size: 12px;
+      margin: 0 !important;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+      padding: 0;
+      text-align: right;
+      border-radius: 2px;
+      padding: 3px 7px;
+      height: 100%;
+    }
+  }
+
+  &__slider {
+    display: flex;
+    align-items: center;
+    padding: 0 7px;
+  }
+
+  &__slider input {
+    -webkit-appearance: none;
+    height: 3px;
+    background: #d3d3d3;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 5px;
+    width: 100%;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      background: var(--highlight-primary-1);
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: var(--shadow-down);
+      border: 2px solid var(--elevation-1);
+    }
+
+    &::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      background: var(--highlight-primary-1);
+      cursor: pointer;
+    }
+  }
+}
+
+input.custom {
+  border: 1px solid var(--elevation-6);
+  height: 100%;
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 12px;
+  font-family: sans-serif;
+  padding: 0 7px;
+}
