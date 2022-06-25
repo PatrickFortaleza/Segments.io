@@ -6,7 +6,9 @@ import Rule from "../Rule";
 
 export default function BucketView({
   bucket,
+  bucketKey,
   bucketRef,
+  bucketIndex,
   labelRef,
   inZone,
   remove,
@@ -15,7 +17,9 @@ export default function BucketView({
   conditionLogic,
 }: {
   bucket: Bucket;
+  bucketKey: keyof BucketContainer;
   bucketRef: LegacyRef<HTMLDivElement> | undefined;
+  bucketIndex: number;
   labelRef: LegacyRef<HTMLInputElement> | undefined;
   inZone: boolean;
   remove: () => void;
@@ -80,11 +84,15 @@ export default function BucketView({
       <div className="drag__bucket__rules">
         {Array.isArray(bucket.rules) && bucket.rules.length > 0 ? (
           <>
-            {bucket.rules.map((rule) => (
+            {bucket.rules.map((rule, index) => (
               <Rule
                 key={rule.id}
                 rule={rule}
                 conditionLogic={conditionLogic.value}
+                bucket={bucket}
+                bucketIndex={bucketIndex}
+                bucketKey={bucketKey}
+                bucketRuleIndex={index}
               />
             ))}
           </>

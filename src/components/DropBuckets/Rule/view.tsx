@@ -12,6 +12,7 @@ export default function RuleView({
   rule,
   conditionLogic,
   ruleMetadata,
+  handleDelete,
 }: {
   rule: AttributeWithId;
   conditionLogic: string | undefined;
@@ -19,6 +20,7 @@ export default function RuleView({
     controlOptions: Array<string>;
     variables: any; // TODO: fix
   };
+  handleDelete: () => void;
 }) {
   return (
     <div className="rule">
@@ -31,7 +33,7 @@ export default function RuleView({
         </div>
         <div className="rule__head__name">
           <h5>{snakeCaseToTitleCase(rule.name)}</h5>
-          <button className="default">
+          <button className="default" onClick={handleDelete}>
             <Icon name="trash alternate" />
           </button>
         </div>

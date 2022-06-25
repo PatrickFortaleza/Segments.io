@@ -101,3 +101,22 @@ export const handleDropped = ({
     },
   };
 };
+
+export const deleteRuleFromBucket = ({
+  bucketType,
+  bucketIndex,
+  ruleId,
+}: {
+  bucketType: keyof BucketContainer;
+  bucketIndex: number;
+  ruleId: string;
+}) => {
+  return {
+    type: "delete_rule_from_bucket",
+    payload: {
+      bucketType,
+      bucketIndex,
+      ruleId,
+    },
+  };
+};

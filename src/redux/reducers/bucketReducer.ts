@@ -2,7 +2,6 @@ import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
 import { Bucket, BucketWithType, BucketContainer } from "../../models/bucket";
 import { Attribute, AttributeWithId } from "../../models/attributes";
-import BucketController from "../../components/DropBuckets/Bucket";
 
 const initialBucketState: Bucket = {
   label: "",
@@ -148,6 +147,32 @@ const bucketReducer = (state = initialState, action: Action) => {
         ...existingRules,
         attribute,
       ];
+
+      return { ...bucketState };
+    }
+    case "delete_rule_from_bucket": {
+      console.log("delete");
+      let { bucketType, bucketIndex, ruleId } = action.payload;
+
+      console.log(ruleId);
+
+      let rules =
+        bucketState.buckets[bucketType as keyof BucketContainer][bucketIndex]
+          .rules;
+      rules = rules.filter((rule) => rule.id !== ruleId);
+
+      console.log(rules);
+
+      bucketState = {
+        ...bucketState,
+        buckets: {
+          ...bucketState.buckets,
+        },
+      };
+
+      bucketState.buckets[bucketType as keyof BucketContainer][
+        bucketIndex
+      ].rules = [...rules];
 
       return { ...bucketState };
     }

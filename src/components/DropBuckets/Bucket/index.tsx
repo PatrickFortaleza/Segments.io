@@ -39,7 +39,7 @@ export default function BucketController({
     coords: RectCoordinates;
   }) => {
     const offset = 15;
-    let tRect = calculateCoordinates({ el: targetEl });
+    let tRect: RectCoordinates = calculateCoordinates({ el: targetEl });
     let { top, right, bottom, left } = coords;
 
     if (
@@ -114,7 +114,9 @@ export default function BucketController({
   return (
     <BucketView
       bucket={bucket}
+      bucketKey={bucketKey}
       bucketRef={bucketRef}
+      bucketIndex={bucketIndex}
       labelRef={labelRef}
       inZone={itemInZone}
       remove={removeFromBucket}
