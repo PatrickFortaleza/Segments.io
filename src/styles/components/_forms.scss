@@ -91,6 +91,12 @@
       border-radius: 2px;
       padding: 3px 7px;
       height: 100%;
+      cursor: pointer;
+      border: 1px solid rgba($color: #000000, $alpha: 0);
+
+      &:hover, &:focus, &:active {
+        border: 1px solid var(--highlight-primary-1);
+      }
     }
   }
 
@@ -139,4 +145,10 @@ input.custom {
   font-size: 12px;
   font-family: sans-serif;
   padding: 0 7px;
+  
+    &:hover,
+    &:focus,
+    &:active {
+      border: 1px solid var(--highlight-primary-1);
+    }
 }

@@ -41,17 +41,23 @@ export default function DateSliderController({
   }, [sliderValue]);
 
   useEffect(() => {
-    let start = moment(minDate),
-      end = moment(currentDate);
+    if (isDate(minDate) && isDate(currentDate)) {
+      let start = moment(minDate),
+        end = moment(currentDate);
 
-    let daysBetween = end.diff(start, "days");
+      let daysBetween = end.diff(start, "days");
 
-    let percentageOfTotalDays = Math.round(
-      (daysBetween / daysBetweenDates) * 100
-    );
+      if (daysBetween > 0 && daysBetweenDates > 0) {
+        let percentageOfTotalDays = Math.round(
+          (daysBetween / daysBetweenDates) * 100
+        );
 
-    if (sliderValue !== percentageOfTotalDays)
-      setSliderValue(percentageOfTotalDays);
+        if (sliderValue !== percentageOfTotalDays)
+          setSliderValue(percentageOfTotalDays);
+      } else {
+        if (sliderValue !== 0) setSliderValue(0);
+      }
+    }
   }, [currentDate]);
 
   return (
