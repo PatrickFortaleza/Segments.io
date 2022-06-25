@@ -6,9 +6,11 @@ import { isDate } from "../../../utility";
 export default function DateSliderController({
   minDate,
   maxDate,
+  setter,
 }: {
   minDate: string;
   maxDate: string;
+  setter: ({ value, flag }: { value: string; flag: string }) => void;
 }) {
   const [sliderValue, setSliderValue] = useState<number>(0);
   const [daysBetweenDates, setDaysBetweenDates] = useState<number>(0);
@@ -58,6 +60,11 @@ export default function DateSliderController({
         if (sliderValue !== 0) setSliderValue(0);
       }
     }
+
+    setter({
+      value: currentDate,
+      flag: "value",
+    });
   }, [currentDate]);
 
   return (

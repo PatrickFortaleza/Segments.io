@@ -34,7 +34,7 @@ export default function RangeSliderView({
           min={0}
           max={`${max}`}
           value={`${slider.value}`}
-          onChange={(e) => slider.setter(e.target.value)}
+          onChange={(e) => slider.setter(+e.target.value)}
         />
       </span>
     </span>
