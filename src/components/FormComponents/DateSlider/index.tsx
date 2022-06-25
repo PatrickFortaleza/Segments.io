@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment, { Moment } from "moment";
 import React, { useEffect, useState } from "react";
 import DateSliderView from "./view";
 import { isDate } from "../../../utility";
@@ -18,8 +18,8 @@ export default function DateSliderController({
   useEffect(() => {
     if (isDate(minDate) && isDate(maxDate)) {
       try {
-        let start = moment(minDate),
-          end = moment(maxDate);
+        let start: Moment = moment(minDate),
+          end: Moment = moment(maxDate);
 
         let daysBetween = end.diff(start, "days");
         setDaysBetweenDates(daysBetween);
@@ -31,8 +31,8 @@ export default function DateSliderController({
 
   useEffect(() => {
     if (daysBetweenDates !== 0) {
-      let daysToIncrease = daysBetweenDates * (sliderValue * 0.01);
-      let newDate = moment(minDate)
+      let daysToIncrease: number = daysBetweenDates * (sliderValue * 0.01);
+      let newDate: string = moment(minDate)
         .add(daysToIncrease, "days")
         .format("YYYY-MM-DD");
 
@@ -42,13 +42,13 @@ export default function DateSliderController({
 
   useEffect(() => {
     if (isDate(minDate) && isDate(currentDate)) {
-      let start = moment(minDate),
-        end = moment(currentDate);
+      let start: Moment = moment(minDate),
+        end: Moment = moment(currentDate);
 
-      let daysBetween = end.diff(start, "days");
+      let daysBetween: number = end.diff(start, "days");
 
       if (daysBetween > 0 && daysBetweenDates > 0) {
-        let percentageOfTotalDays = Math.round(
+        let percentageOfTotalDays: number = Math.round(
           (daysBetween / daysBetweenDates) * 100
         );
 
