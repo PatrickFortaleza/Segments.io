@@ -133,13 +133,6 @@ const bucketReducer = (state = initialState, action: Action) => {
       if (itemInBuckets.length !== 1) return { ...bucketState };
       let { type, index } = itemInBuckets[0];
 
-      bucketState = {
-        ...bucketState,
-        buckets: {
-          ...bucketState.buckets,
-        },
-      };
-
       let existingRules =
         bucketState.buckets[type as keyof BucketContainer][index].rules;
 
@@ -160,8 +153,6 @@ const bucketReducer = (state = initialState, action: Action) => {
         bucketState.buckets[bucketType as keyof BucketContainer][bucketIndex]
           .rules;
       rules = rules.filter((rule) => rule.id !== ruleId);
-
-      console.log(rules);
 
       bucketState = {
         ...bucketState,

@@ -84,15 +84,13 @@ export default function BucketView({
       <div className="drag__bucket__rules">
         {Array.isArray(bucket.rules) && bucket.rules.length > 0 ? (
           <>
-            {bucket.rules.map((rule, index) => (
+            {bucket.rules.map((rule) => (
               <Rule
                 key={rule.id}
                 rule={rule}
                 conditionLogic={conditionLogic.value}
-                bucket={bucket}
                 bucketIndex={bucketIndex}
                 bucketKey={bucketKey}
-                bucketRuleIndex={index}
               />
             ))}
           </>

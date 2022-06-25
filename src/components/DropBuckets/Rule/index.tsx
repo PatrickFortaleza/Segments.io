@@ -6,17 +6,13 @@ import { Bucket, BucketContainer } from "../../../models/bucket";
 import { deleteRuleFromBucket } from "../../../redux/actions/bucket";
 
 export default function RuleController({
-  bucket,
   bucketIndex,
   bucketKey,
-  bucketRuleIndex,
   rule,
   conditionLogic,
 }: {
-  bucket: Bucket;
   bucketIndex: number;
   bucketKey: keyof BucketContainer;
-  bucketRuleIndex: number;
   rule: AttributeWithId;
   conditionLogic: string | undefined;
 }) {
