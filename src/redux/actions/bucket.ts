@@ -86,7 +86,7 @@ export const removeCondition = ({
   };
 };
 
-export const handleDropped = ({
+export const addRuleToBucket = ({
   itemId,
   itemType,
 }: {
@@ -94,7 +94,7 @@ export const handleDropped = ({
   itemType: string;
 }) => {
   return {
-    type: "handle_dropped",
+    type: "add_rule_to_bucket",
     payload: {
       itemId,
       itemType,
@@ -117,6 +117,31 @@ export const deleteRuleFromBucket = ({
       bucketType,
       bucketIndex,
       ruleId,
+    },
+  };
+};
+
+export const updateRuleLogic = ({
+  ruleId,
+  bucketType,
+  bucketIndex,
+  condition,
+  value,
+}: {
+  ruleId: string;
+  bucketType: keyof BucketContainer;
+  bucketIndex: number;
+  condition: string;
+  value: string | number | boolean | undefined;
+}) => {
+  return {
+    type: "update_rule_logic",
+    payload: {
+      bucketType,
+      bucketIndex,
+      ruleId,
+      condition,
+      value,
     },
   };
 };

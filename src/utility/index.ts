@@ -32,3 +32,7 @@ export const isDate = (string: string) => {
   let date = moment(string);
   return date.isValid();
 };
+
+export const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};

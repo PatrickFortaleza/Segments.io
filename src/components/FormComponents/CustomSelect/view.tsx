@@ -1,5 +1,6 @@
 import React from "react";
 import { SetterGetter } from "../../../models";
+import { capitalizeFirstLetter } from "../../../utility";
 
 export default function CustomSelectView({
   options,
@@ -23,7 +24,7 @@ export default function CustomSelectView({
             value={option}
             style={{ textTransform: "capitalize" }}
           >
-            {option}
+            {capitalizeFirstLetter(option)}
           </option>
         ))}
       </select>

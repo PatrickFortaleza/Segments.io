@@ -96,7 +96,7 @@ const bucketReducer = (state = initialState, action: Action) => {
 
       return { ...bucketState };
     }
-    case "handle_dropped": {
+    case "add_rule_to_bucket": {
       let { itemId, itemType } = action.payload;
 
       if (!itemId || !itemType) return { ...bucketState };
@@ -144,10 +144,7 @@ const bucketReducer = (state = initialState, action: Action) => {
       return { ...bucketState };
     }
     case "delete_rule_from_bucket": {
-      console.log("delete");
       let { bucketType, bucketIndex, ruleId } = action.payload;
-
-      console.log(ruleId);
 
       let rules =
         bucketState.buckets[bucketType as keyof BucketContainer][bucketIndex]
@@ -167,10 +164,40 @@ const bucketReducer = (state = initialState, action: Action) => {
 
       return { ...bucketState };
     }
+    case "update_rule_logic":
+      let { bucketType, bucketIndex, ruleId, condition, value } =
+        action.payload;
+
+      let rules =
+        bucketState.buckets[bucketType as keyof BucketContainer][bucketIndex]
+          .rules;
+
+      let ruleToChangeIndex = rules.findIndex((r) => r.id === ruleId);
+
+      // error finding index...
+      if (ruleToChangeIndex < 0) return { ...bucketState };
+
+      rules[ruleToChangeIndex] = {
+        ...rules[ruleToChangeIndex],
+        condition,
+        value,
+      };
+
+      bucketState = {
+        ...bucketState,
+        buckets: {
+          ...bucketState.buckets,
+        },
+      };
+
+      bucketState.buckets[bucketType as keyof BucketContainer][
+        bucketIndex
+      ].rules = [...rules];
+
+      return { ...bucketState };
     default: {
       return { ...bucketState };
     }
   }
-  return state;
 };
 export default bucketReducer;

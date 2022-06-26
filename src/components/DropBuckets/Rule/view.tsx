@@ -66,7 +66,7 @@ export default function RuleView({
               )}
           </select>
         </span>
-        <span style={{ marginLeft: 5 }}>
+        <span style={{ marginLeft: 5, marginRight: 5 }}>
           {
             <>
               {rule.type === "alphabetical" && (

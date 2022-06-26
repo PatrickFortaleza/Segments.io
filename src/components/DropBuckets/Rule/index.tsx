@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { AttributeWithId } from "../../../models/attributes";
 import RuleView from "./view";
 import { useSelector, useDispatch } from "react-redux";
-import { Bucket, BucketContainer } from "../../../models/bucket";
-import { deleteRuleFromBucket } from "../../../redux/actions/bucket";
+import { BucketContainer } from "../../../models/bucket";
+import {
+  deleteRuleFromBucket,
+  updateRuleLogic,
+} from "../../../redux/actions/bucket";
 
 interface RuleLogic {
   condition: string;
@@ -31,7 +34,7 @@ export default function RuleController({
     (state: any) => state.attributeReducer[rule.type]
   );
 
-  const updateRuleLogic = ({
+  const changeRuleLogic = ({
     condition,
     value,
     flag,
@@ -63,6 +66,22 @@ export default function RuleController({
     );
   };
 
+  const updateRule = () => {
+    dispatch(
+      updateRuleLogic({
+        ruleId: rule.id,
+        bucketType: bucketKey,
+        bucketIndex: bucketIndex,
+        condition: ruleLogic.condition,
+        value: ruleLogic?.value,
+      })
+    );
+  };
+
+  useEffect(() => {
+    updateRule();
+  }, [ruleLogic]);
+
   return (
     <RuleView
       rule={rule}
@@ -71,7 +90,7 @@ export default function RuleController({
       handleDelete={handleDelete}
       ruleLogic={{
         value: ruleLogic,
-        setter: updateRuleLogic,
+        setter: changeRuleLogic,
       }}
     />
   );
