@@ -18,7 +18,7 @@ const initialState = {
   },
 };
 
-const bucketReducer = (state = initialState, action: Action) => {
+const buckets = (state = initialState, action: Action) => {
   let bucketState = { ...state };
   switch (action.type) {
     case "evaluate_in_zone": {
@@ -200,4 +200,4 @@ const bucketReducer = (state = initialState, action: Action) => {
     }
   }
 };
-export default bucketReducer;
+export default buckets;

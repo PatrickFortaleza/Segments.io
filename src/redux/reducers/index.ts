@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
-import usersReducer from "./usersReducer";
-import dragReducer from "./dragReducer";
-import bucketReducer from "./bucketReducer";
-import attributeReducer from "./attributeReducer";
+import users from "./usersReducer";
+import drag from "./dragReducer";
+import buckets from "./bucketReducer";
+import attributes from "./attributeReducer";
 
 const rootReducer = combineReducers({
-  usersReducer: usersReducer,
-  dragReducer: dragReducer,
-  bucketReducer: bucketReducer,
-  attributeReducer: attributeReducer,
+  users: users,
+  drag: drag,
+  buckets: buckets,
+  attributes: attributes,
 });
 
 export default rootReducer;

@@ -6,7 +6,7 @@ const inititalState = {
   filteredUsers: <Array<User>>[],
 };
 
-const usersReducer = (state = inititalState, action: Action) => {
+const users = (state = inititalState, action: Action) => {
   switch (action.type) {
     case "initialize_users": {
       return { ...state, users: action.payload };
@@ -14,4 +14,4 @@ const usersReducer = (state = inititalState, action: Action) => {
   }
   return state;
 };
-export default usersReducer;
+export default users;

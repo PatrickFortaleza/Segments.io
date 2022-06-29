@@ -28,7 +28,7 @@ export default function BucketController({
   const dispatch = useDispatch();
   const bucketRef = useRef<HTMLDivElement | null>(null);
   const labelRef = useRef<HTMLInputElement | null>(null);
-  const itemState = useSelector((state: any) => state.dragReducer);
+  const itemState = useSelector((state: any) => state.drag);
   let { itemRectCoords } = itemState;
 
   const calculateInDropzone = ({

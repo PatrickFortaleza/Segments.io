@@ -7,8 +7,8 @@ import { initializeAttributeMeta } from "../../redux/actions/attribute";
 
 export default function DropBucketsController() {
   const [usersPopulated, setUsersPopulated] = useState(false);
-  const buckets = useSelector((state: any) => state.bucketReducer.buckets);
-  const users = useSelector((state: any) => state.usersReducer.users);
+  const buckets = useSelector((state: any) => state.buckets.buckets);
+  const users = useSelector((state: any) => state.users.users);
 
   const dispatch = useDispatch();
 

@@ -30,9 +30,7 @@ export default function RuleController({
   });
 
   const dispatch = useDispatch();
-  const ruleMetadata = useSelector(
-    (state: any) => state.attributeReducer[rule.type]
-  );
+  const ruleMetadata = useSelector((state: any) => state.attributes[rule.type]);
 
   const changeRuleLogic = ({
     condition,

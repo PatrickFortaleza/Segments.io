@@ -15,7 +15,7 @@ const initialState = {
   },
 };
 
-const dragReducer = (state = initialState, action: Action) => {
+const drag = (state = initialState, action: Action) => {
   switch (action.type) {
     case "item_dragging": {
       let { isDragging, itemId, itemRectCoords } = action.payload;
@@ -27,4 +27,4 @@ const dragReducer = (state = initialState, action: Action) => {
   }
   return state;
 };
-export default dragReducer;
+export default drag;

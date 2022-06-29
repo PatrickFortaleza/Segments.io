@@ -60,7 +60,7 @@ const inititalState = <AttributeTypes>{
   },
 };
 
-const attributeReducer = (state = inititalState, action: Action) => {
+const attributes = (state = inititalState, action: Action) => {
   switch (action.type) {
     case "initialize_attribute_meta": {
       let { users } = action.payload;
@@ -109,4 +109,4 @@ const attributeReducer = (state = inititalState, action: Action) => {
   }
   return state;
 };
-export default attributeReducer;
+export default attributes;

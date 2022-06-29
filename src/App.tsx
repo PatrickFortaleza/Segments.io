@@ -8,7 +8,7 @@ import DropBuckets from "./components/DropBuckets";
 function App() {
   const api = new Api();
 
-  const users = useSelector((state: any) => state.usersReducer.users);
+  const users = useSelector((state: any) => state.users.users);
   const dispatch = useDispatch();
 
   const fetchData = async () => {

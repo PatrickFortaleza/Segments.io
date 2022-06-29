@@ -10,8 +10,8 @@ export default function DragList({
 }) {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [scrollPos, setScrollPos] = useState<number>(0);
-  const { isDragging, itemId } = useSelector((state: any) => state.dragReducer);
-  const buckets = useSelector((state: any) => state.bucketReducer.buckets);
+  const { isDragging, itemId } = useSelector((state: any) => state.drag);
+  const buckets = useSelector((state: any) => state.buckets.buckets);
 
   const scrollBoxRef = useRef<HTMLDivElement | null>(null);
 
