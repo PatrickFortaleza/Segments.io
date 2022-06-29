@@ -2,17 +2,15 @@ import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
 import { Bucket, BucketHashmap } from "../../models/bucket";
 
-let initialState = {
-  buckets: <BucketHashmap | null>null,
-};
+let initialState = <BucketHashmap | null>null;
 
-if (initialState.buckets === null) {
-  initialState.buckets = {};
+if (initialState === null) {
+  initialState = {};
   ["includes", "excludes"].forEach((i, index) => {
     let bucketId = 1000 + index;
 
-    if (initialState.buckets)
-      initialState.buckets[`${bucketId}`] = <Bucket>{
+    if (initialState)
+      initialState[`${bucketId}`] = <Bucket>{
         id: bucketId,
         type: i,
       };

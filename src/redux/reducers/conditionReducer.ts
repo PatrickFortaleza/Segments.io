@@ -2,18 +2,16 @@ import { Action } from "../../models/action";
 import { v4 as uuid } from "uuid";
 import { Condition, ConditionHashmap } from "../../models/condition";
 
-let initialState = {
-  conditions: <ConditionHashmap | null>null,
-};
+let initialState = <ConditionHashmap | null>null;
 
-if (initialState.conditions === null) {
-  initialState.conditions = {};
+if (initialState === null) {
+  initialState = {};
   [...Array(2)].forEach((_, index) => {
     let conditionId = uuid(),
       bucketId = 1000 + index;
 
-    if (initialState.conditions)
-      initialState.conditions[`${conditionId}`] = <Condition>{
+    if (initialState)
+      initialState[`${conditionId}`] = <Condition>{
         id: conditionId,
         bucket_id: bucketId,
         item_in_zone: false,
