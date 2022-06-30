@@ -96,13 +96,6 @@
       background: #b7dbff;
     }
   }
-
-  .empty {
-    font-size: 12px;
-    text-align: center;
-    padding: 6px;
-    color: var(--elevation-6);
-  }
 }
 
 .buckets__container {
@@ -113,6 +106,7 @@
     background: white;
     padding: 10px;
     border: 1px solid #ddd;
+    min-width: 399px;
 
     h3 {
       font-family: sans-serif;
