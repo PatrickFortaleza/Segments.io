@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
-import { AttributeWithId } from "../../../models/attributes";
 import RuleView from "./view";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  deleteRuleFromBucket,
-  updateRuleLogic,
-} from "../../../redux/actions/bucket";
 import { Rule } from "../../../models/rule";
 
 interface RuleLogic {

@@ -3,14 +3,6 @@ import { v4 as uuid } from "uuid";
 import { Rule, RuleHashmap } from "../../models/rule";
 
 let initialState = <RuleHashmap | null>null;
-let emptyRule = <Rule>{
-  id: "",
-  condition_id: "",
-  type: "",
-  name: "",
-  equation: "",
-  value: "",
-};
 
 // Initializing state if null...
 if (initialState === null) {
@@ -25,7 +17,7 @@ const rules = (state = initialState, action: Action) => {
 
       let ruleId = uuid();
 
-      let newRule = {
+      let newRule = <Rule>{
         ...rule,
         id: ruleId,
       };
