@@ -47,3 +47,19 @@ export const removeCondition = ({ conditionId }: { conditionId: string }) => {
     },
   };
 };
+
+export const changeInZone = ({
+  conditionId,
+  inZone,
+}: {
+  conditionId: string;
+  inZone: boolean;
+}) => {
+  return {
+    type: "change_in_zone",
+    payload: {
+      conditionId,
+      inZone,
+    },
+  };
+};

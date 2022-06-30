@@ -35,6 +35,8 @@ const conditions = (state = initialState, action: Action) => {
   switch (action.type) {
     case "change_condition_label": {
       let { conditionId, label } = action.payload;
+      if (!conditionsState[conditionId]) break;
+
       conditionsState[conditionId] = {
         ...conditionsState[conditionId],
         label: label,
@@ -43,6 +45,8 @@ const conditions = (state = initialState, action: Action) => {
     }
     case "change_condition_operator": {
       let { conditionId, operator } = action.payload;
+      if (!conditionsState[conditionId]) break;
+
       conditionsState[conditionId] = {
         ...conditionsState[conditionId],
         operator: operator,
@@ -67,6 +71,15 @@ const conditions = (state = initialState, action: Action) => {
       let { conditionId } = action.payload;
       delete conditionsState[conditionId];
       break;
+    }
+    case "change_in_zone": {
+      let { conditionId, inZone } = action.payload;
+      if (!conditionsState[conditionId]) break;
+
+      conditionsState[conditionId] = {
+        ...conditionsState[conditionId],
+        item_in_zone: inZone,
+      };
     }
     default:
       break;

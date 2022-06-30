@@ -8,19 +8,23 @@ import {
   changeConditionOperator,
   removeCondition,
 } from "../../../redux/actions/condition";
+import { Rule } from "../../../models/rule";
+import { default as RuleItem } from "../Rule";
 
 export default function ConditionView({
   condition,
   conditionOperators,
   editingLabel,
-  bucketRef,
+  dropRef,
   labelRef,
+  conditionRules,
 }: {
   condition: Condition;
   conditionOperators: Array<string>;
   editingLabel: SetterGetter;
-  bucketRef: LegacyRef<HTMLDivElement> | undefined;
+  dropRef: LegacyRef<HTMLDivElement> | undefined;
   labelRef: LegacyRef<HTMLInputElement> | undefined;
+  conditionRules: Array<Rule>;
 }) {
   const dispatch = useDispatch();
   return (
@@ -98,9 +102,26 @@ export default function ConditionView({
           </button>
         </div>
       </div>
+      <div className="drag__bucket__rules">
+        {conditionRules.length > 0 ? (
+          conditionRules.map((rule) => (
+            <RuleItem
+              key={rule.id}
+              rule={rule}
+              conditionOperator={condition.operator}
+            />
+          ))
+        ) : (
+          <p className="empty">
+            <Icon name="warning sign" /> No existing rules for this condition
+          </p>
+        )}
+      </div>
       <div
-        className={`drag__bucket__target ${false ? "active" : ""}`}
-        ref={null}
+        className={`drag__bucket__target ${
+          condition?.item_in_zone ? "active" : ""
+        }`}
+        ref={dropRef}
       >
         <p>Drag + Drop a Rule here to add to condition</p>
       </div>

@@ -1,5 +1,3 @@
-import React from "react";
-import { AttributeWithId } from "../../../models/attributes";
 import { returnTypeIcon } from "../../../data/attributes";
 import { Icon } from "semantic-ui-react";
 import { snakeCaseToTitleCase } from "../../../utility";
@@ -8,21 +6,20 @@ import DateSlider from "../../FormComponents/DateSlider";
 import AlphaInput from "../../FormComponents/AlphaInput";
 import CustomSelect from "../../FormComponents/CustomSelect";
 import { SetterGetter } from "../../../models";
+import { Rule } from "../../../models/rule";
 
 export default function RuleView({
   rule,
-  conditionLogic,
+  conditionOperator,
   ruleMetadata,
-  handleDelete,
   ruleLogic,
 }: {
-  rule: AttributeWithId;
-  conditionLogic: string | undefined;
+  rule: Rule;
+  conditionOperator: string | undefined;
   ruleMetadata: {
     controlOptions: Array<string>;
     variables: any; // TODO: fix
   };
-  handleDelete: () => void;
   ruleLogic: SetterGetter;
 }) {
   return (
@@ -36,7 +33,7 @@ export default function RuleView({
         </div>
         <div className="rule__head__name">
           <h5>{snakeCaseToTitleCase(rule.name)}</h5>
-          <button className="default" onClick={handleDelete}>
+          <button className="default" onClick={() => console.log("delete")}>
             <Icon name="trash alternate" />
           </button>
         </div>
@@ -101,7 +98,7 @@ export default function RuleView({
         </span>
       </div>
       <div className="rule__append">
-        <span>{conditionLogic}</span>
+        <span>{conditionOperator}</span>
       </div>
     </div>
   );

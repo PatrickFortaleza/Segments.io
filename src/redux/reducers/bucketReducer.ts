@@ -1,5 +1,4 @@
 import { Action } from "../../models/action";
-import { v4 as uuid } from "uuid";
 import { Bucket, BucketHashmap } from "../../models/bucket";
 
 let initialState = <BucketHashmap | null>null;

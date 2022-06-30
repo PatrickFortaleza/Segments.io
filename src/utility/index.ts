@@ -1,4 +1,5 @@
 import moment from "moment";
+import { RectCoordinates } from "../models/positioning";
 
 export const snakeCaseToTitleCase = (string: string): string => {
   return string
@@ -26,6 +27,27 @@ export const calculateCoordinates = ({
     };
 
   return coords;
+};
+
+export const calculateInZone = ({
+  targetEl,
+  coords,
+}: {
+  targetEl: HTMLDivElement;
+  coords: RectCoordinates;
+}) => {
+  const offset = 15;
+  let tRect: RectCoordinates = calculateCoordinates({ el: targetEl });
+  let { top, right, bottom, left } = coords;
+
+  if (
+    bottom < tRect.bottom + offset &&
+    left > tRect.left - offset &&
+    top > tRect.top - offset &&
+    right < tRect.right + offset
+  )
+    return true;
+  return false;
 };
 
 export const isDate = (string: string) => {

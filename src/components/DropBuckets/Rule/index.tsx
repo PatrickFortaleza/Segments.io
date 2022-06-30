@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { AttributeWithId } from "../../../models/attributes";
 import RuleView from "./view";
 import { useSelector, useDispatch } from "react-redux";
-import { BucketContainer } from "../../../models/bucket";
 import {
   deleteRuleFromBucket,
   updateRuleLogic,
 } from "../../../redux/actions/bucket";
+import { Rule } from "../../../models/rule";
 
 interface RuleLogic {
   condition: string;
@@ -14,15 +14,11 @@ interface RuleLogic {
 }
 
 export default function RuleController({
-  bucketIndex,
-  bucketKey,
   rule,
-  conditionLogic,
+  conditionOperator,
 }: {
-  bucketIndex: number;
-  bucketKey: keyof BucketContainer;
-  rule: AttributeWithId;
-  conditionLogic: string | undefined;
+  rule: Rule;
+  conditionOperator: string | undefined;
 }) {
   const [ruleLogic, setRuleLogic] = useState<RuleLogic>({
     condition: "",
@@ -54,38 +50,11 @@ export default function RuleController({
     if (flag === "value") setRuleLogic({ ...ruleLogic, value: value });
   };
 
-  const handleDelete = () => {
-    dispatch(
-      deleteRuleFromBucket({
-        bucketType: bucketKey,
-        bucketIndex: bucketIndex,
-        ruleId: rule.id,
-      })
-    );
-  };
-
-  const updateRule = () => {
-    dispatch(
-      updateRuleLogic({
-        ruleId: rule.id,
-        bucketType: bucketKey,
-        bucketIndex: bucketIndex,
-        condition: ruleLogic.condition,
-        value: ruleLogic?.value,
-      })
-    );
-  };
-
-  useEffect(() => {
-    updateRule();
-  }, [ruleLogic]);
-
   return (
     <RuleView
       rule={rule}
-      conditionLogic={conditionLogic}
+      conditionOperator={conditionOperator}
       ruleMetadata={ruleMetadata}
-      handleDelete={handleDelete}
       ruleLogic={{
         value: ruleLogic,
         setter: changeRuleLogic,
