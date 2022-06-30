@@ -4,6 +4,7 @@ import { Bucket, BucketHashmap } from "../../models/bucket";
 
 let initialState = <BucketHashmap | null>null;
 
+// Initializing state if null...
 if (initialState === null) {
   initialState = {};
   ["includes", "excludes"].forEach((i, index) => {

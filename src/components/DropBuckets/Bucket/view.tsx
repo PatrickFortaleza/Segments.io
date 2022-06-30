@@ -3,110 +3,84 @@ import { Bucket, BucketContainer } from "../../../models/bucket";
 import { Icon } from "semantic-ui-react";
 import { SetterGetter } from "../../../models";
 import Rule from "../Rule";
+import { Condition } from "../../../models/condition";
+import { useDispatch } from "react-redux";
+import { changeConditionLabel } from "../../../redux/actions/condition";
 
 export default function BucketView({
-  bucket,
-  bucketKey,
-  bucketRef,
-  bucketIndex,
-  labelRef,
-  inZone,
-  remove,
-  editingLabel,
-  conditionLabel,
-  conditionLogic,
+  bucketConditions,
 }: {
-  bucket: Bucket;
-  bucketKey: keyof BucketContainer;
-  bucketRef: LegacyRef<HTMLDivElement> | undefined;
-  bucketIndex: number;
-  labelRef: LegacyRef<HTMLInputElement> | undefined;
-  inZone: boolean;
-  remove: () => void;
-  editingLabel: SetterGetter;
-  conditionLabel: SetterGetter;
-  conditionLogic: SetterGetter;
+  bucketConditions: Array<Condition>;
 }) {
   const conditionLogicOptions = ["and", "or"];
+  const dispatch = useDispatch();
+
   return (
-    <div className="drag__bucket">
-      <div className="drag__bucket__header">
-        <div className="bucket__label">
-          <button onClick={() => editingLabel.setter(!editingLabel.value)}>
-            {editingLabel.value ? (
-              <Icon name="checkmark" style={{ color: "var(--success-1)" }} />
-            ) : (
-              <Icon name="edit" />
-            )}
-          </button>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              editingLabel.setter(false);
-            }}
-          >
-            <input
-              ref={labelRef}
-              type="text"
-              value={conditionLabel.value}
-              onChange={(e) => conditionLabel.setter(e.target.value)}
-              className={`${editingLabel.value ? "editing" : ""}`}
-              readOnly={editingLabel.value ? false : true}
-              disabled={editingLabel.value ? false : true}
-            />
-          </form>
-        </div>
-        <div className="bucket__actions">
-          <div className="bucket__actions__radio">
-            {conditionLogicOptions.map((opt, index) => (
-              <label
-                className={`container ${
-                  conditionLogic.value === opt ? "checked" : ""
-                }`}
-                key={index}
+    <>
+      {bucketConditions.map((condition, index) => (
+        <div className="drag__bucket">
+          <div className="drag__bucket__header">
+            <div className="bucket__label">
+              <button onClick={() => console.log("set edit")}>
+                <Icon name="edit" />
+              </button>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  console.log("submit");
+                }}
               >
-                {opt}
                 <input
-                  type="radio"
-                  checked={conditionLogic.value === opt ? true : false}
-                  onChange={(e) => conditionLogic.setter(e.target.value)}
-                  name="logicOptions"
-                  value={opt}
+                  ref={null}
+                  type="text"
+                  value={condition.label}
+                  onChange={(e) =>
+                    dispatch(
+                      changeConditionLabel({
+                        conditionId: condition.id,
+                        label: e.target.value,
+                      })
+                    )
+                  }
+                  // className={`${editingLabel.value ? "editing" : ""}`}
+                  // readOnly={editingLabel.value ? false : true}
+                  // disabled={editingLabel.value ? false : true}
                 />
-              </label>
-            ))}
+              </form>
+            </div>
+            <div className="bucket__actions">
+              <div className="bucket__actions__radio">
+                {conditionLogicOptions.map((opt, index) => (
+                  <label
+                    className={`container ${
+                      condition.operator === opt ? "checked" : ""
+                    }`}
+                    key={index}
+                  >
+                    {opt}
+                    <input
+                      type="radio"
+                      checked={condition.operator === opt ? true : false}
+                      onChange={(e) => console.log("change")}
+                      name="logicOptions"
+                      value={opt}
+                    />
+                  </label>
+                ))}
+              </div>
+              <button onClick={() => console.log("remove")}>
+                <Icon name="trash alternate" />{" "}
+              </button>
+            </div>
           </div>
-          <button onClick={() => remove()}>
-            <Icon name="trash alternate" />{" "}
-          </button>
+          <div
+            className={`drag__bucket__target ${false ? "active" : ""}`}
+            ref={null}
+          >
+            <p>Drag + Drop a Rule here to add to condition</p>
+          </div>
         </div>
-      </div>
-      <div className="drag__bucket__rules">
-        {Array.isArray(bucket.rules) && bucket.rules.length > 0 ? (
-          <>
-            {bucket.rules.map((rule) => (
-              <Rule
-                key={rule.id}
-                rule={rule}
-                conditionLogic={conditionLogic.value}
-                bucketIndex={bucketIndex}
-                bucketKey={bucketKey}
-              />
-            ))}
-          </>
-        ) : (
-          <p className="empty">
-            <Icon name="warning sign" /> No rules currently selected for this
-            condition
-          </p>
-        )}
-      </div>
-      <div
-        className={`drag__bucket__target ${inZone ? "active" : ""}`}
-        ref={bucketRef}
-      >
-        <p>Drag + Drop a Rule here to add to condition</p>
-      </div>
-    </div>
+      ))}
+    </>
   );
 }
