@@ -5,14 +5,14 @@ import RangeSlider from "../../FormComponents/RangeSlider";
 import DateSlider from "../../FormComponents/DateSlider";
 import AlphaInput from "../../FormComponents/AlphaInput";
 import CustomSelect from "../../FormComponents/CustomSelect";
-import { SetterGetter } from "../../../models";
 import { Rule } from "../../../models/rule";
+import { useDispatch } from "react-redux";
+import { updateRule, deleteRule } from "../../../redux/actions/rule";
 
 export default function RuleView({
   rule,
   conditionOperator,
   ruleMetadata,
-  ruleLogic,
 }: {
   rule: Rule;
   conditionOperator: string | undefined;
@@ -20,8 +20,9 @@ export default function RuleView({
     controlOptions: Array<string>;
     variables: any; // TODO: fix
   };
-  ruleLogic: SetterGetter;
 }) {
+  const dispatch = useDispatch();
+
   return (
     <div className="rule">
       <div className="rule__head">
@@ -33,7 +34,16 @@ export default function RuleView({
         </div>
         <div className="rule__head__name">
           <h5>{snakeCaseToTitleCase(rule.name)}</h5>
-          <button className="default" onClick={() => console.log("delete")}>
+          <button
+            className="default"
+            onClick={() =>
+              dispatch(
+                deleteRule({
+                  ruleId: rule.id,
+                })
+              )
+            }
+          >
             <Icon name="trash alternate" />
           </button>
         </div>
@@ -41,16 +51,27 @@ export default function RuleView({
       <div className="rule__body">
         <span className="custom-select">
           <select
-            value={ruleLogic.value.condition}
+            value={rule.equation}
             onChange={(e) =>
-              ruleLogic.setter({
-                condition: e.target.value,
-                flag: "condition",
-              })
+              rule.type === "boolean"
+                ? dispatch(
+                    updateRule({
+                      ruleId: rule.id,
+                      equation: e.target.value,
+                      value: e.target.value === "is_true",
+                    })
+                  )
+                : dispatch(
+                    updateRule({
+                      ruleId: rule.id,
+                      equation: e.target.value,
+                      value: rule?.value,
+                    })
+                  )
             }
           >
             <option disabled value="">
-              Please select
+              Please select...
             </option>
             {Array.isArray(ruleMetadata.controlOptions) &&
               ruleMetadata.controlOptions.length > 0 &&
@@ -67,18 +88,46 @@ export default function RuleView({
           {
             <>
               {rule.type === "alphabetical" && (
-                <AlphaInput setter={ruleLogic.setter} />
+                <AlphaInput
+                  setter={(value: string) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
+                />
               )}
               {rule.type === "select" && (
                 <CustomSelect
                   options={ruleMetadata.variables[rule.name]}
-                  setter={ruleLogic.setter}
+                  setter={(value: string) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        key: "equation",
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
                 />
               )}
 
               {rule.type === "numeric" && (
                 <RangeSlider
-                  setter={ruleLogic.setter}
+                  setter={(value: number) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        key: "equation",
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
                   min={ruleMetadata.variables[rule.name][0]}
                   max={ruleMetadata.variables[rule.name][1]}
                 />
@@ -86,7 +135,16 @@ export default function RuleView({
 
               {rule.type === "datetime" && (
                 <DateSlider
-                  setter={ruleLogic.setter}
+                  setter={(value: string) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        key: "equation",
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
                   minDate={ruleMetadata.variables[rule.name][0]}
                   maxDate={ruleMetadata.variables[rule.name][1]}
                 />

@@ -26,10 +26,31 @@ const rules = (state = initialState, action: Action) => {
 
       break;
     }
+    case "update_rule": {
+      let { ruleId, equation, value } = action.payload;
+
+      if (!rulesState[ruleId]) return { ...rulesState };
+
+      rulesState[ruleId] = {
+        ...rulesState[ruleId],
+        equation,
+        value,
+      };
+      break;
+    }
+    case "delete_rule": {
+      let { ruleId } = action.payload;
+
+      if (!rulesState[ruleId]) return { ...rulesState };
+
+      delete rulesState[ruleId];
+      break;
+    }
     default: {
       break;
     }
   }
+
   return { ...rulesState };
 };
 export default rules;

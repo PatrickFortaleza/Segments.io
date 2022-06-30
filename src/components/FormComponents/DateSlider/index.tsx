@@ -10,7 +10,7 @@ export default function DateSliderController({
 }: {
   minDate: string;
   maxDate: string;
-  setter: ({ value, flag }: { value: string; flag: string }) => void;
+  setter: (value: string) => void;
 }) {
   const [sliderValue, setSliderValue] = useState<number>(0);
   const [daysBetweenDates, setDaysBetweenDates] = useState<number>(0);
@@ -61,10 +61,7 @@ export default function DateSliderController({
       }
     }
 
-    setter({
-      value: currentDate,
-      flag: "value",
-    });
+    setter(currentDate);
   }, [currentDate]);
 
   return (

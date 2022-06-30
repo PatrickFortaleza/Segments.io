@@ -1,4 +1,5 @@
 import { Condition, ConditionHashmap } from "../../models/condition";
+import { Rule } from "../../models/rule";
 import store from "../store";
 
 export const addRule = ({
@@ -30,6 +31,34 @@ export const addRule = ({
     type: "add_rule",
     payload: {
       rule,
+    },
+  };
+};
+
+export const updateRule = ({
+  ruleId,
+  equation,
+  value,
+}: {
+  ruleId: string;
+  equation: string;
+  value: string | number | boolean | undefined;
+}) => {
+  return {
+    type: "update_rule",
+    payload: {
+      ruleId,
+      equation,
+      value,
+    },
+  };
+};
+
+export const deleteRule = ({ ruleId }: { ruleId: string }) => {
+  return {
+    type: "delete_rule",
+    payload: {
+      ruleId,
     },
   };
 };

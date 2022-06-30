@@ -6,15 +6,12 @@ export default function CustomSelectController({
   setter,
 }: {
   options: Array<string>;
-  setter: ({ value, flag }: { value: string; flag: string }) => void;
+  setter: (value: string) => void;
 }) {
   const [selected, setSelected] = useState<string>("");
 
   useEffect(() => {
-    setter({
-      value: selected,
-      flag: "value",
-    });
+    setter(selected);
   }, [selected]);
 
   return (

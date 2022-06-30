@@ -24,7 +24,7 @@ if (initialState === null) {
         id: conditionId,
         bucket_id: bucketId,
         item_in_zone: false,
-        label: `condition ${index}`,
+        label: `condition ${index + 1}`,
         operator: "and",
       };
   });
@@ -61,7 +61,7 @@ const conditions = (state = initialState, action: Action) => {
         ...emptyCondition,
         id: conditionId,
         bucket_id: bucketId,
-        label: `condition ${Object.keys(conditionsState)?.length || 0}`,
+        label: `condition ${Object.keys(conditionsState)?.length + 1 || 0}`,
       };
 
       conditionsState[conditionId] = newCondition;

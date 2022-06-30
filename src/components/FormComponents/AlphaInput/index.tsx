@@ -4,7 +4,7 @@ import AlphaInputView from "./view";
 export default function AlphaInputController({
   setter,
 }: {
-  setter: ({ value, flag }: { value: string; flag: string }) => void;
+  setter: (value: string) => void;
 }) {
   const [value, setValue] = useState<string>("");
 
@@ -13,7 +13,7 @@ export default function AlphaInputController({
   };
 
   useEffect(() => {
-    setter({ value: value, flag: "value" });
+    setter(value);
   }, [value]);
 
   return (
