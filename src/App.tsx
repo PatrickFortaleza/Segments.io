@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Api } from "./api";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeUsers } from "./redux/actions/users";
 import Sidebar from "./components/Sidebar";
 import DropBuckets from "./components/DropBuckets";
+import { initializeAttributeMeta } from "./redux/actions/attribute";
 
 function App() {
+  const [usersPopulated, setUsersPopulated] = useState<Boolean>(false);
   const api = new Api();
 
   const users = useSelector((state: any) => state.users.users);
@@ -26,9 +28,15 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (Array.isArray(users) && users.length > 0 && usersPopulated === false) {
+      dispatch(initializeAttributeMeta({ users: users }));
+      setUsersPopulated(true);
+    }
+  }, [users]);
+
   return (
     <div className="app">
-      {/* {Array.isArray(users) && users.length > 0 && users.length} */}
       <header className="main" />
       <div className="body">
         <Sidebar />

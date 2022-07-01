@@ -5,9 +5,11 @@ import { Rule, RuleHashmap } from "../../models/rule";
 let initialState = <RuleHashmap | null>null;
 
 // Initializing state if null...
-if (initialState === null) {
+const initializeState = () => {
   initialState = {};
-}
+};
+
+if (initialState === null) initializeState();
 
 const rules = (state = initialState, action: Action) => {
   let rulesState = { ...state };

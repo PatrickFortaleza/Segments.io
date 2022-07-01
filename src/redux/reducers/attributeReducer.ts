@@ -1,10 +1,10 @@
 import { Action } from "../../models/action";
-import { AttributeTypeMeta, AttributeTypes } from "../../models/attributes";
+import { AttributeTypes } from "../../models/attributes";
 import { User } from "../../models/user";
 import moment, { Moment } from "moment";
 
 const inititalState = <AttributeTypes>{
-  alphabetical: <AttributeTypeMeta>{
+  alphabetical: {
     controlOptions: <Array<string>>[
       "starts_with",
       "ends_width",
@@ -13,7 +13,7 @@ const inititalState = <AttributeTypes>{
     ],
     variables: <undefined>undefined,
   },
-  select: <AttributeTypeMeta>{
+  select: {
     controlOptions: <Array<string>>["equal_to", "not_equal_to"],
     variables: {
       // possible unique options for each variable
@@ -24,7 +24,7 @@ const inititalState = <AttributeTypes>{
       family_status: <Array<string>>[],
     },
   },
-  numeric: <AttributeTypeMeta>{
+  numeric: {
     controlOptions: <Array<string>>[
       "greater_than",
       "less_than",
@@ -39,7 +39,7 @@ const inititalState = <AttributeTypes>{
       current_total_debt: <Array<number>>[],
     },
   },
-  datetime: <AttributeTypeMeta>{
+  datetime: {
     controlOptions: <Array<string>>[
       "greater_than",
       "less_than",
@@ -51,7 +51,7 @@ const inititalState = <AttributeTypes>{
       birthday: <Array<string>>[],
     },
   },
-  boolean: <AttributeTypeMeta>{
+  boolean: {
     controlOptions: <Array<string>>["is_true", "is_false"],
     variables: {
       owns_home: <Array<boolean>>[true, false],
@@ -73,6 +73,7 @@ const attributes = (state = inititalState, action: Action) => {
         if (!variables) return;
 
         Object.keys(variables).forEach((v) => {
+          if (metaKey === "boolean") return (allOptions = [true, false]);
           allOptions = users.map((user: User) => user[v as keyof User]);
           allOptions = new Set(allOptions);
           allOptions = Array.from(allOptions);
@@ -82,7 +83,6 @@ const attributes = (state = inititalState, action: Action) => {
               allOptions = [Math.min(...allOptions), Math.max(...allOptions)];
               break;
             case "boolean":
-              allOptions = [true, false];
               break;
             case "datetime":
               let datesMoment = allOptions.map((date) => moment(date)),

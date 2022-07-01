@@ -37,7 +37,6 @@ export default function DragListItemController({ item }: { item: Attribute }) {
       })
     );
     setIsDragging(false);
-    // dispatch(addRuleToBucket({ itemId: item.name, itemType: item.type }));
 
     setPos({ x: 0, y: 0 });
   };

@@ -1,5 +1,5 @@
 import RuleView from "./view";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Rule } from "../../../models/rule";
 
 export default function RuleController({

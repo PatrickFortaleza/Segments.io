@@ -107,7 +107,6 @@ export default function RuleView({
                     dispatch(
                       updateRule({
                         ruleId: rule.id,
-                        key: "equation",
                         equation: rule?.equation,
                         value: value,
                       })
@@ -122,7 +121,6 @@ export default function RuleView({
                     dispatch(
                       updateRule({
                         ruleId: rule.id,
-                        key: "equation",
                         equation: rule?.equation,
                         value: value,
                       })
@@ -139,7 +137,6 @@ export default function RuleView({
                     dispatch(
                       updateRule({
                         ruleId: rule.id,
-                        key: "equation",
                         equation: rule?.equation,
                         value: value,
                       })

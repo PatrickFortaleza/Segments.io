@@ -4,7 +4,7 @@ import { Bucket, BucketHashmap } from "../../models/bucket";
 let initialState = <BucketHashmap | null>null;
 
 // Initializing state if null...
-if (initialState === null) {
+const initializeState = () => {
   initialState = {};
   ["includes", "excludes"].forEach((i, index) => {
     let bucketId = 1000 + index;
@@ -15,7 +15,9 @@ if (initialState === null) {
         type: i,
       };
   });
-}
+};
+
+if (initialState === null) initializeState();
 
 const buckets = (state = initialState, action: Action) => {
   let bucketState = { ...state };

@@ -12,7 +12,7 @@ let emptyCondition = <Condition>{
 };
 
 // Initializing state if null...
-if (initialState === null) {
+const initializeState = () => {
   initialState = {};
 
   [...Array(2)].forEach((_, index) => {
@@ -28,7 +28,9 @@ if (initialState === null) {
         operator: "and",
       };
   });
-}
+};
+
+if (initialState === null) initializeState();
 
 const conditions = (state = initialState, action: Action) => {
   let conditionsState = { ...state };

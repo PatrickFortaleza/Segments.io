@@ -1,4 +1,4 @@
-import React, { LegacyRef } from "react";
+import { LegacyRef } from "react";
 import { Icon } from "semantic-ui-react";
 import { SetterGetter } from "../../../models";
 import { Condition } from "../../../models/condition";
