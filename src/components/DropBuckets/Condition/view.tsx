@@ -7,7 +7,7 @@ import {
   changeConditionLabel,
   changeConditionOperator,
   removeCondition,
-} from "../../../redux/actions/condition";
+} from "../../../redux/actions/entity";
 import { Rule } from "../../../models/rule";
 import { default as RuleItem } from "../Rule";
 

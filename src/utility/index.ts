@@ -2,6 +2,7 @@ import moment from "moment";
 import { RectCoordinates } from "../models/positioning";
 
 export const snakeCaseToTitleCase = (string: string): string => {
+  if (typeof string !== "string") return "";
   return string
     .replace(/^[-_]*(.)/, (_, c) => c.toUpperCase()) // Initial char (after -/_)
     .replace(/[-_]+(.)/g, (_, c) => " " + c.toUpperCase()); // First char after each -/_

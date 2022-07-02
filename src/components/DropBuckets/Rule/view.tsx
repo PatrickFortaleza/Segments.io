@@ -7,7 +7,7 @@ import AlphaInput from "../../FormComponents/AlphaInput";
 import CustomSelect from "../../FormComponents/CustomSelect";
 import { Rule } from "../../../models/rule";
 import { useDispatch } from "react-redux";
-import { updateRule, deleteRule } from "../../../redux/actions/rule";
+import { updateRule, deleteRule } from "../../../redux/actions/entity";
 
 export default function RuleView({
   rule,
@@ -22,7 +22,6 @@ export default function RuleView({
   };
 }) {
   const dispatch = useDispatch();
-
   return (
     <div className="rule">
       <div className="rule__head">

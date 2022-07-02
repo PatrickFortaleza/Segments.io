@@ -2,7 +2,7 @@ import { BucketHashmap } from "../../models/bucket";
 import Bucket from "./Bucket";
 import { Icon } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
-import { addCondition } from "../../redux/actions/condition";
+import { addCondition } from "../../redux/actions/entity";
 
 export default function DropBucketsView({
   buckets,

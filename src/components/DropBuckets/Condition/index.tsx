@@ -3,7 +3,7 @@ import { Condition } from "../../../models/condition";
 import ConditionView from "./view";
 import { useSelector, useDispatch } from "react-redux";
 import { calculateInZone } from "../../../utility";
-import { changeInZone } from "../../../redux/actions/condition";
+import { changeInZone } from "../../../redux/actions/entity";
 import { Rule } from "../../../models/rule";
 
 export default function ConditionController({
@@ -14,7 +14,7 @@ export default function ConditionController({
   const [editingLabel, setEditingLabel] = useState<boolean>(false);
   const [conditionRules, setConditionRules] = useState<Array<Rule>>([]);
 
-  const rules = useSelector((state: any) => state.rules);
+  const { rules } = useSelector((state: any) => state.entities);
   const { itemRectCoords } = useSelector((state: any) => state.drag);
   const dispatch = useDispatch();
 

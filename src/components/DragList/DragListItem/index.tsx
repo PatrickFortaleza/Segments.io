@@ -5,7 +5,7 @@ import { itemDragging, unsetItemDragging } from "../../../redux/actions/drag";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateCoordinates } from "../../../utility";
 import DragListItemView from "./view";
-import { addRule } from "../../../redux/actions/rule";
+import { addRule } from "../../../redux/actions/entity";
 
 export default function DragListItemController({ item }: { item: Attribute }) {
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -16,8 +16,6 @@ export default function DragListItemController({ item }: { item: Attribute }) {
   const listItemRef = useRef<HTMLDivElement | null>(null);
   const bRect: DOMRect = document.body.getBoundingClientRect();
   const dispatch = useDispatch();
-
-  const conditions = useSelector((state: any) => state.conditions);
 
   const onMouseMove = (e: MouseEvent) => {
     if (!isDragging || !listItemRef.current) return;
@@ -36,6 +34,7 @@ export default function DragListItemController({ item }: { item: Attribute }) {
         ruleName: item.name,
       })
     );
+
     setIsDragging(false);
 
     setPos({ x: 0, y: 0 });

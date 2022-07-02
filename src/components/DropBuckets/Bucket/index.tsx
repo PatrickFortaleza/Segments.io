@@ -8,7 +8,7 @@ export default function BucketController({ bucket }: { bucket: Bucket }) {
   const [bucketConditions, setBucketConditions] = useState<Array<Condition>>(
     []
   );
-  const conditions = useSelector((state: any) => state.conditions);
+  const { conditions } = useSelector((state: any) => state.entities);
 
   useEffect(() => {
     let bucketConditions_: Array<Condition> = Object.values(conditions).filter(
