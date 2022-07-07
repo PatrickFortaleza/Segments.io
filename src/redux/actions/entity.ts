@@ -1,5 +1,3 @@
-import { Condition, ConditionHashmap } from "../../models/condition";
-
 // CONDITIONS
 export const addCondition = ({ bucketId }: { bucketId: string }) => {
   return {

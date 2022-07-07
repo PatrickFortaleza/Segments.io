@@ -10,3 +10,9 @@ export interface Rule {
 export interface RuleHashmap {
   [id: string]: Rule;
 }
+
+export interface dRule {
+  attribute: string;
+  equation: string;
+  value: string;
+}

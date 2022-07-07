@@ -10,11 +10,14 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    min-height: 24px;
     .bucket__label {
+
       form {
         display: inline-block;
       }
       input[type="text"] {
+        cursor: pointer;
         font-family: sans-serif;
         font-weight: bold;
         background: none;
@@ -23,6 +26,8 @@
         transition: .2s ease-in-out;
         padding: 0 5px;
         border-radius: 2px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       input[type="text"].editing{

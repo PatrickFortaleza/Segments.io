@@ -7,7 +7,7 @@ const inititalState = <AttributeTypes>{
   alphabetical: {
     controlOptions: <Array<string>>[
       "starts_with",
-      "ends_width",
+      "ends_with",
       "includes",
       "excludes",
     ],

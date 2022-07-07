@@ -39,6 +39,7 @@ export default function ConditionView({
             )}
           </button>
           <form
+            onClick={() => editingLabel.setter(true)}
             onSubmit={(e) => {
               e.preventDefault();
               editingLabel.setter(false);
@@ -64,30 +65,31 @@ export default function ConditionView({
         </div>
         <div className="bucket__actions">
           <div className="bucket__actions__radio">
-            {conditionOperators.map((opt, index) => (
-              <label
-                className={`container ${
-                  condition.operator === opt ? "checked" : ""
-                }`}
-                key={index}
-              >
-                {opt}
-                <input
-                  type="radio"
-                  checked={condition.operator === opt ? true : false}
-                  onChange={(e) =>
-                    dispatch(
-                      changeConditionOperator({
-                        conditionId: condition.id,
-                        operator: e.target.value,
-                      })
-                    )
-                  }
-                  name="logicOptions"
-                  value={opt}
-                />
-              </label>
-            ))}
+            {conditionRules.length > 1 &&
+              conditionOperators.map((opt, index) => (
+                <label
+                  className={`container ${
+                    condition.operator === opt ? "checked" : ""
+                  }`}
+                  key={index}
+                >
+                  {opt}
+                  <input
+                    type="radio"
+                    checked={condition.operator === opt ? true : false}
+                    onChange={(e) =>
+                      dispatch(
+                        changeConditionOperator({
+                          conditionId: condition.id,
+                          operator: e.target.value,
+                        })
+                      )
+                    }
+                    name="logicOptions"
+                    value={opt}
+                  />
+                </label>
+              ))}
           </div>
           <button
             onClick={() =>
