@@ -13,7 +13,7 @@ export default function DropBucketsView({
   return (
     <div className="buckets__container">
       {Object.values(buckets).map((bucket) => (
-        <div key={bucket.id}>
+        <div key={bucket.id} style={{ height: "100%" }}>
           <div className="buckets__container__outer">
             <h3>
               {bucket.type} <Icon name="info circle" />

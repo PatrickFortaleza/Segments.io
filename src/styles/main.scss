@@ -20,8 +20,7 @@ COMPONENTS
 @import "./components/draglist";
 @import "./components/dragbuckets";
 @import "./components/rules";
-
-
+@import "./components/summary";
 
 /*------------------------------------------------
 MAIN STYLES
@@ -34,7 +33,6 @@ MAIN STYLES
 }
 
 body {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -43,17 +41,21 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  max-height: 100vh;
 }
 
 .body {
   display: flex;
   flex: 1;
+  height: 100%;
 }
 
 main {
   padding-top: 25px + 10px;
+  padding-bottom: 10px;
   background: var(--elevation-3);
   width: calc(100% - 300px);
+  display: flex;
 }
 
 .type__icon {
