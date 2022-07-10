@@ -5,6 +5,15 @@
   border: 1px solid var(--elevation-5);
   width: 100%;
 
+  &__section.header {
+    border-bottom: 1px solid var(--elevation-4);
+    padding-bottom: 20px;
+    input[type="text"] {
+      font-size: 17px;
+      color: var(--text-1);
+    }
+  }
+
   &__section {
     margin-bottom: 20px;
     h3 {

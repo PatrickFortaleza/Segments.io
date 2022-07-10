@@ -1,29 +1,23 @@
 import React from "react";
 import { Icon } from "semantic-ui-react";
+import EditableLabel from "../FormComponents/EditableLabel";
 
 export default function SummaryView() {
   return (
     <div className="summary">
-      <div className="summary__section">
-        <button onClick={() => console.log("change editing state")}>
-          <Icon name="edit" />
-        </button>
-        <form
-          onClick={() => console.log("set editing label")}
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <input
-            ref={null}
-            type="text"
-            value={"Untitled Segment"}
-            onChange={(e) => console.log("change title")}
-            className={`${false ? "editing" : ""}`}
-            readOnly={true ? false : true}
-            disabled={false ? false : true}
-          />
-        </form>
+      <div className="summary__section header">
+        <EditableLabel
+          label={"Untitled segment"}
+          emitValue={(value) => console.log(value)}
+        />
+
+        <div className="fieldset">
+          <label>Description (optional)</label>
+          <textarea
+            rows={4}
+            placeholder="Please describe your segment, or leave blank."
+          ></textarea>
+        </div>
       </div>
       <div className="summary__section">
         <h3>Summary</h3>

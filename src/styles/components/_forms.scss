@@ -157,10 +157,8 @@ input.custom {
     }
 }
 
-
-.bucket__label,
 .editable__label {
-
+  display: flex;
   form {
     display: inline-block;
   }
@@ -183,4 +181,50 @@ input.custom {
     border: 1px solid var(--elevation-5);
     background: var(--elevation-2);
   }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 14px;
+    margin-right: 3px;
+
+    i {
+      margin: 0;
+      padding: 0;
+      color: var(--elevation-6);
+      transition: .2s ease-in-out;
+    }
+
+    &:hover,
+    &:focus {
+      i {
+        color: var(--highlight-primary-1);
+      }
+    }
+  }
+}
+
+.fieldset {
+  margin-top: 10px;
+
+  label {
+    font-size: 12px;
+    font-family: sans-serif;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+
+  textarea, input[type='text'] {
+    width: 100%;
+    font-family: sans-serif;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid var(--elevation-5);
+    background: var(--elevation-2);
+    border-radius: 3px;
+  }
+
 }
