@@ -10,59 +10,34 @@ import {
 } from "../../../redux/actions/entity";
 import { Rule } from "../../../models/rule";
 import { default as RuleItem } from "../Rule";
+import EditableLabel from "../../FormComponents/EditableLabel";
 
 export default function ConditionView({
   condition,
   conditionOperators,
-  editingLabel,
   dropRef,
-  labelRef,
   conditionRules,
 }: {
   condition: Condition;
   conditionOperators: Array<string>;
-  editingLabel: SetterGetter;
   dropRef: LegacyRef<HTMLDivElement> | undefined;
-  labelRef: LegacyRef<HTMLInputElement> | undefined;
   conditionRules: Array<Rule>;
 }) {
   const dispatch = useDispatch();
   return (
     <div className="drag__bucket">
       <div className="drag__bucket__header">
-        <div className="bucket__label">
-          <button onClick={() => editingLabel.setter(!editingLabel.value)}>
-            {editingLabel.value ? (
-              <Icon name="checkmark" style={{ color: "var(--success-1)" }} />
-            ) : (
-              <Icon name="edit" />
-            )}
-          </button>
-          <form
-            onClick={() => editingLabel.setter(true)}
-            onSubmit={(e) => {
-              e.preventDefault();
-              editingLabel.setter(false);
-            }}
-          >
-            <input
-              ref={labelRef}
-              type="text"
-              value={condition.label}
-              onChange={(e) =>
-                dispatch(
-                  changeConditionLabel({
-                    conditionId: condition.id,
-                    label: e.target.value,
-                  })
-                )
-              }
-              className={`${editingLabel.value ? "editing" : ""}`}
-              readOnly={editingLabel.value ? false : true}
-              disabled={editingLabel.value ? false : true}
-            />
-          </form>
-        </div>
+        <EditableLabel
+          label={condition.label}
+          emitValue={(value) =>
+            dispatch(
+              changeConditionLabel({
+                conditionId: condition.id,
+                label: value,
+              })
+            )
+          }
+        />
         <div className="bucket__actions">
           <div className="bucket__actions__radio">
             {conditionRules.length > 1 &&

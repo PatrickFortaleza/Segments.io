@@ -11,7 +11,6 @@ export default function ConditionController({
 }: {
   condition: Condition;
 }) {
-  const [editingLabel, setEditingLabel] = useState<boolean>(false);
   const [conditionRules, setConditionRules] = useState<Array<Rule>>([]);
 
   const { rules } = useSelector((state: any) => state.entities);
@@ -19,7 +18,6 @@ export default function ConditionController({
   const dispatch = useDispatch();
 
   const dropRef = useRef<HTMLDivElement | null>(null);
-  const labelRef = useRef<HTMLInputElement | null>(null);
   const conditionOperators = ["and", "or"];
 
   const checkInDropzone = () => {
@@ -42,10 +40,6 @@ export default function ConditionController({
   };
 
   useEffect(() => {
-    if (editingLabel && labelRef?.current) labelRef.current.focus();
-  }, [editingLabel]);
-
-  useEffect(() => {
     checkInDropzone();
   }, [itemRectCoords]);
 
@@ -60,12 +54,7 @@ export default function ConditionController({
     <ConditionView
       condition={condition}
       conditionOperators={conditionOperators}
-      editingLabel={{
-        value: editingLabel,
-        setter: setEditingLabel,
-      }}
       dropRef={dropRef}
-      labelRef={labelRef}
       conditionRules={conditionRules}
     />
   );
