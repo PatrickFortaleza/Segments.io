@@ -36,7 +36,7 @@ export default function ListView({
             key={index}
             item={{
               type: type,
-              name: attribute,
+              name: attribute, // fix
             }}
           />
         ))}

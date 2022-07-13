@@ -1,9 +1,12 @@
 .summary {
   margin: 0 10px;
-  background: var(--elevation-1);
-  padding: 20px;
-  border: 1px solid var(--elevation-5);
   width: 100%;
+
+  &__container {
+    background: var(--elevation-1);
+    padding: 20px;
+    border: 1px solid var(--elevation-5);
+  }
 
   &__section.header {
     border-bottom: 1px solid var(--elevation-4);

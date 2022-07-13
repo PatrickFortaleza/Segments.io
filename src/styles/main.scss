@@ -30,6 +30,7 @@ MAIN STYLES
   height: 100%;
   max-height: 100vh;
   overflow: hidden;
+  background: var(--elevation-3);
 }
 
 body {
@@ -48,6 +49,11 @@ body {
   display: flex;
   flex: 1;
   height: 100%;
+  max-width: 1440px;
+  margin: auto;
+  border: 1px solid var(--elevation-4);
+  background: var(--elevation-3);
+  
 }
 
 main {
