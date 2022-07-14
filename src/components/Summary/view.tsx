@@ -52,7 +52,7 @@ export default function SummaryView() {
 }
 
 const itemLabel: string = "users";
-const size: number = 300;
+const size: number = 250;
 const max: number = 1420;
 const values: Array<DonutValue> = [
   {
