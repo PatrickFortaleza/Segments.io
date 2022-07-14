@@ -1,0 +1,113 @@
+.donut__chart {
+  display: inline-block;
+  padding-top: 0px;
+  max-width: 375px;
+  border-radius: 4px;
+
+  &__container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+
+  &__center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    label,
+    h3,
+    p,
+    h4 {
+      font-family: sans-serif;
+      margin: 0;
+      text-align: center;
+      display: block;
+    }
+
+    label {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    h3 {
+      font-size: 3.5rem;
+
+      sup {
+        font-size: 1.5rem;
+        font-weight: normal;
+      }
+    }
+
+    h4,
+    p {
+      font-weight: normal;
+      color: gray;
+    }
+
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+
+    .legend__item {
+      background: none;
+      border: none;
+      text-align: left;
+      display: flex;
+      margin: 0 7px 7px 0;
+      padding: 7px;
+      transition: .2s ease-in-out;
+      border: 1px solid rgba($color: #ddd, $alpha: 0);
+
+      &.active {
+        transform: scale(1.07);
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        box-shadow: 0px 3px 3px 2px rgba(0, 0, 0, 0.01);
+      }
+
+      &__icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        border-radius: 2px;
+      }
+
+      h5 {
+        margin: 0;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-family: sans-serif;
+        font-weight: 700;
+      }
+
+      span {
+        color: gray;
+        font-family: sans-serif;
+      }
+    }
+  }
+
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    circle {
+      transition: stroke-dasharray 2s cubic-bezier(.59, .26, .17, 1),
+        stroke-width 0.5s cubic-bezier(.59, .26, .17, 1);
+      transform-origin: center center;
+      cursor: pointer;
+    }
+  }
+}
