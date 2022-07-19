@@ -13,6 +13,7 @@ let initialState = {
   conditions: <ConditionHashmap | null>null,
   rules: <RuleHashmap | null>null,
   denormalized: <dBucket | null>null,
+  hasUpdated: <Boolean>false,
 };
 
 let emptyCondition = <Condition>{
@@ -55,7 +56,12 @@ const initializeState = () => {
   });
 };
 
-if (Object.values(initialState).every((i) => i === null)) initializeState();
+if (
+  Object.values(initialState)
+    .filter((i) => typeof i !== "boolean")
+    .every((i) => i === null)
+)
+  initializeState();
 
 const entities = (state = initialState, action: Action) => {
   let entityState = { ...state };
@@ -76,6 +82,7 @@ const entities = (state = initialState, action: Action) => {
       };
 
       entityState.conditions[conditionId] = newCondition;
+      entityState.hasUpdated = true;
       break;
     }
     case "remove_condition": {
@@ -97,6 +104,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        hasUpdated: true,
       };
 
       break;
@@ -119,6 +127,7 @@ const entities = (state = initialState, action: Action) => {
         ...entityState,
         conditions,
       };
+
       break;
     }
     case "change_condition_operator": {
@@ -138,6 +147,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         conditions,
+        hasUpdated: true,
       };
       break;
     }
@@ -191,6 +201,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        hasUpdated: true,
       };
       break;
     }
@@ -212,6 +223,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        hasUpdated: true,
       };
       break;
     }
@@ -229,6 +241,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        hasUpdated: true,
       };
       break;
     }
@@ -271,6 +284,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         denormalized,
+        hasUpdated: false,
       };
     }
     default: {

@@ -24,10 +24,21 @@ header.main {
       border-left: 1px solid var(--text-3);
       padding: 0 20px;
       cursor: pointer;
+      position: relative;
 
       i {
         margin-right: 5px;
         color: var(--elevation-1) !important;
+      }
+
+      .ind {
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        background: red;
+        border-radius: 50%;
+        left: 17px;
+        top: 0px;
       }
     }
   }

@@ -116,3 +116,9 @@ export const deleteRule = ({ ruleId }: { ruleId: string }) => {
     },
   };
 };
+
+export const denormalize = () => {
+  return {
+    type: "denormalize",
+  };
+};
