@@ -11,7 +11,7 @@ export default function SummaryView() {
         <div className="summary__section header">
           <EditableLabel
             label={"Untitled segment"}
-            emitValue={(value) => console.log(value)}
+            emitValue={(value) => null}
           />
 
           <div className="fieldset">

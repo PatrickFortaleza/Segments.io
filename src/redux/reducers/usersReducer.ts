@@ -11,6 +11,10 @@ const users = (state = inititalState, action: Action) => {
     case "initialize_users": {
       return { ...state, users: action.payload };
     }
+    case "apply_filters": {
+      let { rules } = action.payload;
+      console.log("filter!");
+    }
   }
   return state;
 };
