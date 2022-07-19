@@ -11,7 +11,11 @@ export default function BucketView({
     <>
       {bucketConditions.length > 0 ? (
         bucketConditions.map((condition) => (
-          <ConditionItem key={condition.id} condition={condition} />
+          <ConditionItem
+            key={condition.id}
+            condition={condition}
+            hasConditions={bucketConditions.length > 1}
+          />
         ))
       ) : (
         <p className="empty">

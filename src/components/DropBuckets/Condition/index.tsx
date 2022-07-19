@@ -8,8 +8,10 @@ import { Rule } from "../../../models/rule";
 
 export default function ConditionController({
   condition,
+  hasConditions,
 }: {
   condition: Condition;
+  hasConditions: Boolean;
 }) {
   const [conditionRules, setConditionRules] = useState<Array<Rule>>([]);
 
@@ -56,6 +58,7 @@ export default function ConditionController({
       conditionOperators={conditionOperators}
       dropRef={dropRef}
       conditionRules={conditionRules}
+      hasConditions={hasConditions}
     />
   );
 }

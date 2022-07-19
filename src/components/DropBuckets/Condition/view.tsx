@@ -16,11 +16,13 @@ export default function ConditionView({
   conditionOperators,
   dropRef,
   conditionRules,
+  hasConditions,
 }: {
   condition: Condition;
   conditionOperators: Array<string>;
   dropRef: LegacyRef<HTMLDivElement> | undefined;
   conditionRules: Array<Rule>;
+  hasConditions: Boolean;
 }) {
   const dispatch = useDispatch();
   return (
@@ -65,7 +67,7 @@ export default function ConditionView({
                 </label>
               ))}
           </div>
-          {conditionRules.length > 1 && (
+          {hasConditions && (
             <button
               onClick={() =>
                 dispatch(
