@@ -5,6 +5,7 @@ import { initializeUsers } from "./redux/actions/users";
 import Sidebar from "./components/Sidebar";
 import DropBuckets from "./components/DropBuckets";
 import Summary from "./components/Summary";
+import Header from "./components/Header";
 import { initializeAttributeMeta } from "./redux/actions/attribute";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
 
   return (
     <div className="app">
-      <header className="main" />
+      <Header />
       <div className="body">
         <Sidebar />
         <main>

@@ -124,7 +124,7 @@ export default function DonutChartView({
                     key={`${circle.key}-${circle.num}`}
                     strokeWidth={
                       focused.value && focused.value.key === circle.key
-                        ? size * 0.09
+                        ? size * 0.07
                         : size * 0.05
                     }
                     className="donut"

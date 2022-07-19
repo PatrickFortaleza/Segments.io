@@ -1,6 +1,5 @@
 import { LegacyRef } from "react";
 import { Icon } from "semantic-ui-react";
-import { SetterGetter } from "../../../models";
 import { Condition } from "../../../models/condition";
 import { useDispatch } from "react-redux";
 import {
@@ -66,17 +65,19 @@ export default function ConditionView({
                 </label>
               ))}
           </div>
-          <button
-            onClick={() =>
-              dispatch(
-                removeCondition({
-                  conditionId: condition.id,
-                })
-              )
-            }
-          >
-            <Icon name="trash alternate" />{" "}
-          </button>
+          {conditionRules.length > 1 && (
+            <button
+              onClick={() =>
+                dispatch(
+                  removeCondition({
+                    conditionId: condition.id,
+                  })
+                )
+              }
+            >
+              <Icon name="trash alternate" />{" "}
+            </button>
+          )}
         </div>
       </div>
       <div className="drag__bucket__rules">
