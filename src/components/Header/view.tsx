@@ -11,7 +11,7 @@ export default function HeaderView() {
             Apply Rules
           </button>
           <button className="default">
-            <Icon name="save" /> Save Rules
+            <Icon name="save" /> Save
           </button>
           <button className="default">
             <Icon name="download" />
