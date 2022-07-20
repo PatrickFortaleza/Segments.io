@@ -12,7 +12,7 @@ export interface RuleHashmap {
 }
 
 export interface dRule {
-  attribute: string;
+  attribute: string | number | boolean;
   equation: string;
-  value: string;
+  value: string | number | boolean;
 }

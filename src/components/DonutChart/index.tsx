@@ -24,7 +24,7 @@ export default function DonutChartController({
 
   const donutValuesState: DonutValuesHashmap = useMemo(
     () => initializeDonutState({ values, max, size }),
-    [values, max, size]
+    [values]
   );
   const donutValuesTotal: DonutTotals = useMemo(
     () => computeDonutTotals(),
@@ -40,7 +40,6 @@ export default function DonutChartController({
     max: number;
     size: number;
   }) {
-    setStateLoaded(false);
     setFocusedValue(null);
     let _state: DonutValuesHashmap = {};
     let total: number = values.map((v) => v.num).reduce((sum, a) => sum + a, 0);
@@ -93,9 +92,7 @@ export default function DonutChartController({
   }
 
   useEffect(() => {
-    if (donutValuesState && Object.keys(donutValuesState).length > 0) {
-      setTimeout(() => setStateLoaded(true), 500);
-    }
+    setTimeout(() => setStateLoaded(true), 500);
   }, [donutValuesState]);
 
   return (

@@ -29,6 +29,9 @@ export default function DonutChartView({
         {values &&
           Object.values(values).map((circle) => (
             <button
+              onMouseLeave={() => focused.setter(null)}
+              onClick={() => focused.setter(circle)}
+              onMouseOver={() => focused.setter(circle)}
               className={`legend__item ${
                 focused.value && focused.value.key === circle.key
                   ? "active"

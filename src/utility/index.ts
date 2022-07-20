@@ -1,6 +1,5 @@
 import moment from "moment";
 import { RectCoordinates } from "../models/positioning";
-import { dRule } from "../models/rule";
 
 export const snakeCaseToTitleCase = (string: string): string => {
   if (typeof string !== "string") return "";
@@ -66,20 +65,26 @@ export const capitalizeFirstLetter = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+export const kFormatter = (num: number) => {
+  return Math.abs(num) > 999
+    ? `${(Math.sign(num) * (Math.abs(num) / 1000)).toFixed(1)}k`
+    : Math.sign(num) * Math.abs(num);
+};
+
 export const checkRules = ({
   operator,
-  rulesArray,
+  rules,
 }: {
   operator: string;
-  rulesArray: Array<boolean>;
+  rules: Array<boolean>;
 }) => {
   switch (operator) {
     case "and":
       // if the condition is "and" we must check if every rule evaluates true
-      return rulesArray.every((rule) => rule === true);
+      return rules.every((rule) => rule === true);
     case "or":
       // if the condition is "or" we only check if a single rule evaluates true
-      return rulesArray.some((rule) => rule === true);
+      return rules.some((rule) => rule === true);
     default:
       return false;
   }
@@ -94,7 +99,11 @@ export const computeEquation = ({
   attribute: string | number | boolean;
   value: string | number | boolean;
 }) => {
-  if (!equation || !attribute || !value) return false;
+  if (
+    !["is_true", "is_false"].includes(equation) &&
+    (!equation || !attribute || !value)
+  )
+    return false;
 
   try {
     switch (equation) {
@@ -125,8 +134,8 @@ export const computeEquation = ({
       }
       case "greater_than": {
         if (
-          !["string, number"].includes(typeof attribute) ||
-          !["string, number"].includes(typeof value)
+          !["string", "number"].includes(typeof attribute) ||
+          !["string", "number"].includes(typeof value)
         )
           return false;
 
@@ -142,52 +151,56 @@ export const computeEquation = ({
       }
       case "less_than": {
         if (
-          !["string, number"].includes(typeof attribute) ||
-          !["string, number"].includes(typeof value)
+          !["string", "number"].includes(typeof attribute) ||
+          !["string", "number"].includes(typeof value)
         )
           return false;
 
         if (
           typeof attribute === "string" &&
           typeof value === "string" &&
-          regexTestDateStr(attribute) &&
-          regexTestDateStr(value)
+          isDate(attribute) &&
+          isDate(value)
         )
           return new Date(attribute) < new Date(value);
 
-        return attribute < +value;
+        return +attribute < +value;
       }
       case "equal_to": {
-        if (typeof attribute === "string" && typeof value === "string")
-          return attribute.toLowerCase() === value.toLowerCase();
-
         if (
           typeof attribute === "string" &&
           typeof value === "string" &&
-          regexTestDateStr(attribute) &&
-          regexTestDateStr(value)
+          isDate(attribute) &&
+          isDate(value)
         )
           return new Date(attribute).getTime() === new Date(value).getTime();
+
+        if (typeof attribute === "string" && typeof value === "string")
+          return attribute.toLowerCase() === value.toLowerCase();
 
         return attribute === value;
       }
       case "not_equal_to": {
-        if (typeof attribute === "string" && typeof value === "string")
-          return attribute.toLowerCase() !== value.toLowerCase();
-
         if (
           typeof attribute === "string" &&
           typeof value === "string" &&
-          regexTestDateStr(attribute) &&
-          regexTestDateStr(value)
+          isDate(attribute) &&
+          isDate(value)
         )
           return new Date(attribute).getTime() !== new Date(value).getTime();
 
+        if (typeof attribute === "string" && typeof value === "string")
+          return attribute.toLowerCase() !== value.toLowerCase();
+
         return attribute !== value;
       }
-      case "is_false":
       case "is_true": {
-        return attribute === value;
+        if (typeof attribute !== "boolean") return false;
+        return attribute === true;
+      }
+      case "is_false": {
+        if (typeof attribute !== "boolean") return false;
+        return !attribute;
       }
       default:
         return false;

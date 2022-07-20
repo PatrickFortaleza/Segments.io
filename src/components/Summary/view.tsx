@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Icon } from "semantic-ui-react";
 import EditableLabel from "../FormComponents/EditableLabel";
 import DonutChart from "../DonutChart";
-import { DonutValue } from "../../models/donut";
+import { kFormatter } from "../../utility";
 
-export default function SummaryView() {
+export default function SummaryView({
+  chartValues,
+}: {
+  chartValues: {
+    max: number;
+    segment: number;
+  };
+}) {
+  const values = useMemo(() => {
+    return [
+      {
+        num: chartValues.segment,
+        color: "var(--highlight-primary-1)",
+        key: "segment",
+        label: "Segment",
+      },
+    ];
+  }, [chartValues]);
+
   return (
     <div className="summary">
       <div className="summary__container">
@@ -34,31 +52,22 @@ export default function SummaryView() {
                 margin: 0,
               }}
             />
-            1.4k
+            {kFormatter(chartValues.segment)}
           </h2>
-          <p>100% of total individuals in the segment</p>
+          <p>
+            {((chartValues.segment / chartValues.max) * 100).toFixed(1)}% of
+            total individuals in the segment
+          </p>
         </div>
         <div className="summary__section chart">
           <DonutChart
             values={values}
-            max={max}
-            size={size}
-            itemLabel={itemLabel}
+            max={chartValues.max}
+            size={250}
+            itemLabel={"users"}
           />
         </div>
       </div>
     </div>
   );
 }
-
-const itemLabel: string = "users";
-const size: number = 250;
-const max: number = 1420;
-const values: Array<DonutValue> = [
-  {
-    num: 420,
-    color: "var(--highlight-primary-1)",
-    key: "segment",
-    label: "Segment",
-  },
-];
