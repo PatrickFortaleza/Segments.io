@@ -75,6 +75,10 @@ export const kFormatter = (num: number) => {
     : Math.sign(num) * Math.abs(num);
 };
 
+export const checkValid = (value: number | string | boolean) => {
+  return typeof value === "boolean" || value === 0 || value;
+};
+
 export const denormalizeEntityState = (entityState: EntityState) => {
   let denormalized = <dBucket | null>{};
 
@@ -84,7 +88,7 @@ export const denormalizeEntityState = (entityState: EntityState) => {
   Object.values(buckets).forEach((bucket) => {
     let bucketConditions = <Array<dCondition>>[];
 
-    if (!conditions) return { ...entityState };
+    if (!conditions) return;
 
     Object.values(conditions).forEach((condition) => {
       let c = <dCondition>{
@@ -92,7 +96,7 @@ export const denormalizeEntityState = (entityState: EntityState) => {
         rules: [],
       };
 
-      if (!rules) return { ...entityState };
+      if (!rules) return;
 
       Object.values(rules).forEach((rule) => {
         let r = <dRule>{
@@ -101,10 +105,13 @@ export const denormalizeEntityState = (entityState: EntityState) => {
           value: rule.value,
         };
 
-        if (rule.condition_id === condition.id) c.rules.push(r);
+        let validRule = checkValid(r.equation) && checkValid(r.value);
+        if (rule.condition_id === condition.id && validRule) c.rules.push(r);
       });
 
-      if (condition.bucket_id === bucket.id) bucketConditions.push(c);
+      let validCondition = c.rules.length > 0;
+      if (condition.bucket_id === bucket.id && validCondition)
+        bucketConditions.push(c);
     });
 
     if (!denormalized) return;

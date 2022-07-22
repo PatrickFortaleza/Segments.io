@@ -28,57 +28,33 @@ const users = (state = inititalState, action: Action) => {
       let filtered = users.filter((user) => {
         let includes, excludes;
 
-        includes = rules.includes
-          .filter((condition: dCondition) => condition.rules.length > 0)
-          .map((condition: dCondition) => {
-            let { operator } = condition;
-            let rules = condition.rules
-              .filter(
-                (rule) =>
-                  (typeof rule.attribute === "boolean" ||
-                    rule.attribute === 0 ||
-                    rule.attribute) &&
-                  (typeof rule.value === "boolean" ||
-                    rule.value === 0 ||
-                    rule.value)
-              )
-              .map((rule) => {
-                let { attribute, equation, value } = rule;
-                return computeEquation({
-                  equation,
-                  attribute: user[attribute as keyof User],
-                  value,
-                });
-              });
-
-            return checkRules({ operator, rules });
+        includes = rules.includes.map((condition: dCondition) => {
+          let { operator } = condition;
+          let rules = condition.rules.map((rule) => {
+            let { attribute, equation, value } = rule;
+            return computeEquation({
+              equation,
+              attribute: user[attribute as keyof User],
+              value,
+            });
           });
 
-        excludes = rules.excludes
-          .filter((condition: dCondition) => condition.rules.length > 0)
-          .map((condition: dCondition) => {
-            let { operator } = condition;
-            let rules = condition.rules
-              .filter(
-                (rule) =>
-                  (typeof rule.attribute === "boolean" ||
-                    rule.attribute === 0 ||
-                    rule.attribute) &&
-                  (typeof rule.value === "boolean" ||
-                    rule.value === 0 ||
-                    rule.value)
-              )
-              .map((rule) => {
-                let { attribute, equation, value } = rule;
-                return computeEquation({
-                  equation,
-                  attribute: user[attribute as keyof User],
-                  value,
-                });
-              });
+          return checkRules({ operator, rules });
+        });
 
-            return checkRules({ operator, rules });
+        excludes = rules.excludes.map((condition: dCondition) => {
+          let { operator } = condition;
+          let rules = condition.rules.map((rule) => {
+            let { attribute, equation, value } = rule;
+            return computeEquation({
+              equation,
+              attribute: user[attribute as keyof User],
+              value,
+            });
           });
+
+          return checkRules({ operator, rules });
+        });
 
         return (
           includes.every((rule: boolean) => rule === true) &&
