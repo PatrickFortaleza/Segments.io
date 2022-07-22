@@ -1,19 +1,16 @@
 import { Action } from "../../models/action";
-import { BucketHashmap, Bucket, dBucket } from "../../models/bucket";
-import {
-  ConditionHashmap,
-  Condition,
-  dCondition,
-} from "../../models/condition";
-import { RuleHashmap, Rule, dRule } from "../../models/rule";
+import { Bucket, dBucket } from "../../models/bucket";
+import { Condition } from "../../models/condition";
+import { Rule } from "../../models/rule";
 import { v4 as uuid } from "uuid";
+import { EntityState } from "../../models";
+import { denormalizeEntityState } from "../../utility";
 
-let initialState = {
-  buckets: <BucketHashmap | null>null,
-  conditions: <ConditionHashmap | null>null,
-  rules: <RuleHashmap | null>null,
-  denormalized: <dBucket | null>null,
-  hasUpdated: <Boolean>false,
+let initialState: EntityState = {
+  buckets: null,
+  conditions: null,
+  rules: null,
+  denormalized: null,
 };
 
 let emptyCondition = <Condition>{
@@ -82,7 +79,13 @@ const entities = (state = initialState, action: Action) => {
       };
 
       entityState.conditions[conditionId] = newCondition;
-      entityState.hasUpdated = true;
+
+      let denormalized: dBucket | null = denormalizeEntityState(entityState);
+
+      entityState = {
+        ...entityState,
+        denormalized,
+      };
       break;
     }
     case "remove_condition": {
@@ -104,9 +107,10 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
-        hasUpdated: true,
       };
 
+      // denormalize entity state...
+      entityState.denormalized = denormalizeEntityState(entityState);
       break;
     }
     case "change_condition_label": {
@@ -147,8 +151,10 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         conditions,
-        hasUpdated: true,
       };
+
+      // denormalize entity state...
+      entityState.denormalized = denormalizeEntityState(entityState);
       break;
     }
     case "change_condition_in_zone": {
@@ -201,8 +207,10 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
-        hasUpdated: true,
       };
+
+      // denormalize entity state...
+      entityState.denormalized = denormalizeEntityState(entityState);
       break;
     }
     case "update_rule": {
@@ -223,8 +231,10 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
-        hasUpdated: true,
       };
+
+      // denormalize entity state...
+      entityState.denormalized = denormalizeEntityState(entityState);
       break;
     }
     case "delete_rule": {
@@ -241,51 +251,11 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
-        hasUpdated: true,
       };
+
+      // denormalize entity state...
+      entityState.denormalized = denormalizeEntityState(entityState);
       break;
-    }
-    case "denormalize": {
-      // denormalize state...
-      let denormalized = <dBucket>{};
-
-      let { buckets, conditions, rules } = entityState;
-      if (!buckets) return { ...entityState };
-
-      Object.values(buckets).forEach((bucket) => {
-        let bucketConditions = <Array<dCondition>>[];
-
-        if (!conditions) return { ...entityState };
-
-        Object.values(conditions).forEach((condition) => {
-          let c = <dCondition>{
-            operator: condition.operator,
-            rules: [],
-          };
-
-          if (!rules) return { ...entityState };
-
-          Object.values(rules).forEach((rule) => {
-            let r = <dRule>{
-              attribute: rule.name,
-              equation: rule.equation,
-              value: rule.value,
-            };
-
-            if (rule.condition_id === condition.id) c.rules.push(r);
-          });
-
-          if (condition.bucket_id === bucket.id) bucketConditions.push(c);
-        });
-
-        denormalized[bucket.type] = bucketConditions;
-      });
-
-      entityState = {
-        ...entityState,
-        denormalized,
-        hasUpdated: false,
-      };
     }
     default: {
       break;

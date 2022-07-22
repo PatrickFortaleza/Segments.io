@@ -1,5 +1,9 @@
 import moment from "moment";
 import { RectCoordinates } from "../models/positioning";
+import { dBucket } from "../models/bucket";
+import { dCondition } from "../models/condition";
+import { dRule } from "../models/rule";
+import { EntityState } from "../models";
 
 export const snakeCaseToTitleCase = (string: string): string => {
   if (typeof string !== "string") return "";
@@ -69,6 +73,45 @@ export const kFormatter = (num: number) => {
   return Math.abs(num) > 999
     ? `${(Math.sign(num) * (Math.abs(num) / 1000)).toFixed(1)}k`
     : Math.sign(num) * Math.abs(num);
+};
+
+export const denormalizeEntityState = (entityState: EntityState) => {
+  let denormalized = <dBucket | null>{};
+
+  let { buckets, conditions, rules } = entityState;
+  if (!buckets) return null;
+
+  Object.values(buckets).forEach((bucket) => {
+    let bucketConditions = <Array<dCondition>>[];
+
+    if (!conditions) return { ...entityState };
+
+    Object.values(conditions).forEach((condition) => {
+      let c = <dCondition>{
+        operator: condition.operator,
+        rules: [],
+      };
+
+      if (!rules) return { ...entityState };
+
+      Object.values(rules).forEach((rule) => {
+        let r = <dRule>{
+          attribute: rule.name,
+          equation: rule.equation,
+          value: rule.value,
+        };
+
+        if (rule.condition_id === condition.id) c.rules.push(r);
+      });
+
+      if (condition.bucket_id === bucket.id) bucketConditions.push(c);
+    });
+
+    if (!denormalized) return;
+    denormalized[bucket.type] = bucketConditions;
+  });
+
+  return denormalized;
 };
 
 export const checkRules = ({
