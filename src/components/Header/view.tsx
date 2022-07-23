@@ -1,9 +1,10 @@
 import { Icon } from "semantic-ui-react";
-import { useDispatch, useSelector } from "react-redux";
 
-export default function HeaderView() {
-  const dispatch = useDispatch();
-  const hasUpdated = useSelector((state: any) => state.entities.hasUpdated);
+export default function HeaderView({
+  downloadXLSX,
+}: {
+  downloadXLSX: () => Promise<void>;
+}) {
   return (
     <header className="main">
       <div className="main__wrap">
@@ -12,7 +13,7 @@ export default function HeaderView() {
           <button className="default">
             <Icon name="save" /> Save
           </button>
-          <button className="default">
+          <button className="default" onClick={() => downloadXLSX()}>
             <Icon name="download" />
             Download
           </button>
