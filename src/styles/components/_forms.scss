@@ -31,6 +31,10 @@
         border-top: 5px solid red;
       }
     }
+
+    option {
+      color: var(--text-3) !important;
+    }
   }
 
 
@@ -66,6 +70,22 @@
   &:active,
   &:hover {
     border: var(--highlight-primary-1) 1px solid;
+  }
+
+  &.base {
+    border: none;
+    background: none;
+
+    &::before {
+      background: none;
+      border: none;
+    }
+
+    select {
+      background: none;
+      color: var(--elevation-1);
+    }
+
   }
 }
 

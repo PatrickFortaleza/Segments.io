@@ -1,8 +1,10 @@
+import { useState } from "react";
 import HeaderView from "./view";
 import { convertToXLSX, convertToCSV } from "../../utility/exportArray";
 import { useSelector } from "react-redux";
 
 export default function HeaderController() {
+  const [exportAction, setExportAction] = useState("");
   const filteredUsers = useSelector((state: any) => state.users.filteredUsers);
 
   const downloadXLSX = async () => {
@@ -10,5 +12,7 @@ export default function HeaderController() {
     await convertToCSV(filteredUsers, "test");
   };
 
-  return <HeaderView downloadXLSX={downloadXLSX} />;
+  return (
+    <HeaderView downloadXLSX={downloadXLSX} setExportAction={setExportAction} />
+  );
 }

@@ -42,4 +42,10 @@ header.main {
       }
     }
   }
+
+  .custom-select {
+    cursor: pointer;
+    padding-left: 10px;
+    border-left: 1px solid var(--text-3) !important;
+  }
 }
