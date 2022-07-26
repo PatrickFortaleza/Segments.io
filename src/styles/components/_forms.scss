@@ -5,6 +5,15 @@
   position: relative;
   pointer-events: all;
 
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    select {
+      cursor: not-allowed !important;
+    }
+  }
+
   select {
     appearance: none;
     // Additional resets for further consistency

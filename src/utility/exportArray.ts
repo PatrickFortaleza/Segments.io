@@ -22,3 +22,9 @@ export const convertToCSV = async (array: Array<User>, fileName: string) => {
   let data = new Blob([csv], { type: fileType });
   saveAs(data, fileName);
 };
+
+export const convertToJSON = async (array: Array<User>, fileName: string) => {
+  let fileType = "application/json;";
+  let data = new Blob([JSON.stringify(array)], { type: fileType });
+  saveAs(data, fileName);
+};

@@ -1,10 +1,15 @@
 import { Icon } from "semantic-ui-react";
+import { SetterGetter } from "../../models";
 import BaseSelect from "../FormComponents/BaseSelect";
 
 export default function HeaderView({
-  setExportAction,
+  exportAction,
+  options,
+  validSegment,
 }: {
-  setExportAction: (string: string) => Promise<void>;
+  exportAction: SetterGetter;
+  options: Array<string>;
+  validSegment: boolean;
 }) {
   return (
     <header className="main">
@@ -14,14 +19,11 @@ export default function HeaderView({
           <button className="default">
             <Icon name="save" /> Save
           </button>
-          {/* <button className="default" onClick={() => downloadXLSX()}>
-            <Icon name="download" />
-            Download
-          </button> */}
           <BaseSelect
-            setter={setExportAction}
-            options={["XLSX", "CSV", "JSON"]}
+            selected={exportAction}
+            options={options}
             placeholder={"Export Segment"}
+            disabled={!validSegment}
           />
         </div>
       </div>

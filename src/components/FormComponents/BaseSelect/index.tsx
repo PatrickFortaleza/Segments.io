@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { SetterGetter } from "../../../models";
 import CustomSelectView from "./view";
 
 export default function BaseSelectController({
   options,
-  setter,
+  selected,
   placeholder,
+  disabled,
 }: {
   options: Array<string>;
-  setter: (value: string) => void;
+  selected: SetterGetter;
   placeholder: string;
+  disabled: boolean;
 }) {
-  const [selected, setSelected] = useState<string>("");
-
-  useEffect(() => {
-    setter(selected);
-  }, [selected]);
-
   return (
     <CustomSelectView
       options={options}
-      selected={{
-        value: selected,
-        setter: setSelected,
-      }}
+      selected={selected}
       placeholder={placeholder}
+      disabled={disabled}
     />
   );
 }
