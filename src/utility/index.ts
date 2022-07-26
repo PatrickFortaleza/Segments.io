@@ -75,6 +75,14 @@ export const kFormatter = (num: number) => {
     : Math.sign(num) * Math.abs(num);
 };
 
+export const sanitizeFileName = (string: string) => {
+  let str = string
+    .replace(/([^\w\s\d\-_~,;\[\]\(\).])/, "")
+    .replace(/([\.]{2,})/, "");
+
+  return str;
+};
+
 export const checkValid = (value: number | string | boolean) => {
   return typeof value === "boolean" || value === 0 || value;
 };

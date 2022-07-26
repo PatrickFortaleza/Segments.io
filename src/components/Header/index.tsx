@@ -5,6 +5,7 @@ import {
   convertToCSV,
   convertToJSON,
 } from "../../utility/exportArray";
+import { sanitizeFileName } from "../../utility";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
 import { saveState } from "../../redux/browser-storage";
@@ -13,6 +14,7 @@ export default function HeaderController() {
   const [exportAction, setExportAction] = useState("");
   const [saveSuccessful, setSaveSuccessful] = useState(false);
   const filteredUsers = useSelector((state: any) => state.users.filteredUsers);
+  const segmentTitle = useSelector((state: any) => state.users.segmentTitle);
 
   const options = ["XLSX", "CSV", "JSON"];
 
@@ -32,13 +34,13 @@ export default function HeaderController() {
     (async () => {
       switch (exportAction) {
         case "XLSX":
-          await convertToXLSX(filteredUsers, "test");
+          await convertToXLSX(filteredUsers, sanitizeFileName(segmentTitle));
           break;
         case "CSV":
-          await convertToCSV(filteredUsers, "test");
+          await convertToCSV(filteredUsers, sanitizeFileName(segmentTitle));
           break;
         case "JSON":
-          await convertToJSON(filteredUsers, "test");
+          await convertToJSON(filteredUsers, sanitizeFileName(segmentTitle));
           break;
         default:
           break;
