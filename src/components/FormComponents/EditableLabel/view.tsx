@@ -31,6 +31,7 @@ export default function EditableLabelView({
           ref={labelRef}
           type="text"
           value={label.value}
+          onBlur={() => editingLabel.setter(false)}
           onChange={(e) => label.setter(e.target.value)}
           className={`${editingLabel.value ? "editing" : ""}`}
           readOnly={editingLabel.value ? false : true}

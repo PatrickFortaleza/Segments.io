@@ -8,6 +8,20 @@ export const initializeUsers = ({ users }: { users: Array<User> }) => {
   };
 };
 
+export const updateSegmentTitle = (title: string) => {
+  return {
+    type: "update_segment_title",
+    payload: title,
+  };
+};
+
+export const updateSegmentDescription = (description: string) => {
+  return {
+    type: "update_segment_description",
+    payload: description,
+  };
+};
+
 export const applyFilters = ({ rules }: { rules: dBucket }) => {
   return {
     type: "apply_filters",

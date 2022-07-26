@@ -6,7 +6,8 @@ import { applyFilters } from "../../redux/actions/users";
 export default function SummaryController() {
   const dispatch = useDispatch();
   const denormalized = useSelector((state: any) => state.entities.denormalized);
-  const { users, filteredUsers } = useSelector((state: any) => state.users);
+  const { users, filteredUsers, segmentTitle, segmentDescription } =
+    useSelector((state: any) => state.users);
 
   const totalUsers: number = useMemo(() => users.length || 0, [users]);
   const selectedUsers: number = useMemo(
@@ -24,6 +25,8 @@ export default function SummaryController() {
         max: totalUsers,
         segment: selectedUsers,
       }}
+      segmentTitle={segmentTitle}
+      segmentDescription={segmentDescription}
     />
   );
 }

@@ -1,17 +1,27 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Icon } from "semantic-ui-react";
 import EditableLabel from "../FormComponents/EditableLabel";
 import DonutChart from "../DonutChart";
 import { kFormatter } from "../../utility";
+import { useDispatch } from "react-redux";
+import {
+  updateSegmentDescription,
+  updateSegmentTitle,
+} from "../../redux/actions/users";
 
 export default function SummaryView({
   chartValues,
+  segmentTitle,
+  segmentDescription,
 }: {
   chartValues: {
     max: number;
     segment: number;
   };
+  segmentTitle: string;
+  segmentDescription: string;
 }) {
+  const dispatch = useDispatch();
   const values = useMemo(() => {
     return [
       {
@@ -28,13 +38,17 @@ export default function SummaryView({
       <div className="summary__container">
         <div className="summary__section header">
           <EditableLabel
-            label={"Untitled segment"}
-            emitValue={(value) => null}
+            label={segmentTitle}
+            emitValue={(value) => dispatch(updateSegmentTitle(value))}
           />
 
           <div className="fieldset">
             <label>Description (optional)</label>
             <textarea
+              value={segmentDescription}
+              onChange={(e) =>
+                dispatch(updateSegmentDescription(e.target.value))
+              }
               rows={4}
               placeholder="Please describe your segment, or leave blank."
             ></textarea>

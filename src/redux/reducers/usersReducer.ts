@@ -6,6 +6,8 @@ import { dCondition } from "../../models/condition";
 const inititalState = {
   users: <Array<User>>[],
   filteredUsers: <Array<User>>[],
+  segmentTitle: <string>"Untitled segment",
+  segmentDescription: <string>"",
 };
 
 const users = (state = inititalState, action: Action) => {
@@ -13,6 +15,12 @@ const users = (state = inititalState, action: Action) => {
   switch (action.type) {
     case "initialize_users": {
       return { ...usersState, users: action.payload };
+    }
+    case "update_segment_description": {
+      return { ...usersState, segmentDescription: action.payload };
+    }
+    case "update_segment_title": {
+      return { ...usersState, segmentTitle: action.payload };
     }
     case "apply_filters": {
       let { rules } = action.payload;
