@@ -1,5 +1,6 @@
 import rootReducer from "./reducers";
 import { configureStore } from "@reduxjs/toolkit";
+import { loadState } from "./browser-storage";
 
 const actionSanitizer = (action: any) =>
   action.type === "item_dragging" && action.payload
@@ -8,6 +9,7 @@ const actionSanitizer = (action: any) =>
 
 const store = configureStore({
   reducer: rootReducer,
+  preloadedState: loadState(),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       immutableCheck: false,

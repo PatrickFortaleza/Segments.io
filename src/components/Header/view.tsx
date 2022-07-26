@@ -3,10 +3,12 @@ import { SetterGetter } from "../../models";
 import BaseSelect from "../FormComponents/BaseSelect";
 
 export default function HeaderView({
+  saveStore,
   exportAction,
   options,
   validSegment,
 }: {
+  saveStore: () => any;
   exportAction: SetterGetter;
   options: Array<string>;
   validSegment: boolean;
@@ -16,7 +18,7 @@ export default function HeaderView({
       <div className="main__wrap">
         <div></div>
         <div className="main__actions">
-          <button className="default">
+          <button className="default" onClick={() => saveStore()}>
             <Icon name="save" /> Save
           </button>
           <BaseSelect

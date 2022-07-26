@@ -6,12 +6,18 @@ import {
   convertToJSON,
 } from "../../utility/exportArray";
 import { useSelector } from "react-redux";
+import store from "../../redux/store";
+import { saveState } from "../../redux/browser-storage";
 
 export default function HeaderController() {
   const [exportAction, setExportAction] = useState("");
   const filteredUsers = useSelector((state: any) => state.users.filteredUsers);
 
   const options = ["XLSX", "CSV", "JSON"];
+
+  const saveStore = () => {
+    saveState(store.getState());
+  };
 
   useEffect(() => {
     (async () => {
@@ -36,6 +42,7 @@ export default function HeaderController() {
 
   return (
     <HeaderView
+      saveStore={saveStore}
       options={options}
       exportAction={{
         setter: setExportAction,
