@@ -4,11 +4,13 @@ import CustomSelectView from "./view";
 export default function CustomSelectController({
   options,
   setter,
+  defaultValue,
 }: {
   options: Array<string>;
   setter: (value: string) => void;
+  defaultValue: string | undefined;
 }) {
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<string>(defaultValue ?? "");
 
   useEffect(() => {
     setter(selected);

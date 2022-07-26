@@ -3,7 +3,7 @@ import { AttributeTypes } from "../../models/attributes";
 import { User } from "../../models/user";
 import moment, { Moment } from "moment";
 
-const inititalState = <AttributeTypes>{
+const initialState = <AttributeTypes>{
   alphabetical: {
     controlOptions: <Array<string>>[
       "starts_with",
@@ -60,11 +60,11 @@ const inititalState = <AttributeTypes>{
   },
 };
 
-const attributes = (state = inititalState, action: Action) => {
+const attributes = (state = initialState, action: Action) => {
   switch (action.type) {
     case "initialize_attribute_meta": {
       let { users } = action.payload;
-      let newAttributeMeta = { ...state };
+      let newAttributeMeta = initialState;
 
       Object.entries(newAttributeMeta).forEach(([metaKey, metaData]) => {
         let { variables } = metaData;
@@ -98,7 +98,7 @@ const attributes = (state = inititalState, action: Action) => {
               break;
           }
           newAttributeMeta[metaKey as keyof AttributeTypes].variables[v] = [
-            ...newAttributeMeta[metaKey as keyof AttributeTypes].variables[v],
+            // ...newAttributeMeta[metaKey as keyof AttributeTypes].variables[v],
             ...allOptions,
           ];
         });

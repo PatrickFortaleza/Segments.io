@@ -7,14 +7,18 @@ export default function DateSliderController({
   minDate,
   maxDate,
   setter,
+  defaultValue,
 }: {
   minDate: string;
   maxDate: string;
   setter: (value: string) => void;
+  defaultValue: string | undefined;
 }) {
   const [sliderValue, setSliderValue] = useState<number>(0);
   const [daysBetweenDates, setDaysBetweenDates] = useState<number>(0);
-  const [currentDate, setCurrentDate] = useState<string>(minDate);
+  const [currentDate, setCurrentDate] = useState<string>(
+    defaultValue ?? minDate
+  );
 
   // when minDate, and maxDate initializes, count the days between.
   useEffect(() => {

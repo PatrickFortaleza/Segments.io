@@ -4,11 +4,13 @@ import BaseSelect from "../FormComponents/BaseSelect";
 
 export default function HeaderView({
   saveStore,
+  saveSuccessful,
   exportAction,
   options,
   validSegment,
 }: {
   saveStore: () => any;
+  saveSuccessful: boolean;
   exportAction: SetterGetter;
   options: Array<string>;
   validSegment: boolean;
@@ -19,7 +21,15 @@ export default function HeaderView({
         <div></div>
         <div className="main__actions">
           <button className="default" onClick={() => saveStore()}>
-            <Icon name="save" /> Save
+            {saveSuccessful ? (
+              <>
+                <Icon name="check" style={{ color: "mediumseagreen" }} /> Saved!
+              </>
+            ) : (
+              <>
+                <Icon name="save" /> Save{" "}
+              </>
+            )}
           </button>
           <BaseSelect
             selected={exportAction}

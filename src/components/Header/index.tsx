@@ -11,12 +11,21 @@ import { saveState } from "../../redux/browser-storage";
 
 export default function HeaderController() {
   const [exportAction, setExportAction] = useState("");
+  const [saveSuccessful, setSaveSuccessful] = useState(false);
   const filteredUsers = useSelector((state: any) => state.users.filteredUsers);
 
   const options = ["XLSX", "CSV", "JSON"];
 
   const saveStore = () => {
-    saveState(store.getState());
+    try {
+      saveState(store.getState());
+      setSaveSuccessful(true);
+      setTimeout(() => {
+        setSaveSuccessful(false);
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -48,6 +57,7 @@ export default function HeaderController() {
         setter: setExportAction,
         value: exportAction,
       }}
+      saveSuccessful={saveSuccessful}
       validSegment={Array.isArray(filteredUsers) && filteredUsers.length > 0}
     />
   );

@@ -97,6 +97,7 @@ export default function RuleView({
                       })
                     )
                   }
+                  defaultValue={rule?.value}
                 />
               )}
               {rule.type === "select" && (
@@ -111,6 +112,7 @@ export default function RuleView({
                       })
                     )
                   }
+                  defaultValue={rule?.value}
                 />
               )}
 
@@ -125,6 +127,7 @@ export default function RuleView({
                       })
                     )
                   }
+                  defaultValue={rule?.value}
                   min={ruleMetadata.variables[rule.name][0]}
                   max={ruleMetadata.variables[rule.name][1]}
                 />
@@ -141,6 +144,7 @@ export default function RuleView({
                       })
                     )
                   }
+                  defaultValue={rule?.value}
                   minDate={ruleMetadata.variables[rule.name][0]}
                   maxDate={ruleMetadata.variables[rule.name][1]}
                 />
