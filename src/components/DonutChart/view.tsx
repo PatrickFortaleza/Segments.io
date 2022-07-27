@@ -44,10 +44,8 @@ export default function DonutChartView({
                 style={{ background: circle.color }}
               />
               <label>
-                <h5>{circle.label}</h5>
-                <span>
-                  {numberWithCommas(circle.num)} {itemLabel}
-                </span>
+                <h5>{numberWithCommas(circle.num)}</h5>
+                <span>{circle.label}</span>
               </label>
             </button>
           ))}

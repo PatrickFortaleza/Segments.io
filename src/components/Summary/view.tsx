@@ -78,7 +78,7 @@ export default function SummaryView({
             values={values}
             max={chartValues.max}
             size={250}
-            itemLabel={"users"}
+            itemLabel={"Individuals"}
           />
         </div>
       </div>

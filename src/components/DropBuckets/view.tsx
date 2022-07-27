@@ -3,6 +3,7 @@ import Bucket from "./Bucket";
 import { Icon } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { addCondition } from "../../redux/actions/entity";
+import Tooltip from "../Tooltip/Tooltip";
 
 export default function DropBucketsView({
   buckets,
@@ -18,7 +19,7 @@ export default function DropBucketsView({
           <div key={bucket.id} style={{ height: "100%" }}>
             <div className="buckets__container__outer">
               <h3>
-                {bucket.type} <Icon name="info circle" />
+                {bucket.type} <Tooltip message={"test"} />
               </h3>
               <div className="buckets__container__inner">
                 <Bucket bucket={bucket} />
