@@ -32,7 +32,9 @@ MAIN STYLES
   height: 100%;
   max-height: 100vh;
   overflow: hidden;
-  background: var(--elevation-3);
+  background: var(--elevation-6);
+  display: flex;
+  // flex-direction: column;
 }
 
 body {
@@ -43,7 +45,6 @@ body {
 #root, .app {
   flex: 1;
   display: flex;
-  flex-direction: column;
   max-height: 100vh;
 }
 
@@ -53,16 +54,14 @@ body {
   height: 100%;
   max-width: 1440px;
   margin: auto;
-  border: 1px solid var(--elevation-4);
-  background: var(--elevation-3);
-  
+  // border: 1px solid var(--elevation-4);
+  // background: var(--elevation-6);
 }
 
 main {
   padding-top: 25px + 10px;
   padding-bottom: 10px;
-  background: var(--elevation-3);
-  width: calc(100% - 300px);
+  // width: calc(100% - 300px);
   display: flex;
 }
 
@@ -70,14 +69,14 @@ main {
   width: 25px;
   height: 25px;
   text-align: center;
-  background: var(--highlight-primary-1);
+  background: var(--highlight-primary-2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 
   i {
-    color: var(--elevation-1);
+    color: var(--text-1);
     transform: translateX(2px);
     font-size: 12px;
   }

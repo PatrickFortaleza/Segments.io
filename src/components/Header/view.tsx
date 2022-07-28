@@ -18,7 +18,12 @@ export default function HeaderView({
   return (
     <header className="main">
       <div className="main__wrap">
-        <div></div>
+        <div className="main__actions">
+          <button className="default">
+            <Icon name="info circle" />
+            App Information
+          </button>
+        </div>
         <div className="main__actions">
           <button className="default" onClick={() => saveStore()}>
             {saveSuccessful ? (

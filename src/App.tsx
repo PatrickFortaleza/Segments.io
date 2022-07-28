@@ -40,8 +40,8 @@ function App() {
   return (
     <div className="app">
       <Header />
+      <Sidebar />
       <div className="body">
-        <Sidebar />
         <main>
           <DropBuckets />
           <Summary />
