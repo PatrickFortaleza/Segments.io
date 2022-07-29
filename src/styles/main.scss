@@ -17,6 +17,7 @@ COMPONENTS
 @import "./components/forms";
 @import "./components/sidebar";
 @import "./components/header";
+@import "./components/footer";
 @import "./components/draglist";
 @import "./components/dragbuckets";
 @import "./components/rules";
@@ -58,7 +59,7 @@ body {
 
 main {
   padding-top: 36px + 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px + 10px;
   // width: calc(100% - 300px);
   display: flex;
 }

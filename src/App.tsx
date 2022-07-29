@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Api } from "./api";
 import { useDispatch, useSelector } from "react-redux";
-import { applyFilters, initializeUsers } from "./redux/actions/users";
+import { initializeUsers } from "./redux/actions/users";
 import Sidebar from "./components/Sidebar";
 import DropBuckets from "./components/DropBuckets";
 import Summary from "./components/Summary";
 import Header from "./components/Header";
 import { initializeAttributeMeta } from "./redux/actions/attribute";
+import Footer from "./components/Footer";
 
 function App() {
   const [usersPopulated, setUsersPopulated] = useState<Boolean>(false);
@@ -47,6 +48,7 @@ function App() {
           <Summary />
         </main>
       </div>
+      <Footer />
     </div>
   );
 }
