@@ -1,51 +1,111 @@
 header.main {
-  height: 25px;
-  background: var(--text-1);
-  border-bottom: 1px solid red;
+  background: var(--elevation-2);
+  border-bottom: 1px solid var(--elevation-1);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 502;
 
-  .main__wrap {
-    @include wrap;
+  .main__sub {
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .main__actions {
-    button {
-      color: var(--elevation-1);
-      font-family: sans-serif;
-      font-size: 12px;
-      border-left: 1px solid var(--text-3);
-      padding: 0 20px;
-      cursor: pointer;
-      position: relative;
+  .main__head {
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-      i {
-        margin-right: 5px;
-        color: var(--elevation-1);
+    &__left {
+      display: flex;
+
+      button {
+        padding: 0 10px;
+        i {
+          color: var(--text-1);
+          font-size: 14px;
+        }
       }
 
-      .ind {
-        position: absolute;
-        width: 7px;
-        height: 7px;
-        background: red;
-        border-radius: 50%;
-        left: 17px;
-        top: 0px;
+      .logo {
+        display: flex;
+        align-items: center;
+        font-family: sans-serif;
+        color: var(--text-1);
+        font-weight: 700;
+        font-size: 14px;
+        padding-right: 10px;
+        border-right: 1px solid var(--elevation-0);
+      }
+
+      .logo__mark {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 5px;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
-  }
 
-  .custom-select {
-    cursor: pointer;
-    padding-left: 10px;
-    border-left: 1px solid var(--text-3) !important;
+    &__right {
+      display: flex;
+
+      button {
+        color: var(--text-1);
+        font-family: sans-serif;
+        font-size: 12px;
+        padding: 0 20px;
+        cursor: pointer;
+        position: relative;
+
+        i {
+          margin-right: 5px;
+          color: var(--text-1);
+        }
+
+        .ind {
+          position: absolute;
+          width: 7px;
+          height: 7px;
+          background: var(--elevation-0);
+          border-radius: 50%;
+          left: 17px;
+          top: 0px;
+        }
+      }
+
+      .custom-select {
+        cursor: pointer;
+        padding-left: 10px;
+
+        select {
+          color: var(--text-1);
+        }
+
+        &::after {
+          border-top: 5px solid var(--text-1);
+        }
+      }
+    }
+
+    .user {
+      color: var(--text-1);
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+
+      span {
+        font-family: sans-serif;
+        font-size: 12px;
+      }
+    }
   }
 }

@@ -11,7 +11,7 @@
   // BACKGROUNDS
   --elevation-0: #70747a;
   --elevation-1: #555b63;
-  --elevation-2: #424a55;
+  --elevation-2: #384759;
   --elevation-3: #333d49;
   --elevation-4: #454642;
   --elevation-5: #303433;
@@ -23,10 +23,10 @@
   --text-4: #aaaaaa;
   // HIGHLIGHTS
   --highlight-primary-1: #ff8300;
-  --highlight-primary-2: #26a1ff;
+  --highlight-primary-2: #ff5000;
   --highlight-primary-3: #fc1923;
-  --highlight-secondary-1: #01286d;
-  --highlight-secondary-2: #89c2ff;
+  --highlight-secondary-1: #26a1ff;
+  --highlight-secondary-2: #265fff;
   // SUCCESS
   --success-1: #19b51e;
   --success-2: #1ecc24;
@@ -37,6 +37,14 @@
   // INFO
   --info-1: #1180db;
   --info-2: #3aa1f4;
+}
+
+@mixin gradient-primary {
+  background: linear-gradient(130deg, var(--highlight-primary-1) 0%, var(--highlight-primary-2) 100%);
+}
+
+@mixin gradient-secondary {
+    background: linear-gradient(130deg, var(--highlight-secondary-1) 0%, var(--highlight-secondary-2) 100%);
 }
 
 @mixin wrap {

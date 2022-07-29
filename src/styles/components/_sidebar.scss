@@ -3,11 +3,10 @@ aside {
   min-width: 300px;
   max-width: 300px;
   max-height: 100vh;
-  padding-top: 25px;
+  padding-top: 36px;
   display: flex;
   flex-direction: column;
-  background: var(--elevation-2);
-  // border-right: 1px solid var(--elevation-1);
+  background: var(--elevation-3);
 }
 
 .sidebar__container {
@@ -34,9 +33,10 @@ header.sidebar {
 
       .sidebar__header__icon {
         display: block;
-        width: 40px;
-        height: 40px;
-        background: var(--highlight-primary-2);
+        width: 35px;
+        height: 35px;
+        background: var(--highlight-secondary-2);
+        @include gradient-secondary;
         border-radius: 4px;
         text-align: center;
 

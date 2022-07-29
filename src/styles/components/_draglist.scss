@@ -26,7 +26,7 @@
   &.dragging {
     overflow-y: visible;
     overflow-x: visible;
-    padding-right: 15px;
+    padding-right: 20px;
   }
 }
 
@@ -109,12 +109,12 @@
 .drag__list__item__rule {
   display: flex;
   align-items: center;
-  border: 1px solid var(--elevation-3);
+  border: 1px solid var(--elevation-2);
   border-radius: 2px;
   margin-bottom: -1px;
   padding: 6px 6px;
   padding-right: 45px;
-  background: var(--elevation-3);
+  background: var(--elevation-2);
   position: relative;
   z-index: 500000;
   cursor: pointer;

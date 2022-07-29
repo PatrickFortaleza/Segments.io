@@ -17,14 +17,20 @@ export default function HeaderView({
 }) {
   return (
     <header className="main">
-      <div className="main__wrap">
-        <div className="main__actions">
+      <div className="main__head">
+        <div className="main__head__left">
+          <span className="logo">
+            <span className="logo__mark">
+              <img src="/assets/images/segments-logo.svg" alt="logo" />
+            </span>
+            Segments.io
+          </span>
           <button className="default">
-            <Icon name="info circle" />
-            App Information
+            <Icon name="question circle outline" />
           </button>
         </div>
-        <div className="main__actions">
+
+        <div className="main__head__right">
           <button className="default" onClick={() => saveStore()}>
             {saveSuccessful ? (
               <>
@@ -42,6 +48,9 @@ export default function HeaderView({
             placeholder={"Export Segment"}
             disabled={!validSegment}
           />
+          <span className="user">
+            <Icon name="user circle" /> <span>Guest</span>
+          </span>
         </div>
       </div>
     </header>
