@@ -11,8 +11,10 @@ export default function SidebarHeader() {
           </span>
         </div>
         <div>
-          <h3>Segment Filters</h3>
-          <span>Drag-and-drop the rules below to apply segment filters</span>
+          <h3>Rule Filters</h3>
+          <span>
+            Drag-and-drop the rules below to apply filters for your segment.
+          </span>
         </div>
       </div>
     </header>

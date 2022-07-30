@@ -141,21 +141,24 @@
   
     }
 
-    button.add {
-      background: none;
-      border: none;
-      font-family: sans-serif;
-      font-size: 12px;
-      color: var(--highlight-primary-2);
-      cursor: pointer;
-      margin-top: 5px;
 
-      i {
-        margin: 0;
-        font-size: 9px;
-        line-height: 12px;
-      }
-    }
+  }
+}
+
+button.add__condition {
+  background: none;
+  border: none;
+  font-family: sans-serif;
+  font-size: 12px;
+  color: var(--highlight-primary-2);
+  cursor: pointer;
+  margin-top: 15px;
+  text-align: left;
+
+  i {
+    margin: 0;
+    font-size: 9px;
+    line-height: 12px;
   }
 }
 

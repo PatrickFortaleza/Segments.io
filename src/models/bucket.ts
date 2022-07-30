@@ -12,3 +12,7 @@ export interface BucketHashmap {
 export interface dBucket {
   [type: string]: Array<dCondition>;
 }
+
+export interface BucketRefs {
+  [id: string]: any;
+}

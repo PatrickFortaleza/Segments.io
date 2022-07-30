@@ -1,11 +1,14 @@
 import { Condition } from "../../../models/condition";
 import { default as ConditionItem } from "../Condition";
 import { Icon } from "semantic-ui-react";
+import { LegacyRef } from "react";
 
 export default function BucketView({
   bucketConditions,
+  anchorRef,
 }: {
   bucketConditions: Array<Condition>;
+  anchorRef: LegacyRef<HTMLDivElement> | undefined;
 }) {
   return (
     <>
@@ -22,6 +25,8 @@ export default function BucketView({
           <Icon name="warning sign" /> No existing conditions for this bucket
         </p>
       )}
+
+      <div ref={anchorRef} />
     </>
   );
 }
