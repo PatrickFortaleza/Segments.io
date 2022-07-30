@@ -12,4 +12,5 @@ export interface EntityState {
   conditions: ConditionHashmap | null;
   rules: RuleHashmap | null;
   denormalized: dBucket | null;
+  pendingSave: boolean;
 }

@@ -116,3 +116,12 @@ export const deleteRule = ({ ruleId }: { ruleId: string }) => {
     },
   };
 };
+
+export const updatePendingSave = ({ bool }: { bool: boolean }) => {
+  return {
+    type: "update_pending_save",
+    payload: {
+      bool,
+    },
+  };
+};

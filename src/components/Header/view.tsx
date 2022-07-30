@@ -1,6 +1,8 @@
 import { Icon } from "semantic-ui-react";
 import { SetterGetter } from "../../models";
 import BaseSelect from "../FormComponents/BaseSelect";
+import { useDispatch } from "react-redux";
+import { updatePendingSave } from "../../redux/actions/entity";
 
 export default function HeaderView({
   saveStore,
@@ -8,13 +10,16 @@ export default function HeaderView({
   exportAction,
   options,
   validSegment,
+  pendingSave,
 }: {
   saveStore: () => any;
   saveSuccessful: boolean;
   exportAction: SetterGetter;
   options: Array<string>;
   validSegment: boolean;
+  pendingSave: boolean;
 }) {
+  const dispatch = useDispatch();
   return (
     <header className="main">
       <div className="main__head">
@@ -31,7 +36,13 @@ export default function HeaderView({
         </div>
 
         <div className="main__head__right">
-          <button className="default" onClick={() => saveStore()}>
+          <button
+            className="default"
+            onClick={() => {
+              saveStore();
+              dispatch(updatePendingSave({ bool: false }));
+            }}
+          >
             {saveSuccessful ? (
               <>
                 <Icon name="check" style={{ color: "mediumseagreen" }} /> Saved!
@@ -41,6 +52,7 @@ export default function HeaderView({
                 <Icon name="save" /> Save{" "}
               </>
             )}
+            {pendingSave && <div className="ind" />}
           </button>
           <BaseSelect
             selected={exportAction}

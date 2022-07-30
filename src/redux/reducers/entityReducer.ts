@@ -11,6 +11,7 @@ let initialState: EntityState = {
   conditions: null,
   rules: null,
   denormalized: null,
+  pendingSave: false,
 };
 
 let emptyCondition = <Condition>{
@@ -85,6 +86,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         denormalized,
+        pendingSave: true,
       };
       break;
     }
@@ -107,6 +109,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        pendingSave: true,
       };
 
       // denormalize entity state...
@@ -130,6 +133,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         conditions,
+        pendingSave: true,
       };
 
       break;
@@ -151,6 +155,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         conditions,
+        pendingSave: true,
       };
 
       // denormalize entity state...
@@ -207,6 +212,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        pendingSave: true,
       };
 
       // denormalize entity state...
@@ -231,6 +237,7 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        pendingSave: true,
       };
 
       // denormalize entity state...
@@ -251,11 +258,16 @@ const entities = (state = initialState, action: Action) => {
       entityState = {
         ...entityState,
         rules,
+        pendingSave: true,
       };
 
       // denormalize entity state...
       entityState.denormalized = denormalizeEntityState(entityState);
       break;
+    }
+    case "update_pending_save": {
+      let { bool } = action.payload;
+      entityState.pendingSave = bool;
     }
     default: {
       break;

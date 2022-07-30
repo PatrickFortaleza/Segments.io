@@ -15,6 +15,7 @@ export default function HeaderController() {
   const [saveSuccessful, setSaveSuccessful] = useState(false);
   const filteredUsers = useSelector((state: any) => state.users.filteredUsers);
   const segmentTitle = useSelector((state: any) => state.users.segmentTitle);
+  const pendingSave = useSelector((state: any) => state.entities.pendingSave);
 
   const options = ["XLSX", "CSV", "JSON"];
 
@@ -61,6 +62,7 @@ export default function HeaderController() {
       }}
       saveSuccessful={saveSuccessful}
       validSegment={Array.isArray(filteredUsers) && filteredUsers.length > 0}
+      pendingSave={pendingSave}
     />
   );
 }
