@@ -1,9 +1,10 @@
 .drag__bucket {
   width: 350px;
-  background: var(--elevation-1);
+  background: var(--elevation-2);
   padding: 10px;
-  border: 1px solid var(--elevation-5);
+  border: 1px solid var(--elevation-2);
   margin-bottom: 10px;
+  border-radius: 2px;
 
   &__header {
     display: flex;
@@ -25,6 +26,7 @@
         i {
           padding: 0;
           margin: 0;
+          color: var(--text-1);
         }
       }
     }
@@ -41,7 +43,7 @@
       i {
         margin: 0;
         padding: 0;
-        color: var(--elevation-6);
+        color: var(--text-1);
         transition: .2s ease-in-out;
       }
 
@@ -55,8 +57,8 @@
   }
 
   &__target {
-    background: #f7f7f7;
-    border: dashed 1px #cccccc;
+    background: var(--elevation-5);
+    border: dashed 1px var(--elevation-1);
 
     height: 50px;
     border-radius: 3px;
@@ -68,13 +70,13 @@
     p {
       font-size: 12px;
       text-align: center;
-      font-weight: bold;
-      color: #7e7e7e;
+      // font-weight: bold;
+      color: var(--text-3);
     }
 
     &.active {
-      border: 1px dashed var(--highlight-primary-1);
-      background: #b7dbff;
+      border: 1px dashed var(--highlight-primary-2);
+      background: rgba($color: #ff5000, $alpha: .2);
     }
   }
 }
@@ -83,28 +85,33 @@
   display: flex;
   height: 100%;
 
+  & > div:nth-child(2) {
+    margin-left: 20px;
+  }
+
   &__outer {
-    margin-left: 10px;
-    background: white;
+    background: var(--elevation-3);
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--elevation-2);
     min-width: 399px;
     height: 100%;
     display: flex;
     flex-direction: column;
     height: auto;
     max-height: 100%;
+    border-radius: 2px;
 
     h3 {
       font-family: sans-serif;
       font-weight: bold;
       margin-bottom: 10px;
       font-size: 17px;
+      color: var(--text-1);
       
       i {
         font-size: 12px;
         line-height: 17px;
-        color: var(--elevation-6);
+        color: var(--text-3);
       }
     }
 
@@ -113,7 +120,7 @@
 
   &__inner {
     height: 100%;
-    background: var(--elevation-2);
+    background: var(--elevation-5);
     padding: 10px;
     border: 1px solid var(--elevation-5);
     overflow-y: scroll;
@@ -140,7 +147,7 @@
       border: none;
       font-family: sans-serif;
       font-size: 12px;
-      color: var(--highlight-primary-1);
+      color: var(--highlight-primary-2);
       cursor: pointer;
       margin-top: 5px;
 
@@ -166,8 +173,8 @@
     font-family: sans-serif;
     font-size: 12px;
     font-weight: bold;
-    border: 1px solid var(--elevation-6);
-    color: var(--elevation-6);
+    border: 1px solid var(--elevation-1);
+    color: var(--text-3);
     padding: 5px;
     width: 37px;
     display: inline-block;
@@ -177,10 +184,10 @@
     transition: .2s ease-in-out;
 
     &.checked, &:focus, &:hover {
-      border: 1px solid var(--highlight-primary-1);
+      background: rgba($color: #ff5000, $alpha: .2);
+      border: 1px solid var(--highlight-primary-2);
+      color: var(--highlight-primary-2);
       z-index: 500;
-      background: var(--highlight-secondary-2);
-      color: var(--highlight-primary-1);
     }
   }
 

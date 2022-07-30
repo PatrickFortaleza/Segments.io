@@ -1,14 +1,14 @@
 .summary {
-  margin: 0 10px;
+  margin: 0 20px 0 0;
   width: 100%;
   max-width: 300px;
-  padding-top: 36px + 10px;
-  border-radius: 2px;
+  padding-top: 36px + 20px;
 
   &__container {
     background: var(--elevation-3);
     padding: 20px 20px 0 20px;
-    border: 1px solid var(--elevation-1);
+    border: 1px solid var(--elevation-2);
+    border-radius: 2px;
   }
 
   &__section.header {

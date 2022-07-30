@@ -43,7 +43,9 @@ function App() {
       <Header />
       <Sidebar />
       <main>
-        <DropBuckets />
+        <div className="main__container">
+          <DropBuckets />
+        </div>
       </main>
       <Summary />
       <Footer />
