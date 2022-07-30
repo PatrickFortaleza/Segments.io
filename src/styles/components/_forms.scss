@@ -50,18 +50,6 @@
   }
 
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 100%;
-    border-left: 1px solid var(--elevation-1);
-    z-index: 5000;
-    pointer-events: none;
-    background: var(--elevation-3);
-  }
 
   &::after {
     content: "";
@@ -75,7 +63,6 @@
     border-right: 5px solid transparent;
     border-top: 5px solid var(--text-3);
     pointer-events: none;
-    z-index: 5001;
   }
 
   &:focus,

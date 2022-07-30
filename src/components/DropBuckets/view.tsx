@@ -1,9 +1,8 @@
 import { BucketHashmap } from "../../models/bucket";
 import Bucket from "./Bucket";
-import { Icon } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { addCondition } from "../../redux/actions/entity";
-import Tooltip from "../Tooltip/Tooltip";
+import Tooltip from "../Tooltip";
 
 export default function DropBucketsView({
   buckets,

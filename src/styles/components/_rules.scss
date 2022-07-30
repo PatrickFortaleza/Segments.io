@@ -40,13 +40,13 @@
   }
 
   &__head__name {
-    padding: 5px 50px 5px 10px;
+    padding: 5px 70px 5px 10px;
     display: flex;
     align-items: center;
     position: relative;
     width: 100%;
 
-    button {
+    .rule__head__meta {
       position: absolute;
       right: 10px;
       top: 50%;

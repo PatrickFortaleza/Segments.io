@@ -8,6 +8,7 @@ import CustomSelect from "../../FormComponents/CustomSelect";
 import { Rule } from "../../../models/rule";
 import { useDispatch } from "react-redux";
 import { updateRule, deleteRule } from "../../../redux/actions/entity";
+import Tooltip from "../../Tooltip";
 
 export default function RuleView({
   rule,
@@ -33,18 +34,27 @@ export default function RuleView({
         </div>
         <div className="rule__head__name">
           <h5>{snakeCaseToTitleCase(rule.name)}</h5>
-          <button
-            className="default"
-            onClick={() =>
-              dispatch(
-                deleteRule({
-                  ruleId: rule.id,
-                })
-              )
-            }
-          >
-            <Icon name="trash alternate" />
-          </button>
+          <div className="rule__head__meta">
+            {(!rule.equation || !rule.value) && (
+              <Tooltip
+                variant={"warning"}
+                message={"Configure options to apply rule."}
+              />
+            )}
+
+            <button
+              className="default"
+              onClick={() =>
+                dispatch(
+                  deleteRule({
+                    ruleId: rule.id,
+                  })
+                )
+              }
+            >
+              <Icon name="trash alternate" />
+            </button>
+          </div>
         </div>
       </div>
       <div className="rule__body">
