@@ -71,17 +71,6 @@ export default function DonutChartView({
                   {numberWithCommas(totals.totalNumber)} out of{" "}
                   {numberWithCommas(max)}
                 </h4>
-                <p>
-                  <Icon
-                    name="address book"
-                    style={{
-                      padding: 0,
-                      margin: 0,
-                      fontSize: 9,
-                    }}
-                  />
-                  {itemLabel}
-                </p>
               </>
             ) : (
               <>
@@ -94,19 +83,20 @@ export default function DonutChartView({
                   {numberWithCommas(focused.value.num)} out of{" "}
                   {numberWithCommas(max)}
                 </h4>
-                <p>
-                  <Icon
-                    name="address book"
-                    style={{
-                      padding: 0,
-                      margin: 0,
-                      fontSize: 9,
-                    }}
-                  />
-                  {itemLabel}
-                </p>
               </>
             )}
+            <p>
+              <Icon
+                name="address card"
+                style={{
+                  padding: 0,
+                  margin: 0,
+                  fontSize: 9,
+                }}
+              />
+              &nbsp;
+              {itemLabel}
+            </p>
           </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg">

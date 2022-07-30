@@ -59,13 +59,14 @@ export default function SummaryView({
           <h4>Individuals in this segment</h4>
           <h2>
             <Icon
-              name="address book"
+              name="address card"
               style={{
-                color: "var(--highlight-primary-1)",
+                color: "var(--highlight-primary-2)",
                 padding: 0,
                 margin: 0,
               }}
             />
+            &nbsp;
             {kFormatter(chartValues.segment)}
           </h2>
           <p>
