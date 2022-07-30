@@ -42,12 +42,10 @@ function App() {
     <div className="app">
       <Header />
       <Sidebar />
-      <div className="body">
-        <main>
-          <DropBuckets />
-          <Summary />
-        </main>
-      </div>
+      <main>
+        <DropBuckets />
+      </main>
+      <Summary />
       <Footer />
     </div>
   );

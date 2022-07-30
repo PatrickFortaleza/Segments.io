@@ -48,7 +48,7 @@ export default function DonutChartController({
       ...values,
       {
         num: max - total,
-        color: "#dddddd",
+        color: "var(--elevation-1)",
         key: "excluded",
         label: "Excluded",
       },

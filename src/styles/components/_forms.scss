@@ -223,7 +223,7 @@ input.custom {
     i {
       margin: 0;
       padding: 0;
-      color: var(--elevation-6);
+      color: var(--text-2);
       transition: .2s ease-in-out;
     }
 
@@ -244,6 +244,7 @@ input.custom {
     font-family: sans-serif;
     margin-bottom: 5px;
     display: inline-block;
+    color: var(--text-3);
   }
 
   textarea, input[type='text'] {
@@ -252,8 +253,13 @@ input.custom {
     padding: 5px;
     font-size: 12px;
     border: 1px solid var(--elevation-5);
-    background: var(--elevation-2);
+    background: var(--elevation-1);
     border-radius: 3px;
+    color: var(--text-1);
+
+    &::placeholder {
+      color: var(--text-3);
+    }
   }
 
 }

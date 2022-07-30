@@ -26,7 +26,7 @@ export default function SummaryView({
     return [
       {
         num: chartValues.segment,
-        color: "var(--highlight-primary-1)",
+        color: "var(--highlight-primary-2)",
         key: "segment",
         label: "Segment",
       },
