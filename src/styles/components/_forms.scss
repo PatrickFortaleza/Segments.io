@@ -105,6 +105,7 @@
 .custom__range {
   display: flex;
   border: 1px solid var(--elevation-1);
+  background: var(--elevation-6);
   height: 100%;
   align-items: center;
   border-radius: 3px;
@@ -147,7 +148,7 @@
   &__slider input {
     -webkit-appearance: none;
     height: 3px;
-    background: var(--elevation-6);
+    background: var(--elevation-1);
     outline: none;
     -webkit-transition: .2s;
     transition: opacity .2s;

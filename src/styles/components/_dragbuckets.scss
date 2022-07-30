@@ -1,5 +1,5 @@
 .drag__bucket {
-  width: 350px;
+  width: 340px;
   background: var(--elevation-2);
   padding: 10px;
   border: 1px solid var(--elevation-2);
@@ -93,7 +93,6 @@
     background: var(--elevation-3);
     padding: 10px;
     border: 1px solid var(--elevation-2);
-    min-width: 399px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -132,13 +131,13 @@
   
     /* Track */
     &::-webkit-scrollbar-track {
-      background: var(--elevation-2);
+      background: var(--elevation-5);
   
     }
   
     /* Handle */
     &::-webkit-scrollbar-thumb {
-      background: var(--elevation-4);
+      background: var(--highlight-secondary-1);
   
     }
 

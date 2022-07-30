@@ -78,7 +78,7 @@ export default function SummaryView({
           <DonutChart
             values={values}
             max={chartValues.max}
-            size={250}
+            size={225}
             itemLabel={"Individuals"}
           />
         </div>
