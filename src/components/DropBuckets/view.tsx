@@ -19,7 +19,7 @@ export default function DropBucketsView({
           <div key={bucket.id} style={{ height: "100%" }}>
             <div className="buckets__container__outer">
               <h3>
-                {bucket.type} <Tooltip message={"test"} />
+                {bucket.type} <Tooltip message={"test"} variant={"info"} />
               </h3>
               <div className="buckets__container__inner">
                 <Bucket bucket={bucket} />

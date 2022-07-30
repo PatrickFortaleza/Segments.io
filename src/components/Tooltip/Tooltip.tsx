@@ -1,9 +1,43 @@
-import { Icon } from "semantic-ui-react";
+import { Icon, SemanticICONS } from "semantic-ui-react";
 
-export default function Tooltip({ message }: { message: string }) {
+interface tipTypes {
+  warning: string;
+  danger: string;
+  info: string;
+}
+
+export default function Tooltip({
+  message,
+  variant,
+}: {
+  message: string;
+  variant: keyof tipTypes;
+}) {
+  let color: string = "",
+    icon: SemanticICONS | undefined = undefined;
+
+  switch (variant) {
+    case "warning":
+      color = "var(--warning-1)";
+      icon = "warning sign";
+      break;
+    case "danger":
+      color = "var(--danger-1)";
+      icon = "ban";
+      break;
+    case "info":
+      color = "var(--info-1)";
+      icon = "info circle";
+      break;
+    default:
+      color = "var(--elevation-0)";
+      icon = "info circle";
+      break;
+  }
+
   return (
     <button className="tooltip" tabIndex={0}>
-      <Icon name="info circle" />
+      <Icon name={icon} style={{ color: `${color}` }} />
       <span className="tooltip__container">
         <span className="tooltip__content">{message}</span>
       </span>
