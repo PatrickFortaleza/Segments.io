@@ -13,6 +13,7 @@ import { saveState } from "../../redux/browser-storage";
 export default function HeaderController() {
   const [exportAction, setExportAction] = useState("");
   const [saveSuccessful, setSaveSuccessful] = useState(false);
+  const [enableModal, setEnableModal] = useState(false);
   const filteredUsers = useSelector((state: any) => state.users.filteredUsers);
   const segmentTitle = useSelector((state: any) => state.users.segmentTitle);
   const pendingSave = useSelector((state: any) => state.entities.pendingSave);
@@ -59,6 +60,10 @@ export default function HeaderController() {
       exportAction={{
         setter: setExportAction,
         value: exportAction,
+      }}
+      enableModal={{
+        value: enableModal,
+        setter: setEnableModal,
       }}
       saveSuccessful={saveSuccessful}
       validSegment={Array.isArray(filteredUsers) && filteredUsers.length > 0}

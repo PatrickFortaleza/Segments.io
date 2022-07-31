@@ -3,6 +3,7 @@ import { SetterGetter } from "../../models";
 import BaseSelect from "../FormComponents/BaseSelect";
 import { useDispatch } from "react-redux";
 import { updatePendingSave } from "../../redux/actions/entity";
+import Modal from "../Modal";
 
 export default function HeaderView({
   saveStore,
@@ -11,6 +12,7 @@ export default function HeaderView({
   options,
   validSegment,
   pendingSave,
+  enableModal,
 }: {
   saveStore: () => any;
   saveSuccessful: boolean;
@@ -18,10 +20,14 @@ export default function HeaderView({
   options: Array<string>;
   validSegment: boolean;
   pendingSave: boolean;
+  enableModal: SetterGetter;
 }) {
   const dispatch = useDispatch();
   return (
     <header className="main">
+      {enableModal.value && (
+        <Modal title={"test"} content={"test"} enable={enableModal} />
+      )}
       <div className="main__head">
         <div className="main__head__left">
           <span className="logo">
@@ -30,7 +36,7 @@ export default function HeaderView({
             </span>
             Segments.io
           </span>
-          <button className="default">
+          <button className="default" onClick={() => enableModal.setter(true)}>
             <Icon name="question circle outline" />
           </button>
         </div>
