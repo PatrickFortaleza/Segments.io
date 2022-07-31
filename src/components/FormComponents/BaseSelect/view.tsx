@@ -19,6 +19,7 @@ export default function BaseSelectView({
         value={selected?.value || ""}
         disabled={disabled}
         onChange={(e) => selected.setter(e.target.value)}
+        tabIndex={0}
       >
         <option value="" disabled>
           {placeholder ? placeholder : "Please select..."}

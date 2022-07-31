@@ -1,9 +1,19 @@
 import { useMemo, useRef, createRef } from "react";
-import { BucketHashmap, BucketRefs } from "../../models/bucket";
+import {
+  Bucket as BucketType,
+  BucketHashmap,
+  BucketRefs,
+} from "../../models/bucket";
 import Bucket from "./Bucket";
 import { useDispatch } from "react-redux";
 import { addCondition } from "../../redux/actions/entity";
 import Tooltip from "../Tooltip";
+import { Icon } from "semantic-ui-react";
+
+interface bucketTypes {
+  includes: Array<BucketType>;
+  excludes: Array<BucketType>;
+}
 
 export default function DropBucketsView({
   buckets,
@@ -24,14 +34,30 @@ export default function DropBucketsView({
     return refs;
   }
 
+  const toolTips = {
+    includes:
+      "Individuals that correspond to the conditions in this bucket will be included",
+    excludes:
+      "Individuals that correspond to the conditions in this bucket will be excluded",
+  };
+
   return (
     <div className="buckets__container">
+      <span className="buckets__container__title">
+        <Icon style={{ color: "var(--highlight-secondary-1)" }} name="cogs" />{" "}
+        <h3 style={{ display: "inline-block" }}>Condition Builder</h3>
+      </span>
       {buckets &&
         Object.values(buckets).map((bucket) => (
           <div key={bucket.id} style={{ height: "100%" }}>
             <div className="buckets__container__outer">
               <h3>
-                {bucket.type} <Tooltip message={"test"} variant={"info"} />
+                {bucket.type}{" "}
+                <Tooltip
+                  message={toolTips[bucket.type as keyof bucketTypes]}
+                  minWidth={250}
+                  variant={"info"}
+                />
               </h3>
               <div className="buckets__container__inner">
                 <Bucket

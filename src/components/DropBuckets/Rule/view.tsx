@@ -38,7 +38,7 @@ export default function RuleView({
             {(!rule.equation || !rule.value) && (
               <Tooltip
                 variant={"warning"}
-                message={"Configure options to apply rule."}
+                message={"Finish configuring options to apply this rule."}
               />
             )}
 

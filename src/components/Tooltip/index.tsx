@@ -9,9 +9,11 @@ interface tipTypes {
 export default function Tooltip({
   message,
   variant,
+  minWidth,
 }: {
   message: string;
   variant: keyof tipTypes;
+  minWidth: number | undefined;
 }) {
   let color: string = "",
     icon: SemanticICONS | undefined = undefined;
@@ -38,7 +40,10 @@ export default function Tooltip({
   return (
     <button className="tooltip" tabIndex={0}>
       <Icon name={icon} style={{ color: `${color}` }} />
-      <span className="tooltip__container">
+      <span
+        className="tooltip__container"
+        style={minWidth ? { minWidth: minWidth } : {}}
+      >
         <span className="tooltip__content">{message}</span>
       </span>
     </button>

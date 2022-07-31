@@ -81,11 +81,20 @@
   }
 }
 
+
 .buckets__container {
   display: flex;
   height: 100%;
+  position: relative;
+  padding-top: 35px;
 
-  & > div:nth-child(2) {
+  &__title {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+
+  & > div:nth-child(3) {
     margin-left: 20px;
   }
 
@@ -102,7 +111,7 @@
 
     h3 {
       font-family: sans-serif;
-      font-weight: bold;
+      font-weight: normal;
       margin-bottom: 10px;
       font-size: 17px;
       color: var(--text-1);
