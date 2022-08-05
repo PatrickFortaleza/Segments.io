@@ -36,9 +36,9 @@ export default function DropBucketsView({
 
   const toolTips = {
     includes:
-      "Individuals that correspond to the conditions in this bucket will be included",
+      "Add conditions below that will INCLUDE your target individuals into your segment.",
     excludes:
-      "Individuals that correspond to the conditions in this bucket will be excluded",
+      "Add conditions below that will EXCLUDE your target individuals from your segment.",
   };
 
   return (
@@ -49,41 +49,36 @@ export default function DropBucketsView({
       </span>
       {buckets &&
         Object.values(buckets).map((bucket) => (
-          <div key={bucket.id} style={{ height: "100%" }}>
-            <div className="buckets__container__outer">
-              <h3>
-                {bucket.type}{" "}
-                <Tooltip
-                  message={toolTips[bucket.type as keyof bucketTypes]}
-                  minWidth={250}
-                  variant={"info"}
-                />
-              </h3>
-              <div className="buckets__container__inner">
-                <Bucket
-                  bucket={bucket}
-                  anchorRef={anchorRefs[`${bucket.id}`]}
-                />
-              </div>
-              <button
-                className="add__condition"
-                onClick={() => {
-                  dispatch(
-                    addCondition({
-                      bucketId: bucket.id,
-                    })
-                  );
-
-                  setTimeout(() => {
-                    let anchor = anchorRefs[`${bucket.id}`];
-                    if (anchor?.current)
-                      anchor.current.scrollIntoView({ behavior: "smooth" });
-                  }, 500);
-                }}
-              >
-                + Add new condition
-              </button>
+          <div key={bucket.id} className="buckets__container__outer">
+            <h3>
+              {bucket.type}{" "}
+              <Tooltip
+                message={toolTips[bucket.type as keyof bucketTypes]}
+                minWidth={250}
+                variant={"info"}
+              />
+            </h3>
+            <div className="buckets__container__inner">
+              <Bucket bucket={bucket} anchorRef={anchorRefs[`${bucket.id}`]} />
             </div>
+            <button
+              className="add__condition"
+              onClick={() => {
+                dispatch(
+                  addCondition({
+                    bucketId: bucket.id,
+                  })
+                );
+
+                setTimeout(() => {
+                  let anchor = anchorRefs[`${bucket.id}`];
+                  if (anchor?.current)
+                    anchor.current.scrollIntoView({ behavior: "smooth" });
+                }, 500);
+              }}
+            >
+              + Add new condition
+            </button>
           </div>
         ))}
     </div>

@@ -19,6 +19,7 @@ header.main {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: var(--elevation-2);
 
     &__left {
       display: flex;
