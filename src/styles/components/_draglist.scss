@@ -52,7 +52,7 @@
       }
 
       span {
-        font-family: sans-serif;
+        @include typeface;
         font-size: 9px;
         width: 14px;
         height: 14px;

@@ -62,7 +62,7 @@ export default function DropBucketsView({
               <Bucket bucket={bucket} anchorRef={anchorRefs[`${bucket.id}`]} />
             </div>
             <button
-              className="add__condition"
+              className="add__condition base"
               onClick={() => {
                 dispatch(
                   addCondition({

@@ -55,7 +55,7 @@ header.sidebar {
       grid-column: 2 / span 4;
 
       h3, span {
-        font-family: sans-serif;
+        @include typeface;
       }
 
       h3 {

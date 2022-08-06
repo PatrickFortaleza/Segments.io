@@ -35,7 +35,7 @@ header.main {
       .logo {
         display: flex;
         align-items: center;
-        font-family: sans-serif;
+        @include typeface;
         color: var(--text-1);
         font-weight: 700;
         font-size: 14px;
@@ -61,7 +61,7 @@ header.main {
 
       button {
         color: var(--text-1);
-        font-family: sans-serif;
+        @include typeface;
         font-size: 12px;
         padding: 0 20px;
         cursor: pointer;
@@ -95,7 +95,7 @@ header.main {
       margin-left: 10px;
 
       span {
-        font-family: sans-serif;
+        @include typeface;
         font-size: 12px;
       }
     }

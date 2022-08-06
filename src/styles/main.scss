@@ -108,5 +108,5 @@ main {
   font-size: 17px;
   font-weight: bold;
   color: var(--text-1);
-  font-family: sans-serif;
+  @include typeface;
 }

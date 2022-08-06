@@ -22,7 +22,7 @@
     h3,
     p,
     h4 {
-      font-family: sans-serif;
+      @include typeface;
       margin: 0;
       text-align: center;
       display: block;
@@ -94,7 +94,7 @@
         margin-bottom: 3px;
         font-size: 14px;
         text-transform: uppercase;
-        font-family: sans-serif;
+        @include typeface;
         font-weight: 700;
         line-height: 1em;
         color: var(--text-1);
@@ -103,7 +103,7 @@
       span {
         color: var(--text-2);
         font-size: 12px;
-        font-family: sans-serif;
+        @include typeface;
         line-height: 1em;
       }
     }

@@ -18,7 +18,7 @@
   select {
     appearance: none;
     // Additional resets for further consistency
-    font-family: sans-serif;
+    @include typeface;
     font-size: 12px;
     border: none;
     padding: 0 1em 0 0;
@@ -104,7 +104,7 @@
     height: 100%;
 
     input {
-      font-family: sans-serif;
+      @include typeface;
       font-size: 12px;
       margin: 0 !important;
       box-sizing: border-box;
@@ -170,7 +170,7 @@ input.custom {
   cursor: pointer;
   border-radius: 2px;
   font-size: 12px;
-  font-family: sans-serif;
+  @include typeface;
   padding: 0 7px;
   color: var(--text-1);
   
@@ -193,7 +193,7 @@ input.custom {
 
   input[type="text"] {
     cursor: pointer;
-    font-family: sans-serif;
+    @include typeface;
     font-weight: bold;
     background: none;
     border: 1px solid rgba($color: #000000, $alpha: 0);
@@ -241,7 +241,7 @@ input.custom {
 
   label {
     font-size: 12px;
-    font-family: sans-serif;
+    @include typeface;
     margin-bottom: 5px;
     display: inline-block;
     color: var(--text-3);
@@ -249,7 +249,7 @@ input.custom {
 
   textarea, input[type='text'] {
     width: 100%;
-    font-family: sans-serif;
+    @include typeface;
     padding: 5px;
     font-size: 12px;
     border: 1px solid var(--elevation-5);

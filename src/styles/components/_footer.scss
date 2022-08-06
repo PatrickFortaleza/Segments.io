@@ -10,7 +10,7 @@ footer {
   border-top: 1px solid var(--elevation-1);
   
   span {
-    font-family: sans-serif;
+    @include typeface;
     color: var(--text-1);
     font-size: 12px;
   }

@@ -108,7 +108,7 @@
     min-height: 0;
 
     h3 {
-      font-family: sans-serif;
+      @include typeface;
       font-weight: normal;
       margin-bottom: 10px;
       font-size: 17px;
@@ -155,7 +155,7 @@
 button.add__condition {
   background: none;
   border: none;
-  font-family: sans-serif;
+  @include typeface;
   font-size: 12px;
   color: var(--highlight-primary-2);
   cursor: pointer;
@@ -179,7 +179,7 @@ button.add__condition {
   }
 
   .container {
-    font-family: sans-serif;
+    @include typeface;
     font-size: 12px;
     font-weight: bold;
     border: 1px solid var(--elevation-1);

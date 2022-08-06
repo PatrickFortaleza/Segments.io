@@ -31,7 +31,7 @@
     min-width: 135px;
 
     h5{
-      font-family: sans-serif;
+      @include typeface;
       font-size: 12px;
       margin-left: 5px;
       text-transform: capitalize;
@@ -54,7 +54,7 @@
     }
 
     h5 {
-        font-family: sans-serif;
+        @include typeface;
         font-size: 12px;
         margin-left: 5px;
         text-transform: capitalize;
@@ -76,7 +76,7 @@
     transform: translateX(-50%);
 
     span{
-      font-family: sans-serif;
+      @include typeface;
       background: rgba($color: #ff5000, $alpha: .2);
       border-radius: 10px;
       display: inline-block;
