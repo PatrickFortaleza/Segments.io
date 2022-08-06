@@ -17,7 +17,7 @@ export default function ListView({
   return (
     <div
       className="drag__list__container"
-      style={{ zIndex: `${isDragging ? "50000" : "500"}` }}
+      // style={{ zIndex: `${isDragging ? "50000" : "500"}` }}
     >
       <div className="drag__list__container__header">
         <button

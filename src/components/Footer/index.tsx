@@ -8,7 +8,7 @@ export default function Footer() {
       <span>
         <Icon name="github" /> View Code
       </span>
-      <span>&copy; {year} Patrick Fortaleza, demonstration use only.</span>
+      <span>&copy; {year} Patrick Fortaleza, demonstrative use only.</span>
     </footer>
   );
 }
