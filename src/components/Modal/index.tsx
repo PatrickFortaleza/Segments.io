@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { SetterGetter } from "../../models";
+import { Icon, SemanticICONS } from "semantic-ui-react";
 
 export default function Modal({
   enable,
   title,
-  content,
+  badge,
+  children,
 }: {
   enable: SetterGetter;
   title: string;
-  content: string;
+  badge: SemanticICONS | undefined;
+  children: JSX.Element;
 }) {
   const [transition, setTransition] = useState(false);
 
@@ -19,12 +22,18 @@ export default function Modal({
   return (
     <div className={`modal ${transition ? "active" : "inactive"}`}>
       <div className="modal__content">
+        {badge && (
+          <span className="badge">
+            <Icon name={badge} />
+          </span>
+        )}
         <div className="modal__logo">
           <img src="/assets/images/segments-logo.svg" alt="logo" />
         </div>
         <h3>{title}</h3>
-        <p>{content}</p>
+        {children}
         <button
+          className="secondary"
           onClick={() => {
             setTransition(false);
             setTimeout(() => {

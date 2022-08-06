@@ -11,12 +11,10 @@ button.base {
   }
 }
 
-
 button.default {
   background: none;
   border: none;
   cursor: pointer;
-
 
   &:focus,
   &:active,
@@ -31,7 +29,7 @@ button.default {
     margin: 0;
     padding: 0;
     color: var(--elevation-0);
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
 
   .ind {
@@ -42,5 +40,49 @@ button.default {
     border-radius: 50%;
     left: 18px;
     top: 5px;
+  }
+}
+
+button.secondary {
+  @include gradient-secondary;
+  border: none;
+  font-family: sans-serif;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  color: var(--text-1);
+  box-shadow: var(--shadow-down);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin-top: 20px;
+  font-size: 12px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    filter: brightness(1.2);
+  }
+}
+
+button.primary {
+  @include gradient-primary;
+  border: none;
+  font-family: sans-serif;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  color: var(--text-1);
+  box-shadow: var(--shadow-down);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin-top: 20px;
+  font-size: 12px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    filter: brightness(1.2);
   }
 }

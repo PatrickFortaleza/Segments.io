@@ -26,7 +26,25 @@ export default function HeaderView({
   return (
     <header className="main">
       {enableModal.value && (
-        <Modal title={"test"} content={"test"} enable={enableModal} />
+        <Modal
+          title={"Segments.io"}
+          badge={"question circle outline"}
+          enable={enableModal}
+        >
+          <>
+            <br />
+            <p>
+              Segments.io is a segmentation tool that allows you to define
+              conditions and rules that divide your group of individuals into
+              smaller groups based on demographics.
+            </p>
+            <br />
+            <p>
+              All data within this application is sample data, and does not
+              represent real individuals.
+            </p>
+          </>
+        </Modal>
       )}
       <div className="main__head">
         <div className="main__head__left">
