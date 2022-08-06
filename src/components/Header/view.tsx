@@ -35,8 +35,8 @@ export default function HeaderView({
             <br />
             <p>
               Segments.io is a segmentation tool that allows you to define
-              conditions and rules that divide your group of individuals into
-              smaller groups based on demographics.
+              conditions and rules that divide your group of individuals into a
+              smaller group based on specific demographics.
             </p>
             <br />
             <p>
