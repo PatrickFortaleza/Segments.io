@@ -27,7 +27,7 @@ export default function HeaderView({
     <header className="main">
       {enableModal.value && (
         <Modal
-          title={"Segments.io"}
+          title={"About Segments.io"}
           badge={"question circle outline"}
           enable={enableModal}
         >

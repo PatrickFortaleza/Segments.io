@@ -15,13 +15,23 @@ export default function Modal({
 }) {
   const [transition, setTransition] = useState(false);
 
+  const close = () => {
+    setTransition(false);
+    setTimeout(() => {
+      enable.setter(false);
+    }, 500);
+  };
+
   useEffect(() => {
     setTransition(true);
   }, []);
 
   return (
-    <div className={`modal ${transition ? "active" : "inactive"}`}>
-      <div className="modal__content">
+    <div
+      className={`modal ${transition ? "active" : "inactive"}`}
+      onClick={() => close()}
+    >
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         {badge && (
           <span className="badge">
             <Icon name={badge} />
@@ -32,15 +42,7 @@ export default function Modal({
         </div>
         <h3>{title}</h3>
         {children}
-        <button
-          className="secondary"
-          onClick={() => {
-            setTransition(false);
-            setTimeout(() => {
-              enable.setter(false);
-            }, 500);
-          }}
-        >
+        <button className="secondary" onClick={() => close()}>
           Close
         </button>
       </div>
