@@ -9,12 +9,18 @@ import Header from "./components/Header";
 import { initializeAttributeMeta } from "./redux/actions/attribute";
 import Footer from "./components/Footer";
 import Modal from "./components/Modal";
+import { useScreen } from "./context/ScreenProvider";
 
 function App() {
+  let { screenWidth, screenHeight } = useScreen() || {
+    screenWidth: 0,
+    screenHeight: 0,
+  };
+
   const [usersPopulated, setUsersPopulated] = useState<Boolean>(false);
   const isMobile = useMemo(
-    () => window.matchMedia("(any-hover: none)").matches,
-    [window]
+    () => window.matchMedia("(any-hover: none)").matches || screenWidth < 768,
+    [screenWidth, screenHeight]
   );
   const api = new Api();
 
@@ -57,8 +63,8 @@ function App() {
           <>
             <br />
             <p>
-              Sorry! Segments.io is not build for mobile devices yet, but we
-              will be working on mobile versions in the near future.
+              Sorry! Segments.io has not been optimized for mobile devices yet,
+              but we will be working on mobile versions in the near future.
             </p>
             <br />
             <p>
