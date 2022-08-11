@@ -40,6 +40,10 @@ MAIN STYLES
   justify-content: space-between;
 }
 
+html, body, #root, .app {
+  overflow: hidden;
+}
+
 body {
   display: flex;
   flex-direction: column;

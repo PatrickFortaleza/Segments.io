@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Api } from "./api";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeUsers } from "./redux/actions/users";
@@ -8,9 +8,14 @@ import Summary from "./components/Summary";
 import Header from "./components/Header";
 import { initializeAttributeMeta } from "./redux/actions/attribute";
 import Footer from "./components/Footer";
+import Modal from "./components/Modal";
 
 function App() {
   const [usersPopulated, setUsersPopulated] = useState<Boolean>(false);
+  const isMobile = useMemo(
+    () => window.matchMedia("(any-hover: none)").matches,
+    [window]
+  );
   const api = new Api();
 
   const users = useSelector((state: any) => state.users.users);
@@ -40,13 +45,45 @@ function App() {
 
   return (
     <div className="app">
+      {isMobile && (
+        <Modal
+          title={"Segments.io"}
+          badge={"question circle outline"}
+          enable={{
+            setter: null,
+            value: true,
+          }}
+        >
+          <>
+            <br />
+            <p>
+              Sorry! Segments.io is not build for mobile devices yet, but we
+              will be working on mobile versions in the near future.
+            </p>
+            <br />
+            <p>
+              Please consider following me on{" "}
+              <a
+                href="https://github.com/PatrickFortaleza"
+                target="blank_"
+                rel="noreferrer"
+              >
+                github
+              </a>{" "}
+              for the latests updates on this project.
+            </p>
+          </>
+        </Modal>
+      )}
       <Header />
       <Sidebar />
-      <main>
-        <div className="main__container">
-          <DropBuckets />
-        </div>
-      </main>
+      {!isMobile && (
+        <main>
+          <div className="main__container">
+            <DropBuckets />
+          </div>
+        </main>
+      )}
       <Summary />
       <Footer />
     </div>

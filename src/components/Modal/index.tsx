@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { SetterGetter } from "../../models";
 import { Icon, SemanticICONS } from "semantic-ui-react";
 
 export default function Modal({
@@ -8,7 +7,10 @@ export default function Modal({
   badge,
   children,
 }: {
-  enable: SetterGetter;
+  enable: {
+    setter: ((any: any) => any) | null;
+    value: any;
+  };
   title: string;
   badge: SemanticICONS | undefined;
   children: JSX.Element;
@@ -16,10 +18,12 @@ export default function Modal({
   const [transition, setTransition] = useState(false);
 
   const close = () => {
-    setTransition(false);
-    setTimeout(() => {
-      enable.setter(false);
-    }, 500);
+    if (enable?.setter) {
+      setTransition(false);
+      setTimeout(() => {
+        if (typeof enable.setter === "function") enable.setter(false);
+      }, 500);
+    }
   };
 
   useEffect(() => {
@@ -42,7 +46,10 @@ export default function Modal({
         </div>
         <h3>{title}</h3>
         {children}
-        <button className="secondary" onClick={() => close()}>
+        <button
+          className={`secondary ${!enable?.setter ? "disabled" : "active"}`}
+          onClick={() => close()}
+        >
           Close
         </button>
       </div>

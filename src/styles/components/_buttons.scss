@@ -79,6 +79,12 @@ button.secondary {
   &:active {
     filter: brightness(1.2);
   }
+
+  &.disabled {
+    filter: grayscale(100);
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
 }
 
 button.primary {
@@ -100,5 +106,11 @@ button.primary {
   &:focus,
   &:active {
     filter: brightness(1.2);
+  }
+
+  &.disabled {
+    filter: grayscale(100);
+    cursor: not-allowed;
+    opacity: 0.25;
   }
 }
