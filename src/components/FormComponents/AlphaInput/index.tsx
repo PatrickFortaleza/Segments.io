@@ -6,9 +6,11 @@ export default function AlphaInputController({
   defaultValue,
 }: {
   setter: (value: string) => void;
-  defaultValue: string | undefined;
+  defaultValue: string | number | boolean | undefined;
 }) {
-  const [value, setValue] = useState<string>(defaultValue ?? "");
+  const [value, setValue] = useState<string>(
+    typeof defaultValue === "string" && defaultValue ? defaultValue : ""
+  );
 
   const cleanValue = (string: string) => {
     setValue(string.replace(/[^a-zA-Z0-9 -]/, ""));

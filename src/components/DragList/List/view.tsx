@@ -7,12 +7,10 @@ export default function ListView({
   attributes,
   expanded,
   type,
-  isDragging,
 }: {
   attributes: Array<Attribute>;
   expanded: SetterGetter;
   type: string;
-  isDragging: boolean;
 }) {
   return (
     <div className="drag__list__container">
@@ -33,10 +31,10 @@ export default function ListView({
             key={index}
             item={{
               type: type,
-              name: attribute, // fix
+              name: attribute.toString(),
             }}
-          />
-        ))}
+          />)
+          )}
       </ul>
     </div>
   );

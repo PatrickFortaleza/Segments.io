@@ -12,12 +12,12 @@ export default function DateSliderController({
   minDate: string;
   maxDate: string;
   setter: (value: string) => void;
-  defaultValue: string | undefined;
+  defaultValue: string | number | boolean | undefined;
 }) {
   const [sliderValue, setSliderValue] = useState<number>(0);
   const [daysBetweenDates, setDaysBetweenDates] = useState<number>(0);
   const [currentDate, setCurrentDate] = useState<string>(
-    defaultValue ?? minDate
+    typeof defaultValue === "string" && defaultValue ? defaultValue : minDate
   );
 
   // when minDate, and maxDate initializes, count the days between.

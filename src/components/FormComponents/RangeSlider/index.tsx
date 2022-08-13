@@ -10,9 +10,11 @@ export default function RangeSliderController({
   max: number;
   min: number;
   setter: (value: number) => void;
-  defaultValue: number | undefined;
+  defaultValue: string | number | boolean | undefined;
 }) {
-  const [sliderValue, setSliderValue] = useState<number>(defaultValue ?? min);
+  const [sliderValue, setSliderValue] = useState<number>(
+    typeof defaultValue === "number" && defaultValue ? defaultValue : min
+  );
 
   useEffect(() => {
     setter(sliderValue);

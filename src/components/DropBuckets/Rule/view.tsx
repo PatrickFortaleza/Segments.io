@@ -39,6 +39,7 @@ export default function RuleView({
               <Tooltip
                 variant={"warning"}
                 message={"Finish configuring options to apply this rule."}
+                minWidth={undefined}
               />
             )}
 
@@ -101,7 +102,7 @@ export default function RuleView({
                   setter={(value: string) =>
                     dispatch(
                       updateRule({
-                        ruleId: rule.id,
+                        ruleId: rule.id, 
                         equation: rule?.equation,
                         value: value,
                       })
