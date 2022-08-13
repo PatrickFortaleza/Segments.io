@@ -53,7 +53,7 @@ function App() {
     <div className="app">
       {isMobile && (
         <Modal
-          title={"Segments.io"}
+          title={"Mobile Version Unavailable"}
           badge={"question circle outline"}
           enable={{
             setter: null,
