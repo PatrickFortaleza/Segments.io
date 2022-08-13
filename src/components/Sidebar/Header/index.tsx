@@ -7,12 +7,14 @@ export default function SidebarHeader() {
       <div className="sidebar__wrap">
         <div>
           <span className="sidebar__header__icon">
-            <Icon name="address book" />
+            <Icon name="bolt" />
           </span>
         </div>
         <div>
-          <h3>Market Attributes</h3>
-          <span>Select attributes below to begin segmenting the market.</span>
+          <h3>Rule Filters</h3>
+          <span>
+            Drag-and-drop the rules below to apply filters for your segment.
+          </span>
         </div>
       </div>
     </header>

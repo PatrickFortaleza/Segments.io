@@ -1,0 +1,17 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 4px 20px;
+  display: flex;
+  justify-content: space-between;
+  background: var(--elevation-2);
+  border-top: 1px solid var(--elevation-1);
+  
+  span {
+    @include typeface;
+    color: var(--text-1);
+    font-size: 12px;
+  }
+} 

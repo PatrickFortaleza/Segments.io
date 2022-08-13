@@ -1,112 +1,32 @@
-import React, { LegacyRef } from "react";
-import { Bucket, BucketContainer } from "../../../models/bucket";
+import { Condition } from "../../../models/condition";
+import { default as ConditionItem } from "../Condition";
 import { Icon } from "semantic-ui-react";
-import { SetterGetter } from "../../../models";
-import Rule from "../Rule";
+import { LegacyRef } from "react";
 
 export default function BucketView({
-  bucket,
-  bucketKey,
-  bucketRef,
-  bucketIndex,
-  labelRef,
-  inZone,
-  remove,
-  editingLabel,
-  conditionLabel,
-  conditionLogic,
+  bucketConditions,
+  anchorRef,
 }: {
-  bucket: Bucket;
-  bucketKey: keyof BucketContainer;
-  bucketRef: LegacyRef<HTMLDivElement> | undefined;
-  bucketIndex: number;
-  labelRef: LegacyRef<HTMLInputElement> | undefined;
-  inZone: boolean;
-  remove: () => void;
-  editingLabel: SetterGetter;
-  conditionLabel: SetterGetter;
-  conditionLogic: SetterGetter;
+  bucketConditions: Array<Condition>;
+  anchorRef: LegacyRef<HTMLDivElement> | undefined;
 }) {
-  const conditionLogicOptions = ["and", "or"];
   return (
-    <div className="drag__bucket">
-      <div className="drag__bucket__header">
-        <div className="bucket__label">
-          <button onClick={() => editingLabel.setter(!editingLabel.value)}>
-            {editingLabel.value ? (
-              <Icon name="checkmark" style={{ color: "var(--success-1)" }} />
-            ) : (
-              <Icon name="edit" />
-            )}
-          </button>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              editingLabel.setter(false);
-            }}
-          >
-            <input
-              ref={labelRef}
-              type="text"
-              value={conditionLabel.value}
-              onChange={(e) => conditionLabel.setter(e.target.value)}
-              className={`${editingLabel.value ? "editing" : ""}`}
-              readOnly={editingLabel.value ? false : true}
-              disabled={editingLabel.value ? false : true}
-            />
-          </form>
-        </div>
-        <div className="bucket__actions">
-          <div className="bucket__actions__radio">
-            {conditionLogicOptions.map((opt, index) => (
-              <label
-                className={`container ${
-                  conditionLogic.value === opt ? "checked" : ""
-                }`}
-                key={index}
-              >
-                {opt}
-                <input
-                  type="radio"
-                  checked={conditionLogic.value === opt ? true : false}
-                  onChange={(e) => conditionLogic.setter(e.target.value)}
-                  name="logicOptions"
-                  value={opt}
-                />
-              </label>
-            ))}
-          </div>
-          <button onClick={() => remove()}>
-            <Icon name="trash alternate" />{" "}
-          </button>
-        </div>
-      </div>
-      <div className="drag__bucket__rules">
-        {Array.isArray(bucket.rules) && bucket.rules.length > 0 ? (
-          <>
-            {bucket.rules.map((rule) => (
-              <Rule
-                key={rule.id}
-                rule={rule}
-                conditionLogic={conditionLogic.value}
-                bucketIndex={bucketIndex}
-                bucketKey={bucketKey}
-              />
-            ))}
-          </>
-        ) : (
-          <p className="empty">
-            <Icon name="warning sign" /> No rules currently selected for this
-            condition
-          </p>
-        )}
-      </div>
-      <div
-        className={`drag__bucket__target ${inZone ? "active" : ""}`}
-        ref={bucketRef}
-      >
-        <p>Drag + Drop a Rule here to add to condition</p>
-      </div>
-    </div>
+    <>
+      {bucketConditions.length > 0 ? (
+        bucketConditions.map((condition) => (
+          <ConditionItem
+            key={condition.id}
+            condition={condition}
+            hasConditions={bucketConditions.length > 1}
+          />
+        ))
+      ) : (
+        <p className="empty">
+          <Icon name="warning sign" /> No existing conditions for this bucket
+        </p>
+      )}
+
+      <div ref={anchorRef} />
+    </>
   );
 }

@@ -4,19 +4,33 @@ button.base {
   padding: 0;
   font-size: 12px;
   cursor: pointer;
+  transition: .2s ease-in-out;
 
   i {
-    color: var(--text-3);
+    color: var(--text-1);
     opacity: 0.5;
+  }
+
+  &:hover, &:focus, &:active {
+    filter: brightness(1.5);
   }
 }
 
+a.base {
+  @include typeface;
+  color: var(--text-1);
+  font-size: 12px;
+
+  i {
+    color: var(--text-1);
+    opacity: 0.5;
+  }
+}
 
 button.default {
   background: none;
   border: none;
   cursor: pointer;
-
 
   &:focus,
   &:active,
@@ -30,7 +44,73 @@ button.default {
     font-size: 12px;
     margin: 0;
     padding: 0;
-    color: var(--elevation-6);
-    transition: .2s ease-in-out;
+    color: var(--elevation-0);
+    transition: 0.2s ease-in-out;
+  }
+
+  .ind {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: var(--danger-1);
+    border-radius: 50%;
+    left: 18px;
+    top: 5px;
+  }
+}
+
+button.secondary {
+  @include gradient-secondary;
+  border: none;
+  @include typeface;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  color: var(--text-1);
+  box-shadow: var(--shadow-down);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin-top: 20px;
+  font-size: 12px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    filter: brightness(1.2);
+  }
+
+  &.disabled {
+    filter: grayscale(100);
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
+}
+
+button.primary {
+  @include gradient-primary;
+  border: none;
+  @include typeface;
+  border-radius: 3px;
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  color: var(--text-1);
+  box-shadow: var(--shadow-down);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin-top: 20px;
+  font-size: 12px;
+
+  &:hover,
+  &:focus,
+  &:active {
+    filter: brightness(1.2);
+  }
+
+  &.disabled {
+    filter: grayscale(100);
+    cursor: not-allowed;
+    opacity: 0.25;
   }
 }

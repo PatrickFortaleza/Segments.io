@@ -10,11 +10,12 @@
 }
 
 .rule {
-  border: 1px solid var(--elevation-6);
+  border: 1px solid var(--elevation-1);
   border-radius: 3px;
   margin-bottom: 26px;
   position: relative;
-  background: var(--elevation-1);
+  background: var(--elevation-2);
+  box-shadow: var(--shadow-down);
 
   &__head {
     // padding: 5px;
@@ -24,28 +25,28 @@
   &__head__type {
     display: flex;
     align-items: center;
-    border-right: 1px solid var(--elevation-6);
+    border-right: 1px solid var(--elevation-1);
     padding: 5px 10px;
     font-weight: bold;
     min-width: 135px;
 
     h5{
-      font-family: sans-serif;
+      @include typeface;
       font-size: 12px;
       margin-left: 5px;
       text-transform: capitalize;
-
+      color: var(--text-1);
     }
   }
 
   &__head__name {
-    padding: 5px 50px 5px 10px;
+    padding: 5px 70px 5px 10px;
     display: flex;
     align-items: center;
     position: relative;
     width: 100%;
 
-    button {
+    .rule__head__meta {
       position: absolute;
       right: 10px;
       top: 50%;
@@ -53,17 +54,18 @@
     }
 
     h5 {
-        font-family: sans-serif;
+        @include typeface;
         font-size: 12px;
         margin-left: 5px;
         text-transform: capitalize;
         line-height: 1.3em;
+        color: var(--text-1);
       }
   }
 
   &__body {
     padding: 5px 5px;
-    border-top: 1px solid var(--elevation-6);
+    border-top: 1px solid var(--elevation-1);
     display: flex;
   }
 
@@ -74,14 +76,14 @@
     transform: translateX(-50%);
 
     span{
-      font-family: sans-serif;
-      background: #A7D4F5;
+      @include typeface;
+      background: rgba($color: #ff5000, $alpha: .2);
       border-radius: 10px;
       display: inline-block;
       padding: 3px 10px;
       font-size: 9px;
-      border: 1px solid #2096EB;
-      color: #2096EB;
+      border: 1px solid var(--highlight-primary-2);
+      color: var(--highlight-primary-2);
       position: relative;
 
       &::before,
@@ -89,7 +91,7 @@
         content: "";
         height: 6px;
         width: 1px;
-        background: #2096EB;
+        background: var(--highlight-primary-2);
         position: absolute;
         left: 50%;
         transform: translateX(-50%);

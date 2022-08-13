@@ -1,5 +1,3 @@
-import React from "react";
-import { AttributeWithId } from "../../../models/attributes";
 import { returnTypeIcon } from "../../../data/attributes";
 import { Icon } from "semantic-ui-react";
 import { snakeCaseToTitleCase } from "../../../utility";
@@ -7,24 +5,24 @@ import RangeSlider from "../../FormComponents/RangeSlider";
 import DateSlider from "../../FormComponents/DateSlider";
 import AlphaInput from "../../FormComponents/AlphaInput";
 import CustomSelect from "../../FormComponents/CustomSelect";
-import { SetterGetter } from "../../../models";
+import { Rule } from "../../../models/rule";
+import { useDispatch } from "react-redux";
+import { updateRule, deleteRule } from "../../../redux/actions/entity";
+import Tooltip from "../../Tooltip";
 
 export default function RuleView({
   rule,
-  conditionLogic,
+  conditionOperator,
   ruleMetadata,
-  handleDelete,
-  ruleLogic,
 }: {
-  rule: AttributeWithId;
-  conditionLogic: string | undefined;
+  rule: Rule;
+  conditionOperator: string | undefined;
   ruleMetadata: {
     controlOptions: Array<string>;
     variables: any; // TODO: fix
   };
-  handleDelete: () => void;
-  ruleLogic: SetterGetter;
 }) {
+  const dispatch = useDispatch();
   return (
     <div className="rule">
       <div className="rule__head">
@@ -36,24 +34,53 @@ export default function RuleView({
         </div>
         <div className="rule__head__name">
           <h5>{snakeCaseToTitleCase(rule.name)}</h5>
-          <button className="default" onClick={handleDelete}>
-            <Icon name="trash alternate" />
-          </button>
+          <div className="rule__head__meta">
+            {(!rule.equation || !rule.value) && (
+              <Tooltip
+                variant={"warning"}
+                message={"Finish configuring options to apply this rule."}
+              />
+            )}
+
+            <button
+              className="default"
+              onClick={() =>
+                dispatch(
+                  deleteRule({
+                    ruleId: rule.id,
+                  })
+                )
+              }
+            >
+              <Icon name="trash alternate" />
+            </button>
+          </div>
         </div>
       </div>
       <div className="rule__body">
         <span className="custom-select">
           <select
-            value={ruleLogic.value.condition}
+            value={rule.equation}
             onChange={(e) =>
-              ruleLogic.setter({
-                condition: e.target.value,
-                flag: "condition",
-              })
+              rule.type === "boolean"
+                ? dispatch(
+                    updateRule({
+                      ruleId: rule.id,
+                      equation: e.target.value,
+                      value: e.target.value === "is_true",
+                    })
+                  )
+                : dispatch(
+                    updateRule({
+                      ruleId: rule.id,
+                      equation: e.target.value,
+                      value: rule?.value,
+                    })
+                  )
             }
           >
             <option disabled value="">
-              Please select
+              Please select...
             </option>
             {Array.isArray(ruleMetadata.controlOptions) &&
               ruleMetadata.controlOptions.length > 0 &&
@@ -70,18 +97,47 @@ export default function RuleView({
           {
             <>
               {rule.type === "alphabetical" && (
-                <AlphaInput setter={ruleLogic.setter} />
+                <AlphaInput
+                  setter={(value: string) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
+                  defaultValue={rule?.value}
+                />
               )}
               {rule.type === "select" && (
                 <CustomSelect
                   options={ruleMetadata.variables[rule.name]}
-                  setter={ruleLogic.setter}
+                  setter={(value: string) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
+                  defaultValue={rule?.value}
                 />
               )}
 
               {rule.type === "numeric" && (
                 <RangeSlider
-                  setter={ruleLogic.setter}
+                  setter={(value: number) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
+                  defaultValue={rule?.value}
                   min={ruleMetadata.variables[rule.name][0]}
                   max={ruleMetadata.variables[rule.name][1]}
                 />
@@ -89,7 +145,16 @@ export default function RuleView({
 
               {rule.type === "datetime" && (
                 <DateSlider
-                  setter={ruleLogic.setter}
+                  setter={(value: string) =>
+                    dispatch(
+                      updateRule({
+                        ruleId: rule.id,
+                        equation: rule?.equation,
+                        value: value,
+                      })
+                    )
+                  }
+                  defaultValue={rule?.value}
                   minDate={ruleMetadata.variables[rule.name][0]}
                   maxDate={ruleMetadata.variables[rule.name][1]}
                 />
@@ -101,7 +166,7 @@ export default function RuleView({
         </span>
       </div>
       <div className="rule__append">
-        <span>{conditionLogic}</span>
+        <span>{conditionOperator}</span>
       </div>
     </div>
   );

@@ -1,18 +1,28 @@
 aside {
-  border-right: 1px solid var(--elevation-3);
   position: relative;
-  width: 300px;
+  min-width: 270px;
+  max-width: 270px;
   max-height: 100vh;
-  padding-top: 25px;
+  padding-top: 36px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
-  background: var(--elevation-2);
+  background: var(--elevation-3);
+}
+
+.sidebar__container {
+  background: var(--elevation-1);
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 1px;
 }
 
 header.sidebar {
-  border-bottom: 1px solid var(--elevation-3);
-  z-index: 502;
-  background: var(--elevation-1);
+  z-index: 500;
+  border-bottom: 1px solid var(--elevation-1);
+  border-radius: 1px;
+  background: var(--elevation-3);
 
   .sidebar__wrap {
     display: grid;
@@ -25,16 +35,17 @@ header.sidebar {
 
       .sidebar__header__icon {
         display: block;
-        width: 40px;
-        height: 40px;
-        background: var(--highlight-primary-2);
+        width: 35px;
+        height: 35px;
+        background: var(--highlight-secondary-2);
+        @include gradient-secondary;
         border-radius: 4px;
         text-align: center;
 
         i {
           margin: 0;
           line-height: 40px;
-          color: var(--elevation-1);
+          color: var(--text-1);
           font-size: 17px;
         }
       }
@@ -44,17 +55,18 @@ header.sidebar {
       grid-column: 2 / span 4;
 
       h3, span {
-        font-family: sans-serif;
+        @include typeface;
       }
 
       h3 {
         font-size: 17px;
         font-weight: bold;
+        color: var(--text-1);
       }
 
       span {
-        font-size: 12px;
-        color: var(--text-3);
+        font-size: 11px;
+        color: var(--text-2);
       }
     }
   }

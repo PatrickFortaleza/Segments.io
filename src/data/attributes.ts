@@ -1,4 +1,4 @@
-import { Icon, SemanticICONS } from "semantic-ui-react";
+import { SemanticICONS } from "semantic-ui-react";
 export const attributes = <Array<string>>[
   "first_name",
   "last_name",

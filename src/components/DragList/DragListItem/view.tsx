@@ -17,7 +17,7 @@ export default function DragListItemView({
   return (
     <li
       style={{
-        zIndex: is.dragging ? "5001" : "500",
+        zIndex: is.dragging ? "900" : "500",
       }}
     >
       <div className={`drag__list__item list placeholder`}>

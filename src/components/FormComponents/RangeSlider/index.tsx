@@ -5,18 +5,17 @@ export default function RangeSliderController({
   max,
   min,
   setter,
+  defaultValue,
 }: {
   max: number;
   min: number;
-  setter: ({ value, flag }: { value: number; flag: string }) => void;
+  setter: (value: number) => void;
+  defaultValue: number | undefined;
 }) {
-  const [sliderValue, setSliderValue] = useState<number>(min);
+  const [sliderValue, setSliderValue] = useState<number>(defaultValue ?? min);
 
   useEffect(() => {
-    setter({
-      value: sliderValue,
-      flag: "value",
-    });
+    setter(sliderValue);
   }, [sliderValue]);
 
   return (

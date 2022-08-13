@@ -1,14 +1,24 @@
 .custom-select {
-  border: var(--elevation-6) 1px solid;
+  border: var(--elevation-1) 1px solid;
   border-radius: 2px;
   display: inline-block;
   position: relative;
   pointer-events: all;
+  
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    select {
+      cursor: not-allowed !important;
+    }
+  }
 
   select {
     appearance: none;
     // Additional resets for further consistency
-    font-family: sans-serif;
+    @include typeface;
     font-size: 12px;
     border: none;
     padding: 0 1em 0 0;
@@ -20,6 +30,12 @@
     cursor: pointer;
     background-color: none;
     outline: none;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--text-1);
+    background: var(--elevation-5);
 
     &:focus,
     &:active {
@@ -27,21 +43,13 @@
         border-top: 5px solid red;
       }
     }
+
+    option {
+      color: var(--text-3) !important;
+    }
   }
 
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 100%;
-    border-left: 1px solid var(--elevation-6);
-    z-index: 5000;
-    pointer-events: none;
-    background: var(--elevation-2);
-  }
 
   &::after {
     content: "";
@@ -53,34 +61,50 @@
     transform: translateY(-50%);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid var(--elevation-6);
+    border-top: 5px solid var(--text-3);
     pointer-events: none;
-    z-index: 5001;
   }
 
   &:focus,
   &:active,
   &:hover {
-    border: var(--highlight-primary-1) 1px solid;
+    border: var(--highlight-primary-2) 1px solid;
+  }
+
+  &.base {
+    border: none;
+    background: none;
+
+    &::before {
+      background: none;
+      border: none;
+    }
+
+    select {
+      background: none;
+      color: var(--elevation-1);
+    }
+
   }
 }
 
 
 .custom__range {
   display: flex;
-  border: 1px solid var(--elevation-6);
+  border: 1px solid var(--elevation-1);
+  background: var(--elevation-6);
   height: 100%;
   align-items: center;
-  border-radius: 2px;
+  border-radius: 3px;
 
 
   &__input {
     display: inline-block;
-    border-right: 1px solid var(--elevation-6);
+    border-right: 1px solid var(--elevation-1);
     height: 100%;
 
     input {
-      font-family: sans-serif;
+      @include typeface;
       font-size: 12px;
       margin: 0 !important;
       box-sizing: border-box;
@@ -93,9 +117,11 @@
       height: 100%;
       cursor: pointer;
       border: 1px solid rgba($color: #000000, $alpha: 0);
+      background: var(--elevation-5);
+      color: var(--text-1);
 
       &:hover, &:focus, &:active {
-        border: 1px solid var(--highlight-primary-1);
+        border: 1px solid var(--highlight-primary-2);
       }
     }
   }
@@ -109,7 +135,7 @@
   &__slider input {
     -webkit-appearance: none;
     height: 3px;
-    background: #d3d3d3;
+    background: var(--elevation-1);
     outline: none;
     -webkit-transition: .2s;
     transition: opacity .2s;
@@ -121,7 +147,7 @@
       appearance: none;
       width: 14px;
       height: 14px;
-      background: var(--highlight-primary-1);
+      background: var(--highlight-primary-2);
       cursor: pointer;
       border-radius: 50%;
       box-shadow: var(--shadow-down);
@@ -131,24 +157,109 @@
     &::-moz-range-thumb {
       width: 14px;
       height: 14px;
-      background: var(--highlight-primary-1);
+      background: var(--highlight-primary-2);
       cursor: pointer;
     }
   }
 }
 
 input.custom {
-  border: 1px solid var(--elevation-6);
+  border: 1px solid var(--elevation-1);
+  background: var(--elevation-5);
   height: 100%;
   cursor: pointer;
   border-radius: 2px;
   font-size: 12px;
-  font-family: sans-serif;
+  @include typeface;
   padding: 0 7px;
+  color: var(--text-1);
   
-    &:hover,
-    &:focus,
-    &:active {
-      border: 1px solid var(--highlight-primary-1);
+  &:hover,
+  &:focus,
+  &:active {
+    border: 1px solid var(--highlight-primary-2);
+  }
+
+  &::placeholder {
+    color: var(--text-3);
+  }
+}
+
+.editable__label {
+  display: flex;
+  form {
+    display: inline-block;
+  }
+
+  input[type="text"] {
+    cursor: pointer;
+    @include typeface;
+    font-weight: bold;
+    background: none;
+    border: 1px solid rgba($color: #000000, $alpha: 0);
+    font-size: 14px;
+    transition: .2s ease-in-out;
+    padding: 0 5px;
+    border-radius: 2px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--text-1);
+  }
+
+  input[type="text"].editing {
+    border: 1px solid var(--elevation-1);
+    background: var(--elevation-2);
+  }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 14px;
+    margin-right: 3px;
+
+    i {
+      margin: 0;
+      padding: 0;
+      color: var(--text-2);
+      transition: .2s ease-in-out;
     }
+
+    &:hover,
+    &:focus {
+      i {
+        color: var(--highlight-primary-2);
+      }
+    }
+  }
+}
+
+.fieldset {
+  margin-top: 10px;
+
+  label {
+    font-size: 12px;
+    @include typeface;
+    margin-bottom: 5px;
+    display: inline-block;
+    color: var(--text-3);
+  }
+
+  textarea, input[type='text'] {
+    width: 100%;
+    @include typeface;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid var(--elevation-5);
+    background: var(--elevation-5);
+    border-radius: 3px;
+    color: var(--text-1);
+
+    &::placeholder {
+      color: var(--text-3);
+    }
+  }
+
 }

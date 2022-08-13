@@ -2,10 +2,10 @@ import React, { useRef, useEffect, useState } from "react";
 import { Attribute } from "../../../models/attributes";
 import { Coordinates, RectCoordinates } from "../../../models/positioning";
 import { itemDragging, unsetItemDragging } from "../../../redux/actions/drag";
-import { addRuleToBucket } from "../../../redux/actions/bucket";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { calculateCoordinates } from "../../../utility";
 import DragListItemView from "./view";
+import { addRule } from "../../../redux/actions/entity";
 
 export default function DragListItemController({ item }: { item: Attribute }) {
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -27,10 +27,15 @@ export default function DragListItemController({ item }: { item: Attribute }) {
 
   const onMouseUp = async () => {
     if (!isDragging) return;
+
+    dispatch(
+      addRule({
+        ruleType: item.type,
+        ruleName: item.name,
+      })
+    );
+
     setIsDragging(false);
-    dispatch(addRuleToBucket({ itemId: item.name, itemType: item.type }));
-    // addRuleToBucket({ itemId: item.id });
-    // setIsTransitioning(true);
 
     setPos({ x: 0, y: 0 });
   };

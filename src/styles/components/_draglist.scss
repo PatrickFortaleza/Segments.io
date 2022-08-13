@@ -1,7 +1,7 @@
 .drag__list__bar__wrap {
   width: 100%;
   height: 100%;
-  padding: 10px 20px 10px 20px;
+  padding: 5px 15px 15px 15px;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -19,19 +19,20 @@
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: var(--elevation-4);
+    background: var(--elevation-1);
 
   }
 
   &.dragging {
     overflow-y: visible;
     overflow-x: visible;
-    padding-right: 25px;
+    padding-right: 20px;
   }
 }
 
 .drag__list__container {
   margin-top: 10px;
+
   h2 {
     font-size: 12px;
   }
@@ -40,23 +41,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
+    margin: 5px 0;
 
     &__title {
       display: flex;
+      width: 100%;
 
       h2 {
         margin-right: 5px;
       }
 
       span {
-        font-family: sans-serif;
+        @include typeface;
         font-size: 9px;
         width: 14px;
         height: 14px;
         border-radius: 50%;
-        background: var(--elevation-5);
-        border: 1px solid var(--elevation-6);
+        background: var(--elevation-3);
+        border: 1px solid var(--elevation-1);
         text-align: center;
         line-height: 13px;
         color: var(--text-1);
@@ -67,9 +69,7 @@
 }
 
 .drag__list {
-  padding-left: 10px;
   margin-left: 3px;
-  border-left: 1px solid var(--highlight-primary-2);
   transition: transform .2s cubic-bezier(0.075, 0.82, 0.165, 1), max-height 0s ease .2s;
   transform-origin: top;
   height: 100%;
@@ -89,6 +89,7 @@
   li {
     transform-origin: center;
     position: relative;
+    margin-bottom: 5px;
   }
 
   &__item {
@@ -108,14 +109,21 @@
 .drag__list__item__rule {
   display: flex;
   align-items: center;
-  border: 1px solid #ddd;
+  border: 1px solid var(--elevation-2);
+  border-radius: 2px;
   margin-bottom: -1px;
   padding: 6px 6px;
   padding-right: 45px;
-  background: white;
+  background: var(--elevation-2);
   position: relative;
-  z-index: 500000;
+  z-index: 1000;
   cursor: pointer;
+  transition: .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: var(--shadow-down);
+  }
 
   p {
     padding-left: 6px;
@@ -123,7 +131,7 @@
 
     .type {
       display: block;
-      color: var(--highlight-primary-1);
+      color: var(--text-2);
       text-transform: capitalize;
       font-size: 10px;
       line-height: 1em;
@@ -146,7 +154,7 @@
     transform: translateY(-50%);
 
     i {
-      color: var(--elevation-6);
+      color: var(--elevation-1);
     }
   }
 }

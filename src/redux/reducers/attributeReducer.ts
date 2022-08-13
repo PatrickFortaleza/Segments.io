@@ -1,19 +1,19 @@
 import { Action } from "../../models/action";
-import { AttributeTypeMeta, AttributeTypes } from "../../models/attributes";
+import { AttributeTypes } from "../../models/attributes";
 import { User } from "../../models/user";
 import moment, { Moment } from "moment";
 
-const inititalState = <AttributeTypes>{
-  alphabetical: <AttributeTypeMeta>{
+const initialState = <AttributeTypes>{
+  alphabetical: {
     controlOptions: <Array<string>>[
       "starts_with",
-      "ends_width",
+      "ends_with",
       "includes",
       "excludes",
     ],
     variables: <undefined>undefined,
   },
-  select: <AttributeTypeMeta>{
+  select: {
     controlOptions: <Array<string>>["equal_to", "not_equal_to"],
     variables: {
       // possible unique options for each variable
@@ -24,7 +24,7 @@ const inititalState = <AttributeTypes>{
       family_status: <Array<string>>[],
     },
   },
-  numeric: <AttributeTypeMeta>{
+  numeric: {
     controlOptions: <Array<string>>[
       "greater_than",
       "less_than",
@@ -39,7 +39,7 @@ const inititalState = <AttributeTypes>{
       current_total_debt: <Array<number>>[],
     },
   },
-  datetime: <AttributeTypeMeta>{
+  datetime: {
     controlOptions: <Array<string>>[
       "greater_than",
       "less_than",
@@ -51,7 +51,7 @@ const inititalState = <AttributeTypes>{
       birthday: <Array<string>>[],
     },
   },
-  boolean: <AttributeTypeMeta>{
+  boolean: {
     controlOptions: <Array<string>>["is_true", "is_false"],
     variables: {
       owns_home: <Array<boolean>>[true, false],
@@ -60,11 +60,11 @@ const inititalState = <AttributeTypes>{
   },
 };
 
-const attributeReducer = (state = inititalState, action: Action) => {
+const attributes = (state = initialState, action: Action) => {
   switch (action.type) {
     case "initialize_attribute_meta": {
       let { users } = action.payload;
-      let newAttributeMeta = { ...state };
+      let newAttributeMeta = initialState;
 
       Object.entries(newAttributeMeta).forEach(([metaKey, metaData]) => {
         let { variables } = metaData;
@@ -73,6 +73,7 @@ const attributeReducer = (state = inititalState, action: Action) => {
         if (!variables) return;
 
         Object.keys(variables).forEach((v) => {
+          if (metaKey === "boolean") return (allOptions = [true, false]);
           allOptions = users.map((user: User) => user[v as keyof User]);
           allOptions = new Set(allOptions);
           allOptions = Array.from(allOptions);
@@ -82,7 +83,6 @@ const attributeReducer = (state = inititalState, action: Action) => {
               allOptions = [Math.min(...allOptions), Math.max(...allOptions)];
               break;
             case "boolean":
-              allOptions = [true, false];
               break;
             case "datetime":
               let datesMoment = allOptions.map((date) => moment(date)),
@@ -98,7 +98,7 @@ const attributeReducer = (state = inititalState, action: Action) => {
               break;
           }
           newAttributeMeta[metaKey as keyof AttributeTypes].variables[v] = [
-            ...newAttributeMeta[metaKey as keyof AttributeTypes].variables[v],
+            // ...newAttributeMeta[metaKey as keyof AttributeTypes].variables[v],
             ...allOptions,
           ];
         });
@@ -109,4 +109,4 @@ const attributeReducer = (state = inititalState, action: Action) => {
   }
   return state;
 };
-export default attributeReducer;
+export default attributes;

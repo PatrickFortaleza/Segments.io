@@ -15,10 +15,7 @@ export default function ListView({
   isDragging: boolean;
 }) {
   return (
-    <div
-      className="drag__list__container"
-      style={{ zIndex: `${isDragging ? "50000" : "500"}` }}
-    >
+    <div className="drag__list__container">
       <div className="drag__list__container__header">
         <button
           className="base drag__list__container__header__title"
@@ -36,7 +33,7 @@ export default function ListView({
             key={index}
             item={{
               type: type,
-              name: attribute,
+              name: attribute, // fix
             }}
           />
         ))}

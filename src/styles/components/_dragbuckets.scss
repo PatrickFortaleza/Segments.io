@@ -1,35 +1,17 @@
 .drag__bucket {
-  width: 350px;
-  background: var(--elevation-1);
+  // width: 340px;
+  background: var(--elevation-2);
   padding: 10px;
-  border: 1px solid var(--elevation-5);
+  border: 1px solid var(--elevation-2);
   margin-bottom: 10px;
+  border-radius: 2px;
 
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    .bucket__label {
-      form {
-        display: inline-block;
-      }
-      input[type="text"] {
-        font-family: sans-serif;
-        font-weight: bold;
-        background: none;
-        border: 1px solid rgba($color: #000000, $alpha: 0);
-        font-size: 14px;
-        transition: .2s ease-in-out;
-        padding: 0 5px;
-        border-radius: 2px;
-      }
-
-      input[type="text"].editing{
-        border: 1px solid var(--elevation-5);
-        background: var(--elevation-2);
-      }
-    }
+    min-height: 24px;
 
     .bucket__actions {
       display: flex;
@@ -44,6 +26,7 @@
         i {
           padding: 0;
           margin: 0;
+          color: var(--elevation-0);
         }
       }
     }
@@ -60,8 +43,8 @@
       i {
         margin: 0;
         padding: 0;
-        color: var(--elevation-6);
-        transition: .2s ease-in-out;
+        color: var(--text-1);
+        transition: 0.2s ease-in-out;
       }
 
       &:hover,
@@ -74,8 +57,8 @@
   }
 
   &__target {
-    background: #f7f7f7;
-    border: dashed 1px #cccccc;
+    background: var(--elevation-5);
+    border: dashed 1px var(--elevation-1);
 
     height: 50px;
     border-radius: 3px;
@@ -87,52 +70,69 @@
     p {
       font-size: 12px;
       text-align: center;
-      font-weight: bold;
-      color: #7e7e7e;
+      // font-weight: bold;
+      color: var(--text-3);
     }
 
     &.active {
-      border: 1px dashed var(--highlight-primary-1);
-      background: #b7dbff;
+      border: 1px dashed var(--highlight-primary-2);
+      background: rgba($color: #ff5000, $alpha: 0.2);
     }
-  }
-
-  .empty {
-    font-size: 12px;
-    text-align: center;
-    padding: 6px;
-    color: var(--elevation-6);
   }
 }
 
 .buckets__container {
-  display: flex;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 20px;
+  grid-template-rows: min-content;
+  max-width: 800px;
+
+  @media screen and (min-width: 1425px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__title {
+    grid-column: 1/2;
+
+    @media screen and (min-width: 1425px) {
+      grid-column: 1/3;
+    }
+  }
 
   &__outer {
-    margin-left: 10px;
-    background: white;
+    background: var(--elevation-3);
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--elevation-2);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: 100%;
+    border-radius: 2px;
+    min-height: 0;
+    min-width: 375px;
+    max-width: 400px;
 
     h3 {
-      font-family: sans-serif;
-      font-weight: bold;
+      @include typeface;
+      font-weight: normal;
       margin-bottom: 10px;
       font-size: 17px;
-      
+      color: var(--text-1);
+
       i {
         font-size: 12px;
         line-height: 17px;
-        color: var(--elevation-6);
+        color: var(--text-3);
       }
     }
-
-
   }
 
   &__inner {
-    max-height: 500px;
-    background: var(--elevation-2);
+    height: 100%;
+    background: var(--elevation-5);
     padding: 10px;
     border: 1px solid var(--elevation-5);
     overflow-y: scroll;
@@ -141,77 +141,91 @@
     &::-webkit-scrollbar {
       width: 5px;
     }
-  
+
     /* Track */
     &::-webkit-scrollbar-track {
-      background: var(--elevation-2);
-  
+      background: var(--elevation-5);
     }
-  
+
     /* Handle */
     &::-webkit-scrollbar-thumb {
-      background: var(--elevation-4);
-  
+      background: var(--highlight-secondary-1);
+    }
+  }
+
+  & > &__outer:nth-of-type(2) {
+    grid-row: 3/4;
+  }
+
+  @media screen and (min-width: 1425px) {
+    & > &__outer:nth-child(1) {
+      grid-row: 2/3;
+      grid-column: 1/2;
     }
 
-    button.add {
-      background: none;
-      border: none;
-      font-family: sans-serif;
-      font-size: 12px;
-      color: var(--highlight-primary-1);
-      cursor: pointer;
-      margin-top: 5px;
-
-      i {
-        margin: 0;
-        font-size: 9px;
-        line-height: 12px;
-      }
+    & > &__outer:nth-of-type(2) {
+      grid-row: 2/3;
+      grid-column: 2/3;
     }
   }
 }
 
+button.add__condition {
+  background: none;
+  border: none;
+  @include typeface;
+  font-size: 12px;
+  color: var(--highlight-primary-2);
+  cursor: pointer;
+  margin-top: 15px;
+  text-align: left;
+
+  i {
+    margin: 0;
+    font-size: 9px;
+    line-height: 12px;
+  }
+}
 
 .bucket__actions__radio {
   margin-right: 5px;
   .container input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
   }
 
-
-
   .container {
-    font-family: sans-serif;
+    @include typeface;
     font-size: 12px;
     font-weight: bold;
-    border: 1px solid var(--elevation-6);
-    color: var(--elevation-6);
+    border: 1px solid var(--elevation-1);
+    color: var(--text-3);
     padding: 5px;
     width: 37px;
     display: inline-block;
     text-align: center;
     z-index: 200;
     cursor: pointer;
-    transition: .2s ease-in-out;
+    transition: 0.2s ease-in-out;
 
-    &.checked, &:focus, &:hover {
-      border: 1px solid var(--highlight-primary-1);
+    &.checked,
+    &:focus,
+    &:hover {
+      background: rgba($color: #ff5000, $alpha: 0.2);
+      border: 1px solid var(--highlight-primary-2);
+      color: var(--highlight-primary-2);
       z-index: 500;
-      background: var(--highlight-secondary-2);
-      color: var(--highlight-primary-1);
     }
   }
 
-  &> :first-child {
+  & > :first-child {
     border-right: none;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }
 
-  &> :last-child {
+  & > :last-child {
     border-left: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;

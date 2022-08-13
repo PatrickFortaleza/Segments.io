@@ -14,6 +14,7 @@ export default function CustomSelectView({
       <select
         value={selected.value}
         onChange={(e) => selected.setter(e.target.value)}
+        tabIndex={0}
       >
         <option value="" disabled>
           Please select...

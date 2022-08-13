@@ -35,22 +35,6 @@ export interface Attribute {
   name: string;
 }
 
-export interface AttributeWithId extends Attribute {
-  id: string;
-  condition: string;
-  value: number | string | boolean | undefined;
-}
-
-export interface AttributeTypeMeta {
-  controlOptions: Array<string>;
-  variables:
-    | undefined
-    | SelectVariables
-    | NumericVariables
-    | DateTimeVariables
-    | BooleanVariables;
-}
-
 export interface AttributeTypes {
   alphabetical: {
     controlOptions: Array<string>;
@@ -68,9 +52,5 @@ export interface AttributeTypes {
     controlOptions: Array<string>;
     variables: NumericVariables;
   };
-  boolean: any; // I have no idea why this doesn't work...
-  // boolean: {
-  //   controlOptions: Array<string>;
-  //   variables: BooleanVariables;
-  // };
+  boolean: any;
 }
