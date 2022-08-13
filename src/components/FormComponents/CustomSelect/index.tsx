@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSelectView from "./view";
 
 export default function CustomSelectController({
@@ -8,9 +8,11 @@ export default function CustomSelectController({
 }: {
   options: Array<string>;
   setter: (value: string) => void;
-  defaultValue: string | undefined;
+  defaultValue: string | number | boolean | undefined;
 }) {
-  const [selected, setSelected] = useState<string>(defaultValue ?? "");
+  const [selected, setSelected] = useState<string>(
+    typeof defaultValue === "string" && defaultValue ? defaultValue : ""
+  );
 
   useEffect(() => {
     setter(selected);
